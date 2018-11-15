@@ -1,0 +1,7 @@
+.user-panel{
+    height: 60px;
+}
+.user-panel>.info{
+    position:relative;
+    left: auto;
+}

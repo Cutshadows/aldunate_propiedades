@@ -21,7 +21,7 @@
     <li data-target="#sliderAldunate" data-slide-to="2"></li>
   </ul>
   <div class="carousel-inner">
-    <div class="carousel-item active">
+    <div class="carousel-item active" style="height: 100%;">
       <img src="img/imagenes_aldunate/074.jpg" alt="Colina">
       <div class="carousel-caption fadeInLeft ">
         <div class="caption-titulo" >
