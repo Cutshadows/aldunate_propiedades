@@ -8,30 +8,51 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/min.css">
-
-
-
-
-
-
-
 </head>
-    
-
 <body>
 
 <?include("includes/pages/menu.php");?>
 
-<section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Slider de imagenes</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">imagen anterior</a>
-            <a href="#" class="btn btn-secondary my-2">imagen siguiente</a>
-          </p>
+<div id="sliderAldunate" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#sliderAldunate" data-slide-to="0" class="active"></li>
+    <li data-target="#sliderAldunate" data-slide-to="1"></li>
+    <li data-target="#sliderAldunate" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/imagenes_aldunate/074.jpg" alt="Los Angeles" height="500">
+      <div class="carousel-caption">
+        <div class="caption-titulo">
+          <p>Subida a La Colina</p>
         </div>
-</section>
+        <div class="caption-contenido">
+          <p>We had such a great time in LA!</p>
+        </div>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="img/imagenes_aldunate/IMG_2888.jpg" alt="Chicago" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Chicago</h3>
+        <p>Thank you, Chicago!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="img/imagenes_aldunate/IMG_2882.jpg" alt="New York" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>New York</h3>
+        <p>We love the Big Apple!</p>
+      </div>   
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
 
 
 <!-- FILTRO DE LA BUSQUEDAS -->
@@ -239,7 +260,11 @@
     <div class="jumbotron text-center" style="margin-bottom:0">
      <p>Footer</p>
     </div>
-    
+<script src="js/jquery.js"></script>
+<script src="js/carousel.js"></script>    
+<script src="js/bootstrap.min.js"></script>
+
+
 
 
 </body>
