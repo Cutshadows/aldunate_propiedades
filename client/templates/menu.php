@@ -104,17 +104,17 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <!-- <img src="img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
               <span class="hidden-xs"> Julia Aldunate </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <!-- <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
 
                 <p>
                   Julia Aldunate - Admin
-                  <small>Member since Nov. 2012</small>
+                  <small>Administrador del Sistema</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -135,18 +135,18 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="#" class="btn btn-default btn-flat">Salir</a>
                 </div>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
+          <!-- <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
