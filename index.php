@@ -7,6 +7,7 @@
     <title>Propiedades Aldunate</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/min.css">
 </head>
 <body>
@@ -21,28 +22,29 @@
   </ul>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/imagenes_aldunate/074.jpg" alt="Los Angeles" height="500">
-      <div class="carousel-caption">
-        <div class="caption-titulo">
+      <img src="img/imagenes_aldunate/074.jpg" alt="Colina">
+      <div class="carousel-caption fadeInLeft ">
+        <div class="caption-titulo" >
           <p>Subida a La Colina</p>
         </div>
         <div class="caption-contenido">
-          <p>We had such a great time in LA!</p>
+          <p>Se Vende Amplio Terreno...</p>
+          <p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>          
         </div>
       </div>   
     </div>
     <div class="carousel-item">
       <img src="img/imagenes_aldunate/IMG_2888.jpg" alt="Chicago" width="1100" height="500">
       <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
+        <h3>Sector Centro</h3>
+        <p>Se Vende Casa!</p>
       </div>   
     </div>
     <div class="carousel-item">
       <img src="img/imagenes_aldunate/IMG_2882.jpg" alt="New York" width="1100" height="500">
       <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
+        <h3>Arriendo Departamento</h3>
+        <p>Amplio Departamento!</p>
       </div>   
     </div>
   </div>

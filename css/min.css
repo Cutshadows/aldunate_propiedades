@@ -1,56 +1,164 @@
-.carousel-caption >.caption-titulo > p {
-    /* left: 20px; */
-    border-radius: 3px 3px 0px 0px;
-    border-style:solid;
-    border-top-color:rgb(17, 16, 16);
-    border-left-color:rgb(17, 16, 16);
-    border-right-color:rgb(17, 16, 16);
-    border-bottom-color:rgb(17, 16, 16);
-    font-weight: bold;
-    font-size: 24px;
-    background: #fff;
-    /* margin: 0; */
-    /* padding: 5px; */ 
-    background-color: rgba(46, 43, 43, 0.404);
-    /* asignar el color y  transparencia */
-    position: absolute;
-    bottom: 100%;
-    width: 30%;
-    max-width: 100%;
+@media (max-width: 425px) {
+    .carousel-caption>.caption-titulo>p {
+        /* left: 20px; */
+        border-radius: 0px 15px 0px 0px;
+        border-style: solid;
 
-    opacity: 0.75;
-    padding-left: 2%;
-    margin-right: 38%;
-    padding-bottom: 2%;
-    
-}
-.carousel-caption>.caption-contenido {
-    /* left: 20px; */
-    border-radius: 0px;
-    background: #fff;
-    
-   /*  margin: 0;
+        border-top-color: rgb(17, 16, 16);
+        border-left-color: rgb(17, 16, 16);
+        border-right-color: rgb(17, 16, 16);
+        border-bottom-color: rgb(17, 16, 16);
+
+        font-weight: bold;
+        font-size: 12px;
+        text-align: center;
+        background: #fff;
+        /* margin: 0; */
+        /* padding: 5px; */
+        background-color: rgba(46, 43, 43, 0.404);
+        /* asignar el color y  transparencia */
+        position: absolute;
+        bottom: 72%;
+        transform: translateX(-35%);
+        width: 40%;
+        max-width: 100%;
+
+        opacity: 0.75;
+        padding-left: 2%;
+        margin-right: 1%;
+        padding-bottom: 1%;
+
+    }
+    .carousel-caption>.caption-contenido {
+        /* left: 20px; */
+        border-radius: 0px 0px 0px 15px;
+        background: #fff;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        /*  margin: 0;
     padding:30px 40px 40px; */
-    
-    background-color: rgba(0, 0, 0, 0.281);
-    /* asignar el color y  transparencia */
-    width: 30%;
-    transform: translateY(-50%);
-    text-align:left;
 
-    border-style:solid;
-    border-top-color:rgb(17, 16, 16);
-    border-bottom-color:rgb(17, 16, 16);
-    border-left-color:rgb(17, 16, 16);
-    border-right-color:rgb(17, 16, 16);
-    
-    opacity: 0.75;
-    padding-top:1%;
-    padding-left: 2%;
-    margin-right: 38%;
-    padding-bottom: 2%;
+        background-color: rgba(0, 0, 0, 0.281);
+        /* asignar el color y  transparencia */
+        width: 40%;
+        transform: translateY(35%);
+        transform: translateX(-35%);
+        text-align: left;
+
+        font-size: 12px;
+        border-style: solid;
+        border-top-color: rgb(17, 16, 16);
+        border-bottom-color: rgb(17, 16, 16);
+        border-left-color: rgb(17, 16, 16);
+        border-right-color: rgb(17, 16, 16);
+
+   
+        opacity: 0.75;
+        margin-top: 1%;
+        padding-top: 0%;
+        padding-left: 2%;
+        margin-right: 20%;
+        /* padding-bottom: 0%; */
+    }
+    #carouselButtons {
+        margin-left: 30%;
+        position: relative;
+        bottom: 0px;
+        text-align: center;
+        padding: 5px 5px 5px 5px;
+    }
+
 
 }
+
+@media (min-width: 426px) {
+    .carousel-caption >.caption-titulo > p {
+        /* left: 20px; */
+        border-radius: 0px 15px 0px 0px;
+        border-style:solid;
+        border-top-color:rgb(17, 16, 16);
+        border-left-color:rgb(17, 16, 16);
+        border-right-color:rgb(17, 16, 16);
+        border-bottom-color:rgb(17, 16, 16);
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+        background: #fff;
+        /* margin: 0; */
+        /* padding: 5px; */ 
+        background-color: rgba(46, 43, 43, 0.404);
+        /* asignar el color y  transparencia */
+        position: absolute;
+        bottom: 100%;
+        width: 30%;
+        max-width: 100%;
+
+        opacity: 0.75;
+        padding-left: 2%;
+        margin-right: 38%;
+        padding-bottom: 1%;
+        
+    }
+
+
+
+
+
+    .carousel-caption>.caption-contenido {
+        /* left: 20px; */
+        border-radius: 0px 0px 0px 15px;
+        background: #fff;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        
+    /*  margin: 0;
+        padding:30px 40px 40px; */
+        
+        background-color: rgba(0, 0, 0, 0.281);
+        /* asignar el color y  transparencia */
+        width: 30%;
+        transform: translateY(-50%);
+        text-align:left;
+
+        border-style:solid;
+        border-top-color:rgb(17, 16, 16);
+        border-bottom-color:rgb(17, 16, 16);
+        border-left-color:rgb(17, 16, 16);
+        border-right-color:rgb(17, 16, 16);
+        
+        opacity: 0.75;
+        margin-top:2%;
+        padding-top:1%;
+        padding-left: 2%;
+        margin-right: 38%;
+
+        
+        /* padding-bottom: 0%; */
+    }
+    #carouselButtons {
+        margin-left: 60%;
+        position: relative;
+        bottom: 0px;
+        text-align: center;
+        padding: 5px 5px 5px 5px;
+    }
+}
+
+.carousel-caption .fadeInLeft {
+    opacity: 0%;
+}
+
+.carousel-caption {
+    -webkit-animation-duration: 1s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.carousel-caption.infinite {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
   /* Make the image fully responsive */
 .carousel-inner img {
     width: 100%;

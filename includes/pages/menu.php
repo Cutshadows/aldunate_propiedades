@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="navbar-collapse collapse" id="navbarsExampleDefault" style="color-background:#9c9c9c;">
+      <div class="navbar-collapse collapse" id="navbarsExampleDefault" style="color-background:#9c9c9c!important;">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
