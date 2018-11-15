@@ -164,7 +164,7 @@
         border-right-color: rgb(17, 16, 16);
         border-bottom-color: rgb(17, 16, 16);
         font-weight: bold;
-        font-size: 18px;
+        font-size: 20px;
         text-align: center;
         background: #fff;
         /* margin: 0; */
@@ -179,7 +179,7 @@
         opacity: 0.75;
         padding-left: 2%;
         margin-right: 38%;
-        padding-bottom: 2%;
+        padding-bottom: 1%;
 
     }
 
@@ -201,6 +201,7 @@
         width: 30%;
         transform: translateY(-50%);
         text-align: left;
+        font-size: 20px;
         font-style: oblique;
         font-family: 'Franklin Gothic Medium',
             'Arial Narrow',
@@ -214,7 +215,7 @@
         border-right-color: rgb(17, 16, 16);
 
         opacity: 0.75;
-        margin-top: 1%;
+        margin-top: 2%;
         padding-top: 1%;
         padding-left: 2%;
         margin-right: 38%;
