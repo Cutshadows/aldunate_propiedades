@@ -34,14 +34,14 @@
       </div>   
     </div>
     <div class="carousel-item">
-      <img src="img/imagenes_aldunate/IMG_2888.jpg" alt="Chicago" width="1100" height="500">
+      <img src="img/imagenes_aldunate/IMG_2888.jpg" alt="">
       <div class="carousel-caption">
         <h3>Sector Centro</h3>
         <p>Se Vende Casa!</p>
       </div>   
     </div>
     <div class="carousel-item">
-      <img src="img/imagenes_aldunate/IMG_2882.jpg" alt="New York" width="1100" height="500">
+      <img src="img/imagenes_aldunate/IMG_2882.jpg" alt="">
       <div class="carousel-caption">
         <h3>Arriendo Departamento</h3>
         <p>Amplio Departamento!</p>
