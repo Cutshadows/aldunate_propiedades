@@ -260,7 +260,7 @@
       </div>
 
     <div class="jumbotron text-center" style="margin-bottom:0">
-     <p>Footer</p>
+     <p>INFORMACION DEL FOOTER</p>
     </div>
 <script src="js/jquery.js"></script>
 <script src="js/carousel.js"></script>    
