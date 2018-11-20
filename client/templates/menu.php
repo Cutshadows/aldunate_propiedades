@@ -135,10 +135,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Ajustes</a>
+                  <a href="#" class="btn btn-success btn-flat">Ajustes</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Salir</a>
+                  <a href="#" class="btn btn-success btn-flat">Salir</a>
                 </div>
               </li>
             </ul>
