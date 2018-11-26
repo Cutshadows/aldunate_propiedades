@@ -22,9 +22,14 @@ function crearUsuario(){
         include_once('../include/conexion.php');
         $conn = conectar();
 
-        $nomUser = $_POST['txtNomUsuario'];
-        $emailUser = $_POST['txtEmail'];
-        $passwordUser = $_POST['txtClave'];
+        $nomUser = htmlspecialchars($_POST['txtNomUsuario']);
+        $emailUser = htmlspecialchars($_POST['txtEmail']);
+        $passwordUser = htmlspecialchars($_POST['txtClave']);
+        $tipoUsuario = htmlspecialchars($_POST['tipoUsuario']);
+        
+        $fecha=date('Y-m-d');
+        //echo $fecha;
+        //die(json_encode($_POST));
         //hash para la clave
         $opciones = array(
             'cost' => 12
@@ -35,9 +40,9 @@ function crearUsuario(){
         //die(json_encode($_POST));
         
         $conn->begin_transaction();
-        $stmt = $conn->prepare("INSERT INTO tb_usuario (coNomUsuario, coEmailUsuario, coClaveUsuario) VALUES(?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO tb_usuario(coNomUsuario, coEmailUsuario, coPrivilegiosUsuario, coClaveUsuario, coUltimaLog) VALUES(?,?,?,?,?)");
         
-        $stmt->bind_param("sss", $nomUser, $emailUser, $hash_password);
+        $stmt->bind_param("sssss", $nomUser, $emailUser, $tipoUsuario, $hash_password, $fecha);
         
         
 

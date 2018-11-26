@@ -1,12 +1,11 @@
 //CARGA EL CONTENEDOR ACTUAL
-function verContenedor(destino, ruta, id) {
+function verContenedor(destino, ruta) {
     //var abuscar = $('#abuscar').attr('value');
     $.ajax({
         url: 'view/' + destino,
         type: 'POST',
         data: {
-            ruta: ruta,
-            id: id
+            ruta: ruta
         },
         success: function (datos) {
             $("#contenido-aldunate").html(datos);
@@ -18,16 +17,16 @@ function verContenedor(destino, ruta, id) {
     });
 }
 //CARGA FORMULARIO
-function cargaFormulario(id_registro, destino) {
+function cargaFormulario(id_registro, destino, ruta) {
     $.ajax({
         url: 'view/' + destino,
         type: 'POST',
         data: {
-            accion: 2,
+            ruta: ruta,
             id: id_registro
         },
         success: function (datos) {
-            $("#contenidos").html(datos);
+            $("#contenido-aldunate").html(datos);
             $('html, body').animate({
                 scrollTop: 0
             }, 'slow');
