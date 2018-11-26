@@ -20,7 +20,7 @@
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
-    verContenedor('controlador.php');
+    verContenedor('vPrincipal.php',1);
   })
 </script>
 </body>

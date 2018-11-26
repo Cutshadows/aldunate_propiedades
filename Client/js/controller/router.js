@@ -1,11 +1,11 @@
 //CARGA EL CONTENEDOR ACTUAL
-function verContenedor(destino, id) {
+function verContenedor(destino, ruta, id) {
     //var abuscar = $('#abuscar').attr('value');
     $.ajax({
-        url: 'controller/' + destino,
+        url: 'view/' + destino,
         type: 'POST',
         data: {
-            ruta: 1,
+            ruta: ruta,
             id: id
         },
         success: function (datos) {
@@ -20,7 +20,7 @@ function verContenedor(destino, id) {
 //CARGA FORMULARIO
 function cargaFormulario(id_registro, destino) {
     $.ajax({
-        url: 'controller/' + destino,
+        url: 'view/' + destino,
         type: 'POST',
         data: {
             accion: 2,

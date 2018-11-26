@@ -108,9 +108,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <li><a href="#"><i class="fa fa-plus-circle"></i> Agregar Administrador</a></li>  
-          <li><a href="#"><i class="fa fa-table"></i> Todos los usuarios</a></li>
-            
+          <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',5)"><i class="fa fa-table"></i> Todos los usuarios</a></li>
+          <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',4)"><i class="fa fa-plus-circle"></i> Agregar Administrador</a></li>
+          <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',4)"><i class="fa fa-eye"></i> Historial de Actividades</a></li>  
           </ul>
         </li>
         <!--<li>

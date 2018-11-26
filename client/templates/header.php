@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="css/ionicons.min.css">
+
+  <link rel="stylesheet" href="css/jquery.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -19,6 +21,10 @@
   <link rel="stylesheet" href="css/skins/_all-skins.min.css">
 
   <link rel="stylesheet" href="css/admin.css">
+  
+  
+
+ 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
