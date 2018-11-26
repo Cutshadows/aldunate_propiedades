@@ -8,17 +8,6 @@ $accion = htmlspecialchars($_POST['accion']);
 
 
 if($accion === 'login') {
-    //codigo para crear los administradores
-    
-
-/*    //hash para la clave
-    $opciones = array(
-        'cost'=> 12
-    );
-    $hash_password= password_hash($clave, PASSWORD_BCRYPT, $opciones);
-    //importar la conexion*/
-
-
     try{
         //seleccionar el adrministrador de la base de datos
         include_once('../include/conexion.php');
@@ -35,7 +24,7 @@ if($accion === 'login') {
                   //if($clave == $claveUsuario){
                     //iniciar Session
 
-                //ultimologin($idUsuario);
+                ultimologin($idUsuario);
                  //session_start();
                 $_SESSION['id_usuario'] = $idUsuario;
                 $_SESSION['usuario'] = ucfirst($nombreUsuario);

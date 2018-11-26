@@ -118,7 +118,7 @@ function formulario_contenido(){?>
 /* CONTROL DE USUARIOS Y CREACION */
 function agregar_admin(){
 	$opcion="crear-usuario";
-	$boton="Crear";
+	$boton="Crear Nuevo Usuario";
 	$id=$_POST['id'];
 	if($id>0){
 		//echo "area de actualizar usuario";
@@ -190,7 +190,7 @@ function agregar_admin(){
 								
 							<div class="box-footer">
 							<input type="hidden" name="opcion" <?if($id==0){?>value="<?echo $opcion;}else{echo $opcion;};?>">
-								<button type="submit" class="btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
+								<button type="submit" class="btn-block btn-block-sm btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
 							</div>
 						</form>
 					</div>

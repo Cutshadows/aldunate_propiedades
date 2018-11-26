@@ -1,4 +1,4 @@
-<?//session_start();
+<?session_start();
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "Q1a2z3w4S5croot");
@@ -16,6 +16,23 @@ function conectar()
 
     }
     return $conn;
+}
+
+
+function ultimologin($idUsuario)
+{
+    try {
+        $conn = conectar();
+        $sql = ("UPDATE tb_usuario SET coUltimaLog=NOW() WHERE coidUsuario=" . $idUsuario . "");
+        $stmt = $conn->prepare($sql);
+   // execute the query
+        $stmt->execute();
+    // echo a message to say the UPDATE succeeded
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $stmt->close();
+    $conn->close();
 }
 
 function fecha_formato_espanol($fecha)

@@ -27,7 +27,7 @@ function crearUsuario(){
         $passwordUser = htmlspecialchars($_POST['txtClave']);
         $tipoUsuario = htmlspecialchars($_POST['tipoUsuario']);
         
-        $fecha=date('Y-m-d');
+        $fecha=date('Y-m-d H:m:s');
         //echo $fecha;
         //die(json_encode($_POST));
         //hash para la clave
