@@ -1,5 +1,5 @@
 <?
-
+error_reporting(E_ALL & ~E_NOTICE);
 $router=$_POST['ruta'];
 switch ($router) {
     case 1:inicio();exit;
@@ -118,9 +118,18 @@ function formulario_contenido(){?>
 /* CONTROL DE USUARIOS Y CREACION */
 function agregar_admin(){
 	$opcion="crear-usuario";
+	$boton="Crear";
 	$id=$_POST['id'];
 	if($id>0){
 		//echo "area de actualizar usuario";
+		include_once("../include/conexion.php");
+		$conn=conectar();
+		$boton="Modificar";
+		$consul=$conn->query("SELECT coidUsuario, coNomUsuario, coEmailUsuario, coPrivilegiosUsuario, coClaveUsuario FROM tb_usuario WHERE coidUsuario=".$id);
+		$datos=$consul->fetch_assoc();
+		
+		
+		
 	}
 	?>
 	<section class="content-header">
@@ -158,11 +167,11 @@ function agregar_admin(){
 							<div class="box-body">
 								<div class="form-group">
 									<label for="txtNomUsuario">Nombre Usuario:</label>
-									<input type="text" class="form-control" id="txtNomUsuario" name="txtNomUsuario" placeholder="Ingrese Nombre de Usuario">
+									<input type="text" class="form-control" id="txtNomUsuario" name="txtNomUsuario" placeholder="Ingrese Nombre de Usuario" <?if($id>0){?>value="<?=$datos['coNomUsuario'];?>"<?}?>>
 								</div>
 								<div class="form-group">
 									<label for="txtEmail">Email Usuario:</label>
-									<input type="text" class="form-control" id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario">
+									<input type="text" class="form-control" id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
 								</div>
 								<div class="form-group">
 									<label for="tipoUsuario" class="small">Orden en el Menú</label>
@@ -172,13 +181,16 @@ function agregar_admin(){
 									<option value="super">Super Usuario</option>
 									</select>
 								</div>
+								<?if($id==0){?>
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input type="text" class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session">
+									<input   class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
 								</div>
+								<?}?>
+								
 							<div class="box-footer">
 							<input type="hidden" name="opcion" <?if($id==0){?>value="<?echo $opcion;}else{echo $opcion;};?>">
-								<button type="submit" class="btn btn-primary">Crear</button>
+								<button type="submit" class="btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
 							</div>
 						</form>
 					</div>
@@ -242,14 +254,14 @@ function tabla_admin(){?>
 				include_once("../include/conexion.php");
 				$conn=conectar();
 
-				$consulta=$conn->query("SELECT coidUsuario, coNomUsuario, coEmailUsuario, coUltimaLog FROM tb_usuario");
+				$consulta=$conn->query("SELECT coidUsuario, coNomUsuario, coEmailUsuario, coPrivilegiosUsuario, coUltimaLog FROM tb_usuario");
 				while($resultado=$consulta->fetch_assoc()){
 				?>
 				<tr>
                   <td><?=$resultado['coNomUsuario'];?></td>
                   <td><?=$resultado['coEmailUsuario'];?></td>
                   <td><?=$resultado['coUltimaLog']; ?></td>
-                  <td> 4</td>
+                  <td><?= $resultado['coPrivilegiosUsuario']; ?></td>
                   <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidUsuario']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 4)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    /* $('#tabla_usuario').DataTable({
+    $('#tabla_usuario').DataTable({
         responsive: true,
         paging: true,
         pageLength: 10,
@@ -16,7 +16,7 @@ $(document).ready(function () {
             zeroRecords: 'No Encontrado - Lo Siento',
             infoFiltered: "(Filtrada de _MAX_ total entradas)"
         }
-    }); */
+    });
     // #myInput is a <input type="text"> element
     /* $('#buscadorContenido').on('keyup', function () {
         table.search(this.value).draw();
@@ -29,9 +29,9 @@ $(document).ready(function () {
         $(params).each(function (index, element) {
             formData.append(element.name, element.value);
         });
-        console.log(params);
+        //console.log(params);
         var datos = formData;
-        console.log(datos);
+        //console.log(datos);
         $.ajax({
             url: 'controller/cAdmin.php',
             type: 'POST',
