@@ -49,10 +49,11 @@ $(document).ready(function () {
                         verContenedor('vPrincipal.php',1);
                     }, 1800); */
                 
+                
             },
             error: function (data) {
                 console.log(data);
             }
-        });
+        })
     });
 });

@@ -205,7 +205,10 @@ function agregar_admin(){
 			</section>
 			</div>
 		</div>
+		
 		<script src="js/controller/admin.js"></script>
+		
+		
 		<!-- /.content -->
 <?}
 

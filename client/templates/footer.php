@@ -15,8 +15,9 @@
 <script src="js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
+
 <!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
+<!-- <script src="js/demo.js"></script> -->
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree();
