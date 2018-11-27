@@ -87,5 +87,37 @@ function editarUsuario(){
 
 }
 function eliminarUsuario(){
-    
+    try {
+        include_once('../include/conexion.php');
+        $conn = conectar();
+
+
+        $id = $_POST['id_registro'];
+        $destino = 'vPrincipal.php';
+
+        $conn->begin_transaction();
+        $stmt = $conn->prepare("DELETE FROM tb_usuario WHERE coidUsuario=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                'respuesta' => 'exito',
+                'id_eliminado' => $id,
+                'destino' => $destino
+            );
+        } else {
+            $respuesta = array(
+                'respuesta' => 'Error'
+            );
+        }
+        //reg_acciones(11, "Elimino el Registro, Boletas id:" . $id . " ", 2, $id);
+        $conn->commit();
+        $stmt->close();
+        $conn->close();
+
+    } catch (Exception $e) {
+        $conn->rollBack();
+        echo "Error: " . $e->getMessage();
+    }
+    die(json_encode($respuesta));
 }

@@ -77,3 +77,30 @@ $(document).ready(function () {
         })
     });
 });
+
+function eliminararchivos(ac, id_registro, destino) {
+    $.ajax({
+        url: 'controller/' + destino,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            opcion: ac,
+            id_registro: id_registro
+        },
+        success: function (d) {
+            var resultado = d;
+            if (resultado.respuesta == 'exito') {
+                mkNoti(
+                    'Usuario Eliminado ',
+                    'Exitosamente', {
+                        status: "primary",
+                        duration: 1500
+                    }
+                );
+                setTimeout(function () {
+                    verContenedor(resultado.destino,5);
+                }, 1800);
+            }
+        }
+    });
+};

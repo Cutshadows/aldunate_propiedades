@@ -284,8 +284,13 @@ function tabla_admin(){?>
 				<tr>
                   <td><?=$resultado['coNomUsuario'];?></td>
                   <td><?=$resultado['coEmailUsuario'];?></td>
-                  <td><?=$resultado['coUltimaLog']; ?></td>
-                  <td><?= $resultado['coPrivilegiosUsuario']; ?></td>
+                  <th><?=fecha_formato_espanol_hora($resultado['coUltimaLog']); ?></th>
+                  <td><? switch ($resultado['coPrivilegiosUsuario']) {
+					  case 'admin': echo 'Administrador'; break;
+					  case 'super': echo 'Super Usuario'; break;
+					  case 'digi': echo 'Digitador'; break;
+				  }
+				    ?></td>
                   <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidUsuario']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 4)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">
@@ -324,5 +329,23 @@ function tabla_admin(){?>
 		<script type="text/javascript" src="js/controller/admin.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
 		<script  src="js/jquery.dataTables.min.js"></script>
+		<script src="js/notifications.min.js"></script>
+		
+		 <script>
+			$(document).ready( function() {
+				/* MK Web Notification init */
+				var config = {
+					// Default, Primary, Success, Danger, Warning, Info, Light, Dark, Purple
+					positionY: "left",
+					positionX: "top",
+					scrollable: false, //true
+					rtl: false, // true = ltr
+					max: 5, // number of notifications to display,
+					dismissable: true
+				};
+				mkNotifications(config);
+				
+			}); 
+		</script>
 		
 <?}
