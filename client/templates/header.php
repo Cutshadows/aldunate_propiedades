@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/notifications.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="css/ionicons.min.css">
 

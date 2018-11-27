@@ -97,10 +97,7 @@ $(document).ready(function() {
       radioClass: 'iradio_square-blue',
       increaseArea: '20%'
     }); */
-});
-  
-
-  
+}); 
 </script>
 </body>
 </html>

@@ -205,7 +205,31 @@ function agregar_admin(){
 			</section>
 			</div>
 		</div>
+
 		<script src="js/controller/admin.js"></script>
+		<script src="js/notifications.min.js"></script>
+		
+		 <script>
+			$(document).ready( function() {
+				/* MK Web Notification init */
+				var config = {
+					// Default, Primary, Success, Danger, Warning, Info, Light, Dark, Purple
+					positionY: "left",
+					positionX: "top",
+					scrollable: false, //true
+					rtl: false, // true = ltr
+					max: 5, // number of notifications to display,
+					dismissable: true
+				};
+				mkNotifications(config);
+				
+			}); 
+		</script>
+		
+		
+		
+		
+		
 		<!-- /.content -->
 <?}
 

@@ -33,8 +33,7 @@ if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
   <!-- /.content-wrapper -->
 
  
- 
- 
+
  <?include_once 'templates/footer.php';?>
 
 <?

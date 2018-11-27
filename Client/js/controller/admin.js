@@ -1,4 +1,16 @@
 $(document).ready(function () {
+    $('#btnnoti').on('click', function (e) {
+        e.preventDefault();
+        mkNoti(
+            'Login Correcto',
+            'Bienvenid@ : ',
+            {
+                status: "danger",
+                duration: 1000
+            }
+        );
+    });
+    
     $('#tabla_usuario').DataTable({
         responsive: true,
         paging: true,
@@ -45,9 +57,17 @@ $(document).ready(function () {
                 //console.log(data);
                 var resultado = data;
                 console.log(resultado);
-                    /* setTimeout(function () {
-                        verContenedor('vPrincipal.php',1);
-                    }, 1800); */
+                mkNoti(
+                    'Usuari@ Cread@ ',
+                    'Exitosamente',
+                    {
+                        status: "success",
+                        duration: 2000
+                    }
+                );
+                setTimeout(function () {
+                    verContenedor('vPrincipal.php',5);
+                }, 2500);
                 
             },
             error: function (data) {
