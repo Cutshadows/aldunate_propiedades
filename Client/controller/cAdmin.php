@@ -84,7 +84,57 @@ function crearUsuario(){
 }
 
 function editarUsuario(){
+    try {
+        
+        include_once('../include/conexion.php');
+        $conn = conectar();
 
+        $nomUser = htmlspecialchars($_POST['txtNomUsuario']);
+        $emailUser = htmlspecialchars($_POST['txtEmail']);
+        $tipoUsuario = htmlspecialchars($_POST['tipoUsuario']);
+        $id=htmlspecialchars($_POST['id_usuario']);
+        $conn->begin_transaction();
+        $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?,coEmailUsuario= ?,coEmailUsuario= ?,coPrivilegiosUsuario= ? WHERE coidUsuario= ?");
+        
+		//$stmt->bind_param("sssssss", $cadenaUpdateCabecera, $textInfo, $tituloInfo, $alias, fecha_formato_base_gore($cfecha)." ".$hora, $publicado, $_SESSION['id_usuario']);
+        $stmt->bind_param("issssssssi", $boleta, $jsonTItular, $camion, $diaSemana, $fecha, $cantidadAgua, $observaciones, $fechaIngreso, $jsonRecepcion, $idInterno);
+
+        $stmt->execute();
+		
+		//$id_registro=$stmt->insert_id;
+            //$id_registro = $stmt->insert_id;
+
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                'respuesta' => 'exito',
+                'registro' => $boleta,
+                'tipo' => $opcion
+            );
+            /*  $stmt = $conn->prepare("INSERT INTO db_bk_contenido (db_miniSitios_id_minisitios, db_menu_web_id_menu, db_noticias_id_noticias) VALUES(?,?,?)");
+            $stmt->bind_param("iii", $_SESSION["SitiosPer"], $menu, $id_registro);
+            $stmt->execute();
+            if ($stmt->affected_rows) {
+                $resultado = array(
+                    'respuesta' => 'exito'
+                );
+            } */
+            //reg_acciones(1, "Nuevo Registro, Boleta Agua Potable Rural (" . $boleta . ")", 1, $id_registro);
+        } else {
+            $respuesta = array(
+                'respuesta' => 'Error'
+            );
+        }
+        $conn->commit();
+        $stmt->close();
+        $conn->close();
+
+
+    } catch (Exception $e) {
+        $conn->rollBack();
+        echo "Error: " . $e->getMessage();
+
+    }
+    die(json_encode($respuesta));
 }
 function eliminarUsuario(){
     try {
