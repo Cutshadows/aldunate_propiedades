@@ -69,10 +69,11 @@ $(document).ready(function () {
                     verContenedor('vPrincipal.php',5);
                 }, 2500);
                 
+                
             },
             error: function (data) {
                 console.log(data);
             }
-        });
+        })
     });
 });

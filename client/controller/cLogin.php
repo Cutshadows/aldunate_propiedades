@@ -6,10 +6,16 @@ $usuario = htmlspecialchars($_POST['usuario']);
 $clave = htmlspecialchars($_POST['clave']);
 $accion = htmlspecialchars($_POST['accion']);
 
+/* $opciones = array(
+    'cost' => 12
+);
+$hash_password = password_hash($clave, PASSWORD_BCRYPT, $opciones);
+echo $hash_password; */
 
 if($accion === 'login') {
     try{
         //seleccionar el adrministrador de la base de datos
+        
         include_once('../include/conexion.php');
         $conn = conectar();
         $stmt = $conn->prepare("SELECT coidUsuario, coNomUsuario, coPrivilegiosUsuario, coClaveUsuario, coUltimaLog FROM tb_usuario WHERE  coEmailUsuario =? ");
