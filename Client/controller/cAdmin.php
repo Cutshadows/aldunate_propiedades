@@ -64,7 +64,7 @@ function crearUsuario(){
                     'respuesta' => 'exito'
                 );
             } */
-            //reg_acciones(1, "Nuevo Registro, Boleta Agua Potable Rural (" . $boleta . ")", 1, $id_registro);
+            reg_acciones("Registro de Usuario (" . $nomUser . "), con Privilegios de :". $tipoUsuario ."",1, $id_registro);
         } else {
             $respuesta = array(
                 'respuesta' => 'Error'
@@ -94,10 +94,10 @@ function editarUsuario(){
         $tipoUsuario = htmlspecialchars($_POST['tipoUsuario']);
         $id=htmlspecialchars($_POST['id_usuario']);
         $conn->begin_transaction();
-        $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?,coEmailUsuario= ?,coEmailUsuario= ?,coPrivilegiosUsuario= ? WHERE coidUsuario= ?");
+        $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?,coEmailUsuario= ?,coPrivilegiosUsuario= ? WHERE coidUsuario= ?");
         
 		//$stmt->bind_param("sssssss", $cadenaUpdateCabecera, $textInfo, $tituloInfo, $alias, fecha_formato_base_gore($cfecha)." ".$hora, $publicado, $_SESSION['id_usuario']);
-        $stmt->bind_param("issssssssi", $boleta, $jsonTItular, $camion, $diaSemana, $fecha, $cantidadAgua, $observaciones, $fechaIngreso, $jsonRecepcion, $idInterno);
+        $stmt->bind_param("sssi", $nomUser, $emailUser, $tipoUsuario, $id);
 
         $stmt->execute();
 		
@@ -107,8 +107,8 @@ function editarUsuario(){
         if ($stmt->affected_rows > 0) {
             $respuesta = array(
                 'respuesta' => 'exito',
-                'registro' => $boleta,
-                'tipo' => $opcion
+                'registro' => $nomUser,
+                'tipo' => $tipoUsuario
             );
             /*  $stmt = $conn->prepare("INSERT INTO db_bk_contenido (db_miniSitios_id_minisitios, db_menu_web_id_menu, db_noticias_id_noticias) VALUES(?,?,?)");
             $stmt->bind_param("iii", $_SESSION["SitiosPer"], $menu, $id_registro);
@@ -118,7 +118,7 @@ function editarUsuario(){
                     'respuesta' => 'exito'
                 );
             } */
-            //reg_acciones(1, "Nuevo Registro, Boleta Agua Potable Rural (" . $boleta . ")", 1, $id_registro);
+            reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : ".  $tipoUsuario . " ", 2, $id_registro);
         } else {
             $respuesta = array(
                 'respuesta' => 'Error'
@@ -160,7 +160,7 @@ function eliminarUsuario(){
                 'respuesta' => 'Error'
             );
         }
-        //reg_acciones(11, "Elimino el Registro, Boletas id:" . $id . " ", 2, $id);
+        reg_acciones("Eliminar Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 3, $id_registro);
         $conn->commit();
         $stmt->close();
         $conn->close();

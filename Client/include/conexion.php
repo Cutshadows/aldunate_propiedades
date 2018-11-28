@@ -35,6 +35,21 @@ function ultimologin($idUsuario)
     $conn->close();
 }
 
+function reg_acciones($accion, $tipo, $id)
+{
+    try {
+        $conn = conectar();
+        $fecha = date("Y-m-d H:i:s");
+        $q = "INSERT INTO `tb_actividad` SET `db_usuarios_id_usuarios`=" . $_SESSION["id_usuario"] . ",`coAccion`='" . $accion . "',`coFecha`='" . $fecha . "',`coTipo`=" . $tipo . ", coId=" . $id . ";";
+        $stmt = $conn->prepare($q);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $stmt->close();
+    $conn->close();
+}
+
 function fecha_formato_espanol($fecha)
 {
     $ano = substr($fecha, 0, 4);

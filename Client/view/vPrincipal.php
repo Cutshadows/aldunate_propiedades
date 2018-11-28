@@ -190,6 +190,9 @@ function agregar_admin(){
 								
 							<div class="box-footer">
 							<input type="hidden" name="opcion" <?if($id==0){?>value="<?echo $opcion;}else{echo $opcion;};?>">
+							<? if($id > 0){ ?>
+							<input type="hidden" name="id_usuario" value="<?=$datos['coidUsuario'];?>">
+							<?};?>
 								<button type="submit" class="btn-block btn-block-sm btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
 							</div>
 						</form>
