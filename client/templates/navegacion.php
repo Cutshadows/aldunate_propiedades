@@ -8,7 +8,7 @@
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div> -->
         <div class="pull-left info">
-          <p>Julia Aldunate</p>
+          <p><?=$_SESSION['usuario'];?></p>
           <!-- <a href=""><i class="fa fa-circle text-success"></i> Online</a> -->
         </div>
       </div>
@@ -53,21 +53,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-table"></i> Todo el Contenido</a></li>
-            <li><a href="#"><i class="fa fa-plus-circle"></i> Administrar Contenido</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Ingreso de Contenido</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Editors</a></li>
+            <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',7)"><i class="fa fa-table"></i> Todo el Contenido</a></li>
+            <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',2)"><i class="fa fa-plus-circle"></i> Crear Contenido</a></li>
+            <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',3)"><i class="fa fa-edit"></i> Administrar Contenido</a></li>
           </ul>
         </li>
         <li class="treeview">

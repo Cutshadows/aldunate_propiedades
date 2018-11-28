@@ -4,10 +4,11 @@ $router=$_POST['ruta'];
 switch ($router) {
     case 1:inicio();exit;
     case 2:formulario_contenido();exit;
-    case 3:cargar_contenido();exit;
+    case 3:admin_contenido();exit;
     case 4:agregar_admin();exit;
 	case 5:tabla_admin();exit;
 	case 6:tabla_actividad();exit;
+	case 7:todo_contenido();exit;
 }
 
 function inicio(){?>
@@ -47,8 +48,8 @@ function inicio(){?>
 function formulario_contenido(){?>
 	<section class="content-header">
 		<h1>
-			Pagina en Blanco
-			<small>Subtitulo de la web</small>
+			Creación Contenido
+			<small>Para Mostrar en Web</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -63,7 +64,7 @@ function formulario_contenido(){?>
 		<!-- Default box -->
 		<div class="box">
 			<div class="box-header with-border">
-			<h3 class="box-title">Tabla del Contenido</h3>
+			<h3 class="box-title">Formulario de Contenido</h3>
 
 			<!-- <div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -115,6 +116,11 @@ function formulario_contenido(){?>
 		</section>
 		<!-- /.content -->
 <?}
+
+/**FUNCION PARA ABRIR EL ADMINISTRADOR DE CONTENIDO */
+function admin_contenido(){
+
+}
 
 /* CONTROL DE USUARIOS Y CREACION */
 function agregar_admin(){
@@ -182,12 +188,12 @@ function agregar_admin(){
 									<option value="super">Super Usuario</option>
 									</select>
 								</div>
-								<?if($id==0){?>
+								
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input type="password"   autocomplete="new-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
+									<input type="password"  pattern=".{6,}"  autocomplete="current-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" <?if($id>0){?>value=""<?}?>>
 								</div>
-								<?}?>
+								
 								
 							<div class="box-footer">
 							<input type="hidden" name="opcion" <?if($id==0){?>value="<?echo $opcion;}else{echo $opcion;};?>">
@@ -429,6 +435,111 @@ function tabla_actividad(){?>
 		<script type="text/javascript" src="js/controller/admin.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
 		<script  src="js/jquery.dataTables.min.js"></script>
+<?}
+
+function todo_contenido(){?>
+<section class="content-header">
+		<h1>
+			Administrador 
+			<small>Contenido Web</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+			<li><a href="#">Usuarios</a></li>
+			<li class="active">Tabla Contenido del Frontis</li>
+		</ol>
+		</section>
+		<div class="row">
+			<div class="col-md-12">
+			
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+				<!-- <div class="box-header">
+					<h3 class="box-title">Todos los Usuarios</h3>
+				<div class="box"> -->
+					<div class="box-header">
+              			<h3 class="box-title">Tabla de Contenido que Muestra en Frontis</h3>
+            		</div>							
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="tabla_usuario" name="tabla_usuario" class="table table-bordered table-striped display"  >
+                <thead>
+                <tr>
+                  <th>Nombres</th>
+                  <th>Email</th>
+                  <th>Ultima Conexi&oacute;n(es)</th>
+                  <th>Privilegios</th>
+                  <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+				<?
+			define("_controlador_", 'cAdmin.php');
+			include_once("../include/conexion.php");
+			$conn = conectar();
+
+			$consulta = $conn->query("SELECT coidUsuario, coNomUsuario, coEmailUsuario, coPrivilegiosUsuario, coUltimaLog FROM tb_usuario");
+			while ($resultado = $consulta->fetch_assoc()) {
+				?>
+				<tr>
+                  <td><?= $resultado['coNomUsuario']; ?></td>
+                  <td><?= $resultado['coEmailUsuario']; ?></td>
+                  <th><?= fecha_formato_espanol_hora($resultado['coUltimaLog']); ?></th>
+                  <td><? switch ($resultado['coPrivilegiosUsuario']) {
+																						case 'admin':
+																							echo 'Administrador';
+																							break;
+																						case 'super':
+																							echo 'Super Usuario';
+																							break;
+																						case 'digi':
+																							echo 'Digitador';
+																							break;
+																					}
+																					?></td>
+                  <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidUsuario']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 4)">
+                    <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <!-- <input type="" name="options"  autocomplete="off" checked> -->
+                        <span class="fa fa-pencil"></span>
+                    </label>
+                </a>
+                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-usuario',<?= $resultado['coidUsuario']; ?>,'<?= _controlador_ ?>')">
+                    <label class="btn btn-danger">
+                    <!-- <input type="radio" name="options" autocomplete="off" > -->
+                    <span class="fa fa-trash"></span>
+                    </label> 
+                </a></td>
+				</tr>
+				<?
+		} ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+				<!-- /.box-body -->
+				<!--  <div class="box-footer">
+					Footer
+				</div> -->
+				<!-- /.box-footer-->
+				</div>
+				<!-- /.box -->
+
+			</section>
+			</div>
+		</div>
+		<!-- <script src="js/controller/admin.js"></script> -->
+		<!-- /.content -->
+		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
+		<script type="text/javascript" src="js/controller/admin.js"></script>
+		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
+		<script  src="js/jquery.dataTables.min.js"></script>
 		<script src="js/notifications.min.js"></script>
 		
 		 <script>
@@ -447,5 +558,4 @@ function tabla_actividad(){?>
 				
 			}); 
 		</script>
-		
 <?}

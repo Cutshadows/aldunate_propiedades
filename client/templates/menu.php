@@ -105,7 +105,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- <img src="img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-              <span class="hidden-xs"> Julia Aldunate </span>
+              <span class="hidden-xs"> <?=$_SESSION['usuario']; ?> </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -113,8 +113,16 @@
                 <!-- <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
 
                 <p>
-                  Julia Aldunate - Admin
-                  <small>Administrador del Sistema</small>
+                  <?=$_SESSION['usuario'];?> - <?switch ($_SESSION['privilegios']) {
+                                                  case 'admin':echo 'Administrador';break;
+                                                  case 'digi':echo 'Digitador';break;
+                                                  case 'super':echo 'Super Usuario';break;
+                                                  }?>
+                  <small><?switch ($_SESSION['privilegios']) {
+                                                  case 'admin':echo 'Administrador';break;
+                                                  case 'digi':echo 'Digitador';break;
+                                                  case 'super':echo 'Super Usuario';break;
+                                                  }?> del Sistema</small>
                 </p>
               <!-- </li> -->
               <!-- Menu Body -->
@@ -135,7 +143,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-success btn-flat">Ajustes</a>
+                  <a href="javascript:void(0)" onclick="cargaFormulario(<?= $_SESSION['id_usuario']; ?>,'vPrincipal.php', 4)" class="btn btn-success btn-flat">Ajustes</a>
                 </div>
                 <div class="pull-right">
                   <a href="login.php?cerrar_sesion=true" class="btn btn-success btn-flat">Salir</a>

@@ -1,4 +1,7 @@
+<? include_once ('include/conexion.php');
 
+$_SESSION['usuario']; 
+?>
 <!DOCTYPE html>
 <html>
 <head>
