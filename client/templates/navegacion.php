@@ -80,7 +80,7 @@
           <ul class="treeview-menu">
           <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',5)"><i class="fa fa-table"></i> Todos los Usuarios</a></li>
           <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',4)"><i class="fa fa-plus-circle"></i> Nuevo Usuario</a></li>
-          <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',4)"><i class="fa fa-eye"></i> Historial de Actividades</a></li>  
+          <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',6)"><i class="fa fa-eye"></i> Historial de Actividades</a></li>  
           </ul>
         </li>
     </section>

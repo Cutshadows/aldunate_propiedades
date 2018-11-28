@@ -7,6 +7,7 @@ switch ($router) {
     case 3:cargar_contenido();exit;
     case 4:agregar_admin();exit;
 	case 5:tabla_admin();exit;
+	case 6:tabla_actividad();exit;
 }
 
 function inicio(){?>
@@ -307,6 +308,104 @@ function tabla_admin(){?>
                     <span class="fa fa-trash"></span>
                     </label> 
                 </a></td>
+				</tr>
+				<?} ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+				<!-- /.box-body -->
+				<!--  <div class="box-footer">
+					Footer
+				</div> -->
+				<!-- /.box-footer-->
+				</div>
+				<!-- /.box -->
+
+			</section>
+			</div>
+		</div>
+		<!-- <script src="js/controller/admin.js"></script> -->
+		<!-- /.content -->
+		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
+		<script type="text/javascript" src="js/controller/admin.js"></script>
+		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
+		<script  src="js/jquery.dataTables.min.js"></script>
+		<script src="js/notifications.min.js"></script>
+		
+		 <script>
+			$(document).ready( function() {
+				/* MK Web Notification init */
+				var config = {
+					// Default, Primary, Success, Danger, Warning, Info, Light, Dark, Purple
+					positionY: "left",
+					positionX: "top",
+					scrollable: false, //true
+					rtl: false, // true = ltr
+					max: 5, // number of notifications to display,
+					dismissable: true
+				};
+				mkNotifications(config);
+				
+			}); 
+		</script>
+		
+<?}
+function tabla_actividad(){?>
+	<section class="content-header">
+		<h1>
+			Administrador
+			<small>Control de Usuarios</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+			<li><a href="#">Usuarios</a></li>
+			<li class="active">Tabla Usuarios</li>
+		</ol>
+		</section>
+		<div class="row">
+			<div class="col-md-12">
+			
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+				<!-- <div class="box-header">
+					<h3 class="box-title">Todos los Usuarios</h3>
+				<div class="box"> -->
+					<div class="box-header">
+              			<h3 class="box-title">Tabla de Usuarios del Sistema</h3>
+            		</div>							
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="tabla_usuario" name="tabla_usuario" class="table table-bordered table-striped display"  >
+                <thead>
+                <tr>
+                  <th>Registro Accion</th>
+                  <th>Usuario</th>
+                  <th>Fecha Moficiacion</th>
+                  <th>Privilegios</th>
+                  <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+				<?
+				include_once("../include/conexion.php");
+				$conn=conectar();
+
+				$consulta=$conn->query("SELECT t1.coidActividad, t1.coAccion, t1.coFecha, t2.coNomUsuario, t2.coPrivilegiosUsuario FROM tb_actividad AS t1 INNER JOIN tb_usuario as t2 ON t1.db_usuarios_id_usuarios = t2.coidUsuario");
+				while($resultado=$consulta->fetch_assoc()){
+				?>
+				<tr>
+                  <td><?=$resultado['coAccion'];?></td>
+                  <td><?=$resultado['coNomUsuario'];?></td>
+                  <th><?=fecha_formato_espanol_hora($resultado['coFecha']); ?></th>
+                  <td><?= $resultado['coPrivilegiosUsuario']; ?></td>
+                  <td></td>
 				</tr>
 				<?} ?>
                 </tbody>
