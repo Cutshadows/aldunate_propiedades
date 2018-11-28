@@ -168,7 +168,7 @@ function agregar_admin(){
 							<div class="box-body">
 								<div class="form-group">
 									<label for="txtNomUsuario">Nombre Usuario:</label>
-									<input type="text" class="form-control" id="txtNomUsuario" name="txtNomUsuario" placeholder="Ingrese Nombre de Usuario" <?if($id>0){?>value="<?=$datos['coNomUsuario'];?>"<?}?>>
+									<input type="text" autocomplete="username" class="form-control" id="txtNomUsuario" name="txtNomUsuario" placeholder="Ingrese Nombre de Usuario" <?if($id>0){?>value="<?=$datos['coNomUsuario'];?>"<?}?>>
 								</div>
 								<div class="form-group">
 									<label for="txtEmail">Email Usuario:</label>
@@ -185,7 +185,7 @@ function agregar_admin(){
 								<?if($id==0){?>
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input   class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
+									<input type="password"   autocomplete="new-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
 								</div>
 								<?}?>
 								
@@ -302,7 +302,7 @@ function tabla_admin(){?>
                         <span class="fa fa-pencil"></span>
                     </label>
                 </a>
-                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-usuario',<?= $resultado['coidUsuario']; ?>,'<?=_controlador_ ?>')">
+                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-usuario',<?=$resultado['coidUsuario']; ?>,'<?=_controlador_ ?>')">
                     <label class="btn btn-danger">
                     <!-- <input type="radio" name="options" autocomplete="off" > -->
                     <span class="fa fa-trash"></span>
@@ -389,7 +389,6 @@ function tabla_actividad(){?>
                   <th>Usuario</th>
                   <th>Fecha Moficiacion</th>
                   <th>Privilegios</th>
-                  <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -404,8 +403,7 @@ function tabla_actividad(){?>
                   <td><?=$resultado['coAccion'];?></td>
                   <td><?=$resultado['coNomUsuario'];?></td>
                   <th><?=fecha_formato_espanol_hora($resultado['coFecha']); ?></th>
-                  <td><?= $resultado['coPrivilegiosUsuario']; ?></td>
-                  <td></td>
+                  <td><?=$resultado['coPrivilegiosUsuario']; ?></td>
 				</tr>
 				<?} ?>
                 </tbody>

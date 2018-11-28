@@ -160,7 +160,7 @@ function eliminarUsuario(){
                 'respuesta' => 'Error'
             );
         }
-        reg_acciones("Eliminar Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 3, $id_registro);
+        reg_acciones("Eliminar Usuario Exitosamente.", 3, $id);
         $conn->commit();
         $stmt->close();
         $conn->close();

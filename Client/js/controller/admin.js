@@ -100,6 +100,14 @@ function eliminararchivos(ac, id_registro, destino) {
                 setTimeout(function () {
                     verContenedor(resultado.destino,5);
                 }, 1800);
+            } else if (resultado.respuesta == 'Error'){
+                mkNoti(
+                    'Error del Sistema',
+                    'Error al intentar eliminar', {
+                        status: "danger",
+                        duration: 1500
+                    }
+                );
             }
         }
     });
