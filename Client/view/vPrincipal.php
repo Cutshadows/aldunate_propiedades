@@ -58,7 +58,7 @@ function formulario_contenido(){?>
 		</ol>
 		</section>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-8">
 				<!-- Main content -->
 				<section class="content">
 
@@ -79,33 +79,135 @@ function formulario_contenido(){?>
 					<form role="form">
 						<div class="box-body">
 							<div class="form-group">
-							<label for="txtTitulo">Titulo</label>
-							<input type="text" class="form-control" id="txtTitulo" placeholder=" ">
+								<label for="txtTitulo">Titulo</label>
+								<input type="text" class="form-control" id="txtTitulo" placeholder=" ">
 							</div>
+							
 							<div class="form-group">
-							<label for="txtDetalles">Detalles</label>
-							<input type="text" class="form-control" id="txtDetalles" placeholder="">
+								<label>Descripción</label>
+								<textarea class="form-control" rows="4" placeholder="Ingrese Descripción ..."></textarea>
 							</div>
-							<div class="form-group">
-							<label for="txtValor">Valor</label>
-							<input type="text" class="form-control" id="txtValor" placeholder="">
+							<div class="input-group">
+								<!-- <label for="txtValor">Valor</label>  -->
+								<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+									<input type="text" class="form-control" id="txtValor" placeholder="Valor">
+								<span class="input-group-addon">CLP</span>
 							</div>
-							<div class="form-group">
-							<label for="exampleInputFile">File input</label>
-							<input type="file" id="exampleInputFile">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="txtDetalles">Dirección</label>
+										<input type="text" class="form-control" id="txtDetalles" placeholder="">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="txtDetalles">Comuna</label>
+										<!-- <input type="text" class="form-control" id="txtDetalles" placeholder=""> -->
+										<select class="form-control" name="slctComuna" id="slctComuna" >
+											<option value="0">Seleccionar</option>
+											<option value="P1C1CO00">Canela</option>
+											<option value="P1C1CO01">Illapel</option>
+											<option value="P1C1CO02">Los Vilos</option>
+											<option value="P1C1CO03">Salmanca</option>
+											<option value="P2C2CO04">Andacollo</option>
+											<option value="P2C2CO05">Coquimbo</option>
+											<option value="P2C2CO06">La Higuera</option>
+											<option value="P2C2CO07">La Serena</option>
+											<option value="P2C2CO08">Paihuano</option>
+											<option value="P2C2CO09">Vicuña</option>
+											<option value="P3C3CO10">Combarbalá</option>
+											<option value="P3C3CO11">Monte Patria</option>
+											<option value="P3C3CO12">Ovalle</option>
+											<option value="P3C3CO13">Punitaqui</option>
+											<option value="P3C3CO14">Rio Hurtado</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							 
+										<div class="row mb20">
+											<div class="col-lg-3">
+												<label for="txtDetalles">Baños</label>
+												<div class="input-group">
+														<span class="input-group-addon">
+														<input type="checkbox">
+														</span>
+													<input type="text" class="form-control">
+												</div>
+												<!-- /input-group -->
+											</div>
+											<div class="col-lg-3">
+												<label for="txtDetalles">Piezas</label>
+												<div class="input-group">
+														<span class="input-group-addon">
+														<input type="checkbox">
+														</span>
+													<input type="text" class="form-control">
+												</div>
+												<!-- /input-group -->
+											</div>
+											<div class="col-lg-3">
+												<label for="txtDetalles">Oficinas</label>
+												<div class="input-group">
+														<span class="input-group-addon">
+														<input type="checkbox">
+														</span>
+													<input type="text" class="form-control">
+												</div>
+												<!-- /input-group -->
+											</div>
+											<!-- <div class="col-lg-3">
+												<label for="txtDetalles">Detalles</label>
+												<div class="input-group">
+														<span class="input-group-addon">
+														<input type="checkbox">
+														</span>
+													<input type="text" class="form-control">
+												</div>
+												/input-group
+											</div> -->
+										</div>
+								<div class="panel panel-info">
+									<div class="panel-heading"><h5><strong>IMAGENES</strong>
+										<small> [Imagenes de los Sectores.]</small></h5>
+									</div>
+									<div class="container-fluid">
+										<div class="row mb20">
+											<div class="col-md-6">
+												<label for="exampleInputFile">File input</label>
+												<!-- <div class="form-group"> -->
+													<input type="file" id="exampleInputFile	">
+												<!-- </div> -->
+											</div>
+											<div class="col-md-1">
+												<label></label>
+												<button type="button" class="btn btn-success btn-block text-right" id="btnAddImg" name="btnAddImg">
+												<span class="fa fa-plus" aria-hidden="true"></span>
+												</button>
+											</div>
+											<div class="col-md-1">
+												<label></label>
+												<button type="button" class="btn btn-danger btn-block text-right" id="btnAddImg" name="btnAddImg">
+												<span class="fa fa-minus" aria-hidden="true"></span>
+												</button>
+											</div>
+										</div>
+									</div> 
+								</div>
 
-							<p class="help-block">Example block-level help text here.</p>
+								<!-- <p class="help-block">Example block-level help text here.</p>
 							</div>
 							<div class="checkbox">
 							<label>
 								<input type="checkbox"> Check me out
 							</label>
 							</div>
-						</div>
+						</div> -->
 						<!-- /.box-body -->
 
 						<div class="box-footer">
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn-block btn-block-sm btn btn-primary">Ingresar</button>
 						</div>
 						</form>
 					
