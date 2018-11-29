@@ -57,61 +57,68 @@ function formulario_contenido(){?>
 			<li class="active">Blank page</li>
 		</ol>
 		</section>
+		<div class="row">
+			<div class="col-md-10">
+				<!-- Main content -->
+				<section class="content">
 
-		<!-- Main content -->
-		<section class="content">
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+					<h3 class="box-title">Formulario de Contenido</h3>
 
-		<!-- Default box -->
-		<div class="box">
-			<div class="box-header with-border">
-			<h3 class="box-title">Formulario de Contenido</h3>
+					<!-- <div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+								title="Collapse">
+						<i class="fa fa-minus"></i></button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+						<i class="fa fa-times"></i></button>
+					</div>
+					</div> -->
+					<div class="box-body">
+					<form role="form">
+						<div class="box-body">
+							<div class="form-group">
+							<label for="txtTitulo">Titulo</label>
+							<input type="text" class="form-control" id="txtTitulo" placeholder=" ">
+							</div>
+							<div class="form-group">
+							<label for="txtDetalles">Detalles</label>
+							<input type="text" class="form-control" id="txtDetalles" placeholder="">
+							</div>
+							<div class="form-group">
+							<label for="txtValor">Valor</label>
+							<input type="text" class="form-control" id="txtValor" placeholder="">
+							</div>
+							<div class="form-group">
+							<label for="exampleInputFile">File input</label>
+							<input type="file" id="exampleInputFile">
 
-			<!-- <div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-						title="Collapse">
-				<i class="fa fa-minus"></i></button>
-				<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-				<i class="fa fa-times"></i></button>
-			</div>
-			</div> -->
-			<div class="box-body">
-			<form role="form">
-				<div class="box-body">
-					<div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-					</div>
-					<div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-					</div>
-					<div class="form-group">
-					<label for="exampleInputFile">File input</label>
-					<input type="file" id="exampleInputFile">
+							<p class="help-block">Example block-level help text here.</p>
+							</div>
+							<div class="checkbox">
+							<label>
+								<input type="checkbox"> Check me out
+							</label>
+							</div>
+						</div>
+						<!-- /.box-body -->
 
-					<p class="help-block">Example block-level help text here.</p>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+						</form>
+					
 					</div>
-					<div class="checkbox">
-					<label>
-						<input type="checkbox"> Check me out
-					</label>
+					<!-- /.box-body -->
+					<div class="box-footer">
+					Footer
 					</div>
+					<!-- /.box-footer-->
 				</div>
-				<!-- /.box-body -->
-
-				<div class="box-footer">
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</div>
-				</form>
-			
+				<!-- /.box -->
 			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-			Footer
-			</div>
-			<!-- /.box-footer-->
 		</div>
-		<!-- /.box -->
 
 		</section>
 		<!-- /.content -->
@@ -191,7 +198,7 @@ function agregar_admin(){
 								
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input type="password"  pattern=".{6,}"  autocomplete="current-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" <?if($id>0){?>value=""<?}?>>
+									<input type="password"  pattern=".{6,}"  autocomplete="new-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" <?if($id>0){?>value=""<?}?>>
 								</div>
 								
 								
@@ -409,7 +416,18 @@ function tabla_actividad(){?>
                   <td><?=$resultado['coAccion'];?></td>
                   <td><?=$resultado['coNomUsuario'];?></td>
                   <th><?=fecha_formato_espanol_hora($resultado['coFecha']); ?></th>
-                  <td><?=$resultado['coPrivilegiosUsuario']; ?></td>
+                  <td><?switch ($resultado['coPrivilegiosUsuario']) {
+					  case 'admin':
+					  echo 'Administrador';
+					  break;
+					  case 'super':
+					  echo 'Super Usuario';
+					  break;
+					  case 'digi':
+					  echo 'Digitador';
+					  break;
+					}
+				?></td>
 				</tr>
 				<?} ?>
                 </tbody>
@@ -490,17 +508,17 @@ function todo_contenido(){?>
                   <td><?= $resultado['coEmailUsuario']; ?></td>
                   <th><?= fecha_formato_espanol_hora($resultado['coUltimaLog']); ?></th>
                   <td><? switch ($resultado['coPrivilegiosUsuario']) {
-																						case 'admin':
-																							echo 'Administrador';
-																							break;
-																						case 'super':
-																							echo 'Super Usuario';
-																							break;
-																						case 'digi':
-																							echo 'Digitador';
-																							break;
-																					}
-																					?></td>
+					  case 'admin':
+					  echo 'Administrador';
+					  break;
+					  case 'super':
+					  echo 'Super Usuario';
+					  break;
+					  case 'digi':
+					  echo 'Digitador';
+					  break;
+					}
+				?></td>
                   <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidUsuario']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 4)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">
