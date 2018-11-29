@@ -17,9 +17,11 @@ $_SESSION['usuario'];
   <link rel="stylesheet" href="css/notifications.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="css/ionicons.min.css">
+  <link rel="stylesheet" href="css/morris.css">
 
   <link rel="stylesheet" href="css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="css/notifications.min.css">
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
