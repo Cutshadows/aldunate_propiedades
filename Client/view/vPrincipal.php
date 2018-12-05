@@ -208,7 +208,7 @@ function formulario_contenido(){?>
 		</ol>
 		</section>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<!-- Main content -->
 				<section class="content">
 
@@ -226,7 +226,7 @@ function formulario_contenido(){?>
 					</div>
 					</div> -->
 					<div class="box-body">
-					<form role="form">
+					<form id="form-contenido" role="form">
 						<div class="box-body">
 							<div class="form-group">
 								<label for="txtTitulo">Titulo</label>
@@ -324,25 +324,41 @@ function formulario_contenido(){?>
 									</div>
 									<div class="container-fluid">
 										<div class="row mb20">
-											<div class="col-md-6">
+											<!-- <div class="col-md-6">
 												<label for="exampleInputFile">File input</label>
-												<!-- <div class="form-group"> -->
-													<input type="file" id="exampleInputFile	">
-												<!-- </div> -->
+												<div class="form-group"> 
+													<input type="file" id="exampleInputFile	">-->
+												<!-- </div> 
+											</div>-->
+											<div class="col-md-4">
+												<div class="row">
+													<!-- <div class="col-md-6">
+														<label for="btnAddImg"> Agregar Imagenes</label>
+													</div> -->
+													<div class="col-md-6">
+														<button type="button" class="btn btn-success btn-block text-right" id="btnAddImg" name="btnAddImg">
+															<span class="fa fa-plus" aria-hidden="true"></span>
+														</button>
+													</div>	
+												</div>
 											</div>
-											<div class="col-md-1">
-												<label></label>
-												<button type="button" class="btn btn-success btn-block text-right" id="btnAddImg" name="btnAddImg">
-												<span class="fa fa-plus" aria-hidden="true"></span>
-												</button>
-											</div>
-											<div class="col-md-1">
+											<!-- <div class="col-md-1">
 												<label></label>
 												<button type="button" class="btn btn-danger btn-block text-right" id="btnAddImg" name="btnAddImg">
 												<span class="fa fa-minus" aria-hidden="true"></span>
 												</button>
+											</div> -->
+										</div>
+										<div class="row">
+											<div class="col-md-9">
+												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen"></div>
+											</div>
+											<div class="col-md-3">
+												<input type="hidden" name="imgbd" id="imgdb" value="<?= $imgStandar ?>">
+        	               		    			<img name="imagen_previa" id="imagen_previa" width="100%" height="360px" src="<?= _imagen_ . $imgStandar; ?>">
 											</div>
 										</div>
+										
 									</div> 
 								</div>
 
@@ -362,10 +378,10 @@ function formulario_contenido(){?>
 						</form>
 					
 					</div>
-					<!-- /.box-body -->
+					<!-- /.box-body 
 					<div class="box-footer">
 					Footer
-					</div>
+					</div>-->
 					<!-- /.box-footer-->
 				</div>
 				<!-- /.box -->
@@ -374,6 +390,24 @@ function formulario_contenido(){?>
 
 		</section>
 		<!-- /.content -->
+		<script src="js/controller/contenido.js"></script>
+		<script src="js/notifications.min.js"></script>
+		<script>
+			$(document).ready( function() {
+				/* MK Web Notification init */
+				var config = {
+					// Default, Primary, Success, Danger, Warning, Info, Light, Dark, Purple
+					positionY: "left",
+					positionX: "top",
+					scrollable: false, //true
+					rtl: false, // true = ltr
+					max: 5, // number of notifications to display,
+					dismissable: true
+				};
+				mkNotifications(config);
+				
+			}); 
+		</script>
 <?}
 
 /**FUNCION PARA ABRIR EL ADMINISTRADOR DE CONTENIDO */
