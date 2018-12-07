@@ -9,7 +9,7 @@ $(document).ready(function(){
         if (cont < 7) {                 
             mkNoti(
                 'Alerta de Notificación',
-                'Se Agrego Cuadro Informativo exitosamente',
+                'Se Agrego un cuadro para Imagen exitosamente',
                 {
                     status: 'info',
                     duration: 2000
@@ -25,7 +25,7 @@ $(document).ready(function(){
         } else {
             mkNoti(
                 'Alerta de Notificación',
-                'Ya no se pueden Agregar mas Cuadros Informativos',
+                'Ya no se pueden Agregar mas Cuadros para Imagen',
                 {
                     status: 'warning',
                     duration: 2000
@@ -39,7 +39,7 @@ $(document).ready(function(){
         if (cont < 7) {
             mkNoti(
                 'Alerta de Notificación',
-                'Se Agrego Cuadro Informativo exitosamente', {
+                'Se Agrego Cuadro para Imagen exitosamente', {
                     status: 'info',
                     duration: 2000
                 }
@@ -54,7 +54,7 @@ $(document).ready(function(){
         } else {
             mkNoti(
                 'Alerta de Notificación',
-                'Ya no se pueden Agregar mas Cuadros Informativos', {
+                'Ya no se pueden Agregar mas Cuadros para Imagen', {
                     status: 'warning',
                     duration: 2000
                 }
@@ -120,6 +120,54 @@ $(document).ready(function(){
         });
 
         var infoimg = JSON.stringify(imagenesjson);
-        console.log(infoimg);
+        //console.log(infoimg);
+        var form = $(this);
+        var formData = new FormData();
+        var params = form.serializeArray();
+        formData.append("imagenes", infoimg);
+        $(params).each(function (index, element) {
+            formData.append(element.name, element.value);
+        });
+        var datos = formData;
+        $.ajax({
+            url: 'controller/cContenido.php',
+            type: 'POST',
+            dataType: 'JSON',
+            cache: false,
+            contentType: false,
+            processData: false,
+            async: true,
+            data: datos,
+            success: function (data) {
+                //console.log(data);
+                var resultado = data;
+                if (resultado.respuesta == 'exito') {
+                    //llamamos a la notificacion para que se muestre en el escritorio con su body y url 
+                    mkNoti(
+                        'Alerta de Notificación',
+                        'Contenido Ingresado Correctamente', {
+                            status: 'success',
+                            duration: 3000
+                        }
+                    );
+                    /* notificar(resultado.texto, resultado.alias); */
+                    setTimeout(function () {
+                        verContenedor('vContenido.php');
+                    }, 1800);
+                
+                }
+
+            },
+            error: function (data) {
+                console.log(data);
+                mkNoti(
+                    'Alerta de Notificación',
+                    'Error en el Ingreso de Datos', {
+                        status: 'warning',
+                        duration: 3000
+                    }
+                );
+            }
+        });
     });
 });

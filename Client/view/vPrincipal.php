@@ -6,9 +6,9 @@ switch ($router) {
     case 2:formulario_contenido();exit;
     case 3:admin_contenido();exit;
     case 4:agregar_admin();exit;
-	case 5:tabla_admin();exit;
-	case 6:tabla_actividad();exit;
-	case 7:todo_contenido();exit;
+		case 5:tabla_admin();exit;
+		case 6:tabla_actividad();exit;
+		case 7:todo_contenido();exit;
 }
 
 function inicio(){?>
@@ -373,6 +373,7 @@ function formulario_contenido(){?>
 						<!-- /.box-body -->
 
 						<div class="box-footer">
+							<button type="hidden" value="<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?>"></button>
 							<button type="submit" class="btn-block btn-block-sm btn btn-primary">Ingresar</button>
 						</div>
 						</form>
