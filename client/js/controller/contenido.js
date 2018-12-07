@@ -141,7 +141,8 @@ $(document).ready(function(){
             success: function (data) {
                 //console.log(data);
                 var resultado = data;
-                if (resultado.respuesta == 'exito') {
+                console.log(resultado);
+                /* if (resultado.respuesta == 'exito') { */
                     //llamamos a la notificacion para que se muestre en el escritorio con su body y url 
                     mkNoti(
                         'Alerta de Notificación',
@@ -151,11 +152,11 @@ $(document).ready(function(){
                         }
                     );
                     /* notificar(resultado.texto, resultado.alias); */
-                    setTimeout(function () {
+                    /* setTimeout(function () {
                         verContenedor('vContenido.php');
-                    }, 1800);
+                    }, 1800); */
                 
-                }
+                /* } */
 
             },
             error: function (data) {

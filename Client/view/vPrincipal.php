@@ -230,24 +230,30 @@ function formulario_contenido(){?>
 						<div class="box-body">
 							<div class="form-group">
 								<label for="txtTitulo">Titulo</label>
-								<input type="text" class="form-control" id="txtTitulo" placeholder=" ">
+								<input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder=" ">
 							</div>
 							
 							<div class="form-group">
 								<label>Descripción</label>
-								<textarea class="form-control" rows="4" placeholder="Ingrese Descripción ..."></textarea>
+								<textarea class="form-control" rows="4" name="txtdescripcion" id="txtdescripcion" placeholder="Ingrese Descripción ..."></textarea>
 							</div>
 							<div class="input-group">
 								<!-- <label for="txtValor">Valor</label>  -->
 								<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-									<input type="text" class="form-control" id="txtValor" placeholder="Valor">
+									<input type="text" class="form-control" id="txtValor" name="txtValor" placeholder="Valor Monetario">
 								<span class="input-group-addon">CLP</span>
+							</div>
+							<div class="input-group" style="margin-top:2%;">
+								<!-- <label for="txtValor">Valor</label>  -->
+								<!-- <span class="input-group-addon"><i class="fa fa-dollar"></i></span> -->
+									<input type="text" class="form-control" id="txtvaluf" name="txtvaluf" placeholder="Valor en Unidad de Fomento">
+								<span class="input-group-addon">UF</span>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="txtDetalles">Dirección</label>
-										<input type="text" class="form-control" id="txtDetalles" placeholder="">
+										<input type="text" class="form-control" id="txtDetalles" name="txtDetalles" placeholder="">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -373,7 +379,7 @@ function formulario_contenido(){?>
 						<!-- /.box-body -->
 
 						<div class="box-footer">
-							<button type="hidden" value="<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?>"></button>
+							<input type="hidden" id="opcion" name="opcion" value="crear-contenido" > <!-- value="<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?>" -->
 							<button type="submit" class="btn-block btn-block-sm btn btn-primary">Ingresar</button>
 						</div>
 						</form>
