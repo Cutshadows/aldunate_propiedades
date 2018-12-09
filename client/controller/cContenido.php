@@ -22,6 +22,8 @@ function crearContenido(){
     include_once('../include/conexion.php');
     $conn = conectar();
 
+    $imgs=$_FILES['imagenes'];
+
     die(json_encode($_POST));
 
 }
