@@ -2,7 +2,8 @@ $(document).ready(function(){
 /**
       * AQUI EMPIEZA LA INTERACCION CON EL TEXTAREA
       */
-     var cont = 0;// se inicia el contador para el control de ingreso de horarios solo pueden 3 
+     var cont = 0;
+     var num = 1;// se inicia el contador para el control de ingreso de horarios solo pueden 3 
      //implementamos la funcion en el boton que agregara los campos en el horario
     $("#btnAddImg").click(function () {
     //$("#constructor-imagen").on('click', 'button.btn-success', function () {
@@ -16,11 +17,12 @@ $(document).ready(function(){
                 }
             );
             /* var num = Math.round(Math.random()*(100)); */ // - 5) + 5;    
-            var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /><!-- input type="hidden" name="imgbd" id="imgdb" value="<?=//$imgStandar?>"--></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
+            var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>' + num+ '</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
             $("#constructor-imagen").append(tempInfo);
            /*  $('textarea').each(function () {
                 tinymce.execCommand('mceAddEditor', false, $(this).attr('id'));
             }); */
+            num++;
             cont++;
         } else {
             mkNoti(
@@ -36,6 +38,7 @@ $(document).ready(function(){
     });
     $("#constructor-imagen").on('click', 'button.btn-success', function () {
         //$("#constructor-imagen").on('click', 'button.btn-success', function () {
+        
         if (cont < 7) {
             mkNoti(
                 'Alerta de Notificación',
@@ -45,11 +48,12 @@ $(document).ready(function(){
                 }
             );
             /* var num = Math.round(Math.random() * (100)); */ // - 5) + 5;    
-            var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /><!--input type="hidden" name="imgbd" id="imgdb" value="<?=//$imgStandar?>"--></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
+            var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>' + num + '</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
             $("#constructor-imagen").append(tempInfo);
             /* $('textarea').each(function () {
                 tinymce.execCommand('mceAddEditor', false, $(this).attr('id'));
             }); */
+            num ++;
             cont++;
         } else {
             mkNoti(
@@ -79,6 +83,7 @@ $(document).ready(function(){
                 if ($("#" + contenedor).find('.row').length > 1 || contenedor == "constructor-imagen") {
                     $(this).closest('.row').remove(); // ELIMINA LA FILA DEL REGISRO.
                     cont--;
+                    num--;
                 } else {
                     mkNoti(
                         'Alerta de Notificación',
