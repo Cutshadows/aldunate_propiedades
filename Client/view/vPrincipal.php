@@ -338,7 +338,7 @@ function formulario_contenido(){
 													<input type="file" id="exampleInputFile	">-->
 												<!-- </div> 
 											</div>-->
-											<div class="col-md-4">
+											<div class="col-md-8">
 												<!-- <div class="row">
 													<div class="col-md-6">
 														<label for="btnAddImg"> Agregar Imagenes</label>
@@ -349,6 +349,7 @@ function formulario_contenido(){
 														</button>
 													</div>	
 												</div> -->
+												<div class="row"><div class="col-md-12"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple /></div></div></div></div>
 											</div>
 											<!-- <div class="col-md-1">
 												<label></label>
@@ -358,20 +359,20 @@ function formulario_contenido(){
 											</div> -->
 										</div>
 										<div class="row">
-											<div class="col-md-9">
+											<div class="col-md-12">
 												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen">
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>2</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>3</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>4</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
-														<!--<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>5</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>6</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>7</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div> -->
+														<!--<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>2</b></span><input type="file" class="form-control" name="cnombreimg2" id="cnombreimg2" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>3</b></span><input type="file" class="form-control" name="cnombreimg3" id="cnombreimg3" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>4</b></span><input type="file" class="form-control" name="cnombreimg4" id="cnombreimg4" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>5</b></span><input type="file" class="form-control" name="cnombreimg5" id="cnombreimg5" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>6</b></span><input type="file" class="form-control" name="cnombreimg6" id="cnombreimg6" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>7</b></span><input type="file" class="form-control" name="cnombreimg7" id="cnombreimg7" /></div></div></div></div> -->
 												</div>
 											</div>
 											<div class="col-md-3">
 												<!--input type="hidden" name="imgbd" id="imgdb" value="<? //$imgStandar ?>"-->
-        	               	<img name="imagen_previa" id="imagen_previa" width="100%" height="360px" src="<?= _imagen_ . $imgStandar; ?>">
+        	               	<!-- <img name="imagen_previa" id="imagen_previa" width="100%" height="360px" src="<?= _imagen_ . $imgStandar; ?>"> -->
 											</div>
 										</div>
 										

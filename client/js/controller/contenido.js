@@ -2,12 +2,47 @@ $(document).ready(function(){
 /**
       * AQUI EMPIEZA LA INTERACCION CON EL TEXTAREA
       */
-     var cont = 0;
-     var num = 1;// se inicia el contador para el control de ingreso de horarios solo pueden 3 
+     $('#cnombreimg').on('change', function(){
+        $('constructor-imagen').html('');
+        var archivos =document.getElementById('cnombreimg').files;
+        var navegador= window.URL || window.webkitURL;
+        /* recorrer archivos*/
+        for(x=0; x<archivos.length; x++){
+            /* validar tamaño y tipo de archiv*/
+            var size=archivos[x].size,
+            type= archivos[x].type,
+            name=archivos[x].name;
+            if(size > 5120*5120){
+                mkNoti(
+                    'Alerta de Notificación',
+                    'El archivo'+name+'No puede superar los 5 mb',
+                    {
+                        status: 'danger',
+                        duration: 3000
+                    }
+                );
+            } else if (type != 'image/jpeg' && type != 'image/jpg' && type != 'image/png' && type != 'image/gif'){
+                mkNoti(
+                    'Alerta de Notificación',
+                    'El archivo' + name + 'No es del tipo de imagen permitida',
+                    {
+                        status: 'danger',
+                        duration: 3000
+                    }
+                );
+            }else{
+                var objeto_url=navegador.createObjectURL(archivos[x]);
+                $("#constructor-imagen").append("<img src="+objeto_url+" width='180px' height='180px'>");
+            }
+        }
+
+     });
+     /* var cont = 0; */
+     // se inicia el contador para el control de ingreso de horarios solo pueden 3 
      //implementamos la funcion en el boton que agregara los campos en el horario
-    $("#btnAddImg").click(function () {
+   /*  $("#btnAddImg").click(function () { */
     //$("#constructor-imagen").on('click', 'button.btn-success', function () {
-        if (cont < 7) {                 
+        /* if (cont < 7) {                 
             mkNoti(
                 'Alerta de Notificación',
                 'Se Agrego un cuadro para Imagen exitosamente',
@@ -15,15 +50,15 @@ $(document).ready(function(){
                     status: 'info',
                     duration: 2000
                 }
-            );
+            ); */
             /* var num = Math.round(Math.random()*(100)); */ // - 5) + 5;    
-            var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>' + num+ '</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
-            $("#constructor-imagen").append(tempInfo);
+            /* var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>' + num+ '</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
+            $("#constructor-imagen").append(tempInfo); */
            /*  $('textarea').each(function () {
                 tinymce.execCommand('mceAddEditor', false, $(this).attr('id'));
             }); */
-            num++;
-            cont++;
+            
+           /*  cont++;
         } else {
             mkNoti(
                 'Alerta de Notificación',
@@ -35,8 +70,8 @@ $(document).ready(function(){
             );
         } 
             
-    });
-    $("#constructor-imagen").on('click', 'button.btn-success', function () {
+    }); */
+   /*  $("#constructor-imagen").on('click', 'button.btn-success', function () {
         //$("#constructor-imagen").on('click', 'button.btn-success', function () {
         
         if (cont < 7) {
@@ -46,15 +81,15 @@ $(document).ready(function(){
                     status: 'info',
                     duration: 2000
                 }
-            );
+            ); */
             /* var num = Math.round(Math.random() * (100)); */ // - 5) + 5;    
-            var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>' + num + '</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
-            $("#constructor-imagen").append(tempInfo);
+            /* var tempInfo = '<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>' + num + '</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div><div class="col-md-4 pull-left"><button type="button" class="btn btn-success col-md-2 pull-left" style="margin: 0px 2px" id="btnAddImg" name="btnAddImg"><span class="fa fa-plus"  aria-hidden="true"></span></button><button type="button" class="btn btn-danger col-md-2 pull-left" style="margin: 0px 2px" id="btnSupInfo" name="btnSupInfo"><span class="fa fa-trash" aria-hidden="true"></span></button></div></div>';
+            $("#constructor-imagen").append(tempInfo); */
             /* $('textarea').each(function () {
                 tinymce.execCommand('mceAddEditor', false, $(this).attr('id'));
             }); */
-            num ++;
-            cont++;
+           
+            /*cont++;
         } else {
             mkNoti(
                 'Alerta de Notificación',
@@ -65,10 +100,10 @@ $(document).ready(function(){
             );
         }
 
-    });
-    $("#constructor-imagen").on('click', 'button.btn-danger', function () {
+    }); */
+    /* $("#constructor-imagen").on('click', 'button.btn-danger', function () {
         var contenedor = $(this).closest('div[id*="constructor-"]').attr('id');
-        var textoNombre = contenedor.split("data-");
+        var textoNombre = contenedor.split("data-"); */
         /* swal({
             title: '¿Desea elimninar esta Fila ?',
             text: "Verifique bien antes de eliminar la fila !",
@@ -80,21 +115,21 @@ $(document).ready(function(){
             cancelButtonText: 'No, Cancelar'
         }).then((result) => { */
             /* if (result.value) { */
-                if ($("#" + contenedor).find('.row').length > 1 || contenedor == "constructor-imagen") {
+                /* if ($("#" + contenedor).find('.row').length > 1 || contenedor == "constructor-imagen") {
                     $(this).closest('.row').remove(); // ELIMINA LA FILA DEL REGISRO.
                     cont--;
-                    num--;
-                } else {
-                    mkNoti(
+                    
+                } else { */
+                    /* mkNoti(
                         'Alerta de Notificación',
                         'No se puede eliminar todos los "' + textoNombre[1] + '", siempre debe existir un registro',
                         {
                             status: 'warning',
                             duration: 3000
-                        }
-                    );
+                        } 
+                    );*/
                     // console.log("no se puede eliminar todos los "+textoNombre[1]+", siempre debe existir un registro");
-                }
+                /* } */
             /*  }*/
             /* } else if (result.dismiss === swal.DismissReason.cancel) {
                 swal(
@@ -104,7 +139,7 @@ $(document).ready(function(){
                 )
             }
         });*/
-    });
+    /* }); */
     //FUNCION PARA PROCESAR EL FORMULARIO DE INGRESO
     $("#form-contenido").on("submit", function (e) {
         //$("#btnNuevoContenido").on("click", function (e) {        

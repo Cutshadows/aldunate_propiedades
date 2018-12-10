@@ -24,42 +24,52 @@ function crearContenido(){
 
     define("_imagen_", "../img/contenido/");
    
-    
+        if(isset($_FILES['imagenes'])){
 
-    if (isset($_FILES['imagenes'])) {
-        /* $reporte = null; */
-        for ($x = 0; $x < count($_FILES['imagenes']); $x++) {
-            $img = $_FILES['imagenes'];
-            $directorio = _imagen_;
-            $carpeta = 'contenido';
 
-            echo $nombre = $img["name"][$x];
-           /*  echo $tipo = $img["type"][$x];
-            echo $ruta_provisional = $img["tmp_name"][$x];
-            echo $size = $img["size"][$x]; */
-            //echo $dimensiones = getimagesize($ruta_provisional);
-            //echo $width = $dimensiones[0];
-            //echo $height = $dimensiones[1];
-
+            for ($x=0; $x <count($_FILES['imagenes']) ; $x++) { 
+                # code...
             
-            if (!is_dir($directorio) && !file_exists($carpeta)) {
-                mkdir($directorio, 0755, true);
-                shell_exec('chcon -R -t httpd_sys_rw_content_t ' . $directorio);
-            }            
-            
-            if (move_uploaded_file($img['tmp_name'], $directorio . $img['name'])) {
-                $imagen_url = $img['name'];
-                $imagen_resultado = "Se subio correctamente";
-            } else {
-                $respuesta = array(
-                    'respuesta' => error_get_last()
-                );
+                $img = $_FILES['imagenes'];
+                
+                $directorio = _imagen_;
+                $carpeta = 'contenido';
+
+                 $nombre = $img["name"][$x];
+                 $tipo = $img["type"][$x];
+                 $ruta_provisional = $img["tmp_name"][$x];
+                 $size = $img["size"][$x];
+                 $dimensiones = getimagesize($ruta_provisional);
+                 $width = $dimensiones[0];
+                 $height = $dimensiones[1];
+
+                
+                if (!is_dir($directorio) && !file_exists($carpeta)) {
+                    mkdir($directorio, 0755, true);
+                    shell_exec('chcon -R -t httpd_sys_rw_content_t ' . $directorio);
+                }
+                if (move_uploaded_file($ruta_provisional, $directorio . $nombre)) {
+                    $imagen_url = $nombre;
+                    $imagen_resultado = "Se subio correctamente";
+                } else {
+                    $respuesta = array(
+                        'respuesta' => error_get_last(),
+                        'nombre' => $nombre,
+                        'tipo' => $tipo,
+                        'ruta_tmp'=>$ruta_provisional,
+                        "tamano"=>$size
+                    );
+                }
             }
-            
+        
+        } else {
+            $respuesta = array(
+                'respuesta' => "el archivo esta vacio"
+            );
         }
-        die(json_encode($_POST));
-    }
-
+            
     
+        die(json_encode($respuesta));
+        
 
 }
