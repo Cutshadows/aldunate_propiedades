@@ -105,10 +105,10 @@ $(document).ready(function(){
         //$("#btnNuevoContenido").on("click", function (e) {        
         e.preventDefault();
 
-        var imagenesjson=[];
-        var jsonimg='';
+        /* var imagenesjson=[];
+        var jsonimg=''; */
 
-        $.each($('#constructor-imagen').find('.row'), function (index, div) {
+        /* $.each($('#constructor-imagen').find('.row'), function (index, div) {
             var imagen = $(div).find('input[type="file"]')[0];
             jsonimg ={
                 imagen:$(imagen).val()
@@ -117,14 +117,17 @@ $(document).ready(function(){
             console.log(jsonimg);
             console.log(imagenesjson);
         
-        });
+        }); */
 
-        var infoimg = JSON.stringify(imagenesjson);
+        /* var infoimg = JSON.stringify(imagenesjson); */
         //console.log(infoimg);
+        var files = $('#cnombreimg')[0].files;
+
         var form = $(this);
         var formData = new FormData();
         var params = form.serializeArray();
-        formData.append("imagenes", infoimg);
+        formData.append("imagenes", files[0]);
+        /* formData.append("imagenes", infoimg); */
         $(params).each(function (index, element) {
             formData.append(element.name, element.value);
         });
@@ -134,7 +137,7 @@ $(document).ready(function(){
             type: 'POST',
             dataType: 'JSON',
             cache: false,
-            contentType: true,
+            contentType: false,
             processData: false,
             async: true,
             data: datos,

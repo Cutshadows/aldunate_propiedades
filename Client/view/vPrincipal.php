@@ -195,7 +195,9 @@ function inicio(){?>
 <?}
 
 
-function formulario_contenido(){?>
+function formulario_contenido(){
+	$id=$_POST['id']; 
+	?>
 	<section class="content-header">
 		<h1>
 			Creación Contenido
@@ -226,7 +228,7 @@ function formulario_contenido(){?>
 					</div>
 					</div> -->
 					<div class="box-body">
-					<form id="form-contenido" role="form">
+					<form id="form-contenido" role="form" enctype="multipart/form-data" >
 						<div class="box-body">
 							<div class="form-group">
 								<label for="txtTitulo">Titulo</label>
@@ -342,9 +344,9 @@ function formulario_contenido(){?>
 														<label for="btnAddImg"> Agregar Imagenes</label>
 													</div> -->
 													<div class="col-md-6">
-														<button type="button" class="btn btn-success btn-block text-right" id="btnAddImg" name="btnAddImg">
+														<!-- <button type="button" class="btn btn-success btn-block text-right" id="btnAddImg" name="btnAddImg">
 															<span class="fa fa-plus" aria-hidden="true"></span>
-														</button>
+														</button> -->
 													</div>	
 												</div>
 											</div>
@@ -357,11 +359,15 @@ function formulario_contenido(){?>
 										</div>
 										<div class="row">
 											<div class="col-md-9">
-												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen"></div>
+												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen">
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><label for="cnombreimg">1</label><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><label for="cnombreimg">2</label><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
+														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><label for="cnombreimg">3</label><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" /></div></div></div></div>
+												</div>
 											</div>
 											<div class="col-md-3">
-												<input type="hidden" name="imgbd" id="imgdb" value="<?= $imgStandar ?>">
-        	               		    			<img name="imagen_previa" id="imagen_previa" width="100%" height="360px" src="<?= _imagen_ . $imgStandar; ?>">
+												<!--input type="hidden" name="imgbd" id="imgdb" value="<? //$imgStandar ?>"-->
+        	               	<img name="imagen_previa" id="imagen_previa" width="100%" height="360px" src="<?= _imagen_ . $imgStandar; ?>">
 											</div>
 										</div>
 										
@@ -379,7 +385,7 @@ function formulario_contenido(){?>
 						<!-- /.box-body -->
 
 						<div class="box-footer">
-							<input type="hidden" id="opcion" name="opcion" value="crear-contenido" > <!-- value="<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?>" -->
+							<input type="hidden" id="opcion" name="opcion" value=<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?> > <!-- value="" -->
 							<button type="submit" class="btn-block btn-block-sm btn btn-primary">Ingresar</button>
 						</div>
 						</form>
