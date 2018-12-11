@@ -15,6 +15,9 @@ if (isset($opcion) || trim($opcion)) {
             exit;
     }
 }
+echo $type = $_FILES['imagenes']['type'];
+echo $tmp_name = $_FILES['imagenes']["tmp_name"];
+echo $name = $_FILES['imagenes']["name"];
 
 define("_pathfile_", "/");
 
@@ -22,54 +25,53 @@ function crearContenido(){
     include_once('../include/conexion.php');
     $conn = conectar();
 
-    define("_imagen_", "../img/contenido/");
-   
-        if(isset($_FILES['imagenes'])){
+        if(isset($_FILES['cnombreimg'])){
+            $titulo=$_POST['txtTitulo'];
+            $descripcion = $_POST['txtdescripcion'];
+            $valorClp = $_POST['txtValor'];
+            $valorUf = $_POST['txtvaluf'];
+            $detalles = $_POST['txtDetalles'];
+            $Comuna = $_POST['slctComuna'];
+            /* $titulo = $_POST['txtDetalles'];
+            $titulo=$_POST['txtDetalles'];
+            $titulo=$_POST['txtDetalles'];*/
+            $targetDir = "../img/contenido/";
+            $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
 
+            $images_arr = array();
 
-            for ($x=0; $x <count($_FILES['imagenes']) ; $x++) { 
-                # code...
-            
-                $img = $_FILES['imagenes'];
-                
-                $directorio = _imagen_;
-                $carpeta = 'contenido';
+            foreach ($_FILES['cnombreimg']['name'] as $key => $value) {
+                $name = $_FILES['cnombreimg']['name'][$key];
+                $tmp_name = $_FILES['cnombreimg']['tmp_name'][$key];
+                $size = $_FILES['cnombreimg']['size'][$key];
+                $type = $_FILES['cnombreimg']['type'][$key];
+                $error = $_FILES['cnombreimg']['error'][$key];
+        # code...
 
-                 $nombre = $img["name"][$x];
-                 $tipo = $img["type"][$x];
-                 $ruta_provisional = $img["tmp_name"][$x];
-                 $size = $img["size"][$x];
-                 $dimensiones = getimagesize($ruta_provisional);
-                 $width = $dimensiones[0];
-                 $height = $dimensiones[1];
+                $fileName = basename($_FILES['cnombreimg']['name'][$key]);
+                $targetFilePath = $targetDir . $fileName;
 
-                
-                if (!is_dir($directorio) && !file_exists($carpeta)) {
-                    mkdir($directorio, 0755, true);
-                    shell_exec('chcon -R -t httpd_sys_rw_content_t ' . $directorio);
-                }
-                if (move_uploaded_file($ruta_provisional, $directorio . $nombre)) {
-                    $imagen_url = $nombre;
-                    $imagen_resultado = "Se subio correctamente";
-                } else {
-                    $respuesta = array(
-                        'respuesta' => error_get_last(),
-                        'nombre' => $nombre,
-                        'tipo' => $tipo,
-                        'ruta_tmp'=>$ruta_provisional,
-                        "tamano"=>$size
-                    );
+                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                if (in_array($fileType, $allowTypes)) {
+                    if (move_uploaded_file($_FILES['cnombreimg']['tmp_name'][$key], $targetFilePath)) {
+                        $images_arr[] = $targetFilePath;
+                    }
                 }
             }
+            
+            $respuesta = array(
+                'respuesta' => "exito"
+            );
+
         
         } else {
             $respuesta = array(
-                'respuesta' => "el archivo esta vacio"
+                'respuesta' => "vacio"
             );
         }
             
     
-        die(json_encode($respuesta));
+        die(json_encode($_POST));
         
 
 }
