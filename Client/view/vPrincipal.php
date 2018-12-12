@@ -1,5 +1,7 @@
 <?
 error_reporting(E_ALL & ~E_NOTICE);
+include_once('../include/conexion.php');
+$conn=conectar();
 $router=$_POST['ruta'];
 switch ($router) {
     case 1:inicio();exit;
