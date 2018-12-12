@@ -198,6 +198,8 @@ function inicio(){?>
 
 
 function formulario_contenido(){
+	include_once('../include/conexion.php');
+	$conn=conectar();
 	$id=$_POST['id']; 
 	?>
 	<section class="content-header">
@@ -244,20 +246,20 @@ function formulario_contenido(){
 							<div class="input-group">
 								<!-- <label for="txtValor">Valor</label>  -->
 								<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-									<input type="text" class="form-control" id="txtValor" name="txtValor" placeholder="Valor Monetario">
+									<input type="text" class="form-control txtnumber" id="txtValor" name="txtValor" placeholder="Valor Monetario">
 								<span class="input-group-addon">CLP</span>
 							</div>
 							<div class="input-group" style="margin-top:2%;">
 								<!-- <label for="txtValor">Valor</label>  -->
 								<!-- <span class="input-group-addon"><i class="fa fa-dollar"></i></span> -->
-									<input type="text" class="form-control" id="txtvaluf" name="txtvaluf" placeholder="Valor en Unidad de Fomento">
+									<input type="text" class="form-control txtnumber" id="txtvaluf" name="txtvaluf" placeholder="Valor en Unidad de Fomento">
 								<span class="input-group-addon">UF</span>
 							</div>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="txtDetalles">Dirección</label>
-										<input type="text" class="form-control" id="txtDetalles" name="txtDetalles" placeholder="">
+										<input type="text" class="form-control" id="txtDireccion" name="txtDireccion" placeholder="">
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -266,21 +268,17 @@ function formulario_contenido(){
 										<!-- <input type="text" class="form-control" id="txtDetalles" placeholder=""> -->
 										<select class="form-control" name="slctComuna" id="slctComuna" >
 											<option value="0">Seleccionar</option>
-											<option value="P1C1CO00">Canela</option>
-											<option value="P1C1CO01">Illapel</option>
-											<option value="P1C1CO02">Los Vilos</option>
-											<option value="P1C1CO03">Salmanca</option>
-											<option value="P2C2CO04">Andacollo</option>
-											<option value="P2C2CO05">Coquimbo</option>
-											<option value="P2C2CO06">La Higuera</option>
-											<option value="P2C2CO07">La Serena</option>
-											<option value="P2C2CO08">Paihuano</option>
-											<option value="P2C2CO09">Vicuña</option>
-											<option value="P3C3CO10">Combarbalá</option>
-											<option value="P3C3CO11">Monte Patria</option>
-											<option value="P3C3CO12">Ovalle</option>
-											<option value="P3C3CO13">Punitaqui</option>
-											<option value="P3C3CO14">Rio Hurtado</option>
+											<?
+											$pregunta=$conn->query("SELECT * FROM tb_comuna ORDER BY coidComuna ='P2C2CO07' DESC");
+										
+											$numOrden = 1;
+											$seleccionado = $id > 0 ? 'selected="selected"' : "";
+											while ($row = $pregunta->fetch_assoc()) {
+												$nombre = utf8_encode($row['coNomComuna']);
+												echo '<option value="' . $row['coidComuna'] . '" ' . $seleccionado . '  > ' . $numOrden . '. ' . $nombre . ' </option>'; 
+												$numOrden++;
+											}
+										?>
 										</select>
 									</div>
 								</div>
@@ -291,19 +289,19 @@ function formulario_contenido(){
 												<label for="txtDetalles">Baños</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox">
+														<input type="checkbox" name="chkboxBanos" id="chkboxBanos">
 														</span>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control txtnumber" id="txtBanos"  name="txtBanos" disabled="disabled" value="">
 												</div>
 												<!-- /input-group -->
 											</div>
 											<div class="col-lg-3">
-												<label for="txtDetalles">Piezas</label>
+												<label for="txtDetalles">Pisos</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox">
+														<input type="checkbox"  name="chkboxPiso" id="chkboxPiso">
 														</span>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control txtnumber"  name="txtPiso" id="txtPiso" disabled="disabled" value="">
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -311,22 +309,19 @@ function formulario_contenido(){
 												<label for="txtDetalles">Oficinas</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox">
+														<input type="checkbox" name="chkboxOficinas" id="chkboxOficinas">
 														</span>
-													<input type="text" class="form-control">
+													<input type="text" class="form-control txtnumber" name="txtOficinas" id="txtOficinas" disabled="disabled" value="">
 												</div>
 												<!-- /input-group -->
 											</div>
-											<!-- <div class="col-lg-3">
-												<label for="txtDetalles">Detalles</label>
+											<div class="col-lg-3">
+												<label for="txtDetalles">Estacionamiento</label>
 												<div class="input-group">
-														<span class="input-group-addon">
-														<input type="checkbox">
-														</span>
-													<input type="text" class="form-control">
+														<input type="checkbox" data-toggle="data-toggle" name="chkboxEstacion" id="chkboxEstacion">
 												</div>
-												/input-group
-											</div> -->
+												<!-- /input-group -->
+											</div>
 										</div>
 								<div class="panel panel-info">
 									<div class="panel-heading"><h5><strong>IMAGENES</strong>
@@ -363,33 +358,14 @@ function formulario_contenido(){
 										<div class="row">
 											<div class="col-md-12">
 												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen">
-														<!--<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>2</b></span><input type="file" class="form-control" name="cnombreimg2" id="cnombreimg2" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>3</b></span><input type="file" class="form-control" name="cnombreimg3" id="cnombreimg3" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>4</b></span><input type="file" class="form-control" name="cnombreimg4" id="cnombreimg4" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>5</b></span><input type="file" class="form-control" name="cnombreimg5" id="cnombreimg5" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>6</b></span><input type="file" class="form-control" name="cnombreimg6" id="cnombreimg6" /></div></div></div></div>
-														<div class="row"><div class="col-md-6"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>7</b></span><input type="file" class="form-control" name="cnombreimg7" id="cnombreimg7" /></div></div></div></div> -->
 												</div>
 											</div>
 											<div class="col-md-3">
-												<!--input type="hidden" name="imgbd" id="imgdb" value="<? //$imgStandar ?>"-->
-        	               	<!-- <img name="imagen_previa" id="imagen_previa" width="100%" height="360px" src="<?= _imagen_ . $imgStandar; ?>"> -->
 											</div>
 										</div>
 										
 									</div> 
 								</div>
-
-								<!-- <p class="help-block">Example block-level help text here.</p>
-							</div>
-							<div class="checkbox">
-							<label>
-								<input type="checkbox"> Check me out
-							</label>
-							</div>
-						</div> -->
-						<!-- /.box-body -->
 
 						<div class="box-footer">
 							<input type="hidden" id="opcion" name="opcion" value=<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?> > <!-- value="" -->
@@ -398,13 +374,7 @@ function formulario_contenido(){
 						</form>
 					
 					</div>
-					<!-- /.box-body 
-					<div class="box-footer">
-					Footer
-					</div>-->
-					<!-- /.box-footer-->
 				</div>
-				<!-- /.box -->
 			</div>
 		</div>
 
@@ -412,6 +382,24 @@ function formulario_contenido(){
 		<!-- /.content -->
 		<script src="js/controller/contenido.js"></script>
 		<script src="js/notifications.min.js"></script>
+		<script>
+        /*  */
+        $(function() {
+				    $('#chkboxEstacion').bootstrapToggle({
+                on: 'Si',
+                off: 'No'
+						});
+            $('#chkboxEstacion').change(function(){
+                    if($(this).prop('checked')==true){
+                        $('#console-event').html('Toggle: ' + $(this).prop('checked'));
+                        console.log('estado :' + $("#chkboxEstacion").prop('checked'));
+                    }else{
+                        $('#console-event').html('Toggle: ' + $(this).prop('checked'));
+                        console.log('estado :' + $("#chkboxEstacion").prop('checked'));
+                    }
+            });				
+				});				
+    </script>
 		<script>
 			$(document).ready( function() {
 				/* MK Web Notification init */

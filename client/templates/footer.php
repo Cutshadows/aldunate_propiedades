@@ -15,6 +15,7 @@
 <script src="js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
+<script src="js/bootstrap-toggle.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="js/demo.js"></script> -->

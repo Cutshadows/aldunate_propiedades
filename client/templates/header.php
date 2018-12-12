@@ -19,6 +19,9 @@ $_SESSION['usuario'];
   <link rel="stylesheet" href="css/ionicons.min.css">
   <link rel="stylesheet" href="css/morris.css">
 
+  <link href="css/bootstrap-toggle.css" rel="stylesheet" type="text/css">
+  <link href="css/small-toggle.css" rel="stylesheet">
+
   <link rel="stylesheet" href="css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="css/notifications.min.css">
   

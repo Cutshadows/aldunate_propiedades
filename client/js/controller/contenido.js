@@ -37,7 +37,51 @@ $(document).ready(function(){
         }
 
      });
-    
+
+    //Solo permite introducir numeros.
+    $('.txtnumber').on('input',function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    $('#chkboxBanos').change(function () {
+        if ($(this).prop('checked') == true) {
+            /* $('#console-event').html('Toggle: ' + $(this).prop('checked')); */
+            /* console.log('estado Baños:' + $("#chkboxBanos").prop('checked')); */
+            $("#txtBanos").removeAttr('disabled');
+        } else if (($(this).prop('checked') == false)) {
+            /* $('#console-event').html('Toggle: ' + $(this).prop('checked')); */
+            /* console.log('estado Baños:' + $("#chkboxBanos").prop('checked')); */
+            $("#txtBanos").attr('disabled', 'disabled');
+            $("#txtBanos").val('');
+            
+        }
+    });
+    $('#chkboxPiso').change(function () {
+        if ($(this).prop('checked') == true) {
+            /* $('#console-event').html('Toggle: ' + $(this).prop('checked')); */
+            /* console.log('estado Pisos:' + $("#chkboxPiso").prop('checked')); */
+            $("#txtPiso").removeAttr('disabled');
+        } else if (($(this).prop('checked') == false)) {
+            /* $('#console-event').html('Toggle: ' + $(this).prop('checked')); */
+            /* console.log('estado Pisos:' + $("#chkboxPiso").prop('checked')); */
+            $("#txtPiso").attr('disabled', 'disabled');
+            $("#txtPiso").val('');
+
+        }
+    });
+    $('#chkboxOficinas').change(function () {
+        if ($(this).prop('checked') == true) {
+            /* $('#console-event').html('Toggle: ' + $(this).prop('checked')); */
+            /* console.log('estado Oficinas:' + $("#chkboxOficinas").prop('checked')); */
+            $("#txtOficinas").removeAttr('disabled');
+        } else if (($(this).prop('checked') == false)) {
+            /* $('#console-event').html('Toggle: ' + $(this).prop('checked')); */
+            /* console.log('estado Oficinas:' + $("#chkboxOficinas").prop('checked')); */
+            $("#txtOficinas").attr('disabled', 'disabled');
+            $("#txtOficinas").val('');
+
+        }
+    });
     $("#form-contenido").on("submit", function (e) {
         //$("#btnNuevoContenido").on("click", function (e) {        
         e.preventDefault();
@@ -111,3 +155,4 @@ $(document).ready(function(){
         });
     });
 });
+
