@@ -206,10 +206,41 @@ function formulario_contenido(){
 		include_once("../include/conexion.php");
 		$conn = conectar();
 		$boton = "Modificar";
-		$consul = $conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuario_coidUsuario, cofechaCreacion FROM tb_contenido WHERE coidContenido=" . $id);
+		$consul = $conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuario_coidUsuario, cofechaCreacion, coestadoContenido FROM tb_contenido WHERE coidContenido=" . $id);
 		$datos = $consul->fetch_assoc();
 
+		echo "<pre>";
+		echo var_dump($datos['coidContenido']);
+		echo var_dump($datos['coTitulo']);
+		echo var_dump($datos['coDescripcion']);
+		echo var_dump($datos['coComuna']);
+		echo var_dump($datos['coDireccion']);
+		echo var_dump($datos['coDetalles']);
+		echo var_dump($datos['coPrecioCLP']);
+		echo var_dump($datos['coPreciouF']);
+		echo var_dump($datos['tb_usuario_coidUsuario']);
+		echo var_dump($datos['cofechaCreacion']);
+		echo var_dump($datos['coestadoContenido']);
+		echo "</pre>";
 
+		$jsonDetalles=json_decode($datos['coDetalles'], true);
+		
+		foreach($jsonDetalles as $detalles => $extras):
+			echo $detalles."<br />";
+			echo $extras."<br />";
+		endforeach;
+		
+		
+
+		
+		/* foreach ($jsonDetalles as $llave => $valor):
+			echo $llave . "<br/>";
+			foreach($jsonDetalles[$llave] as $bano => $valbano) :
+				echo $bano . "<br/>";
+				echo $valbano . "<br/>";
+			endforeach;
+		endforeach; */
+		
 
 	} 
 	?>
@@ -247,33 +278,33 @@ function formulario_contenido(){
 						<div class="box-body">
 							<div class="form-group">
 								<label for="txtTitulo">Titulo</label>
-								<input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder=" ">
+								<input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="" <?if($id>0){?>value="<?=$datos['coTitulo'];?>"<?}?>>
 							</div>
 							
 							<div class="form-group">
 								<label>Descripción</label>
-								<textarea class="form-control" rows="4" name="txtdescripcion" id="txtdescripcion" placeholder="Ingrese Descripción ..."></textarea>
+								<textarea class="form-control" rows="4" name="txtdescripcion" id="txtdescripcion" placeholder="Ingrese Descripción ..."><?if($id>0){echo $datos['coDescripcion'];}?></textarea>
 							</div>
 							<div class="input-group">
 								<!-- <label for="txtValor">Valor</label>  -->
 								<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-									<input type="text" class="form-control txtnumber" id="txtValor" name="txtValor" placeholder="Valor Monetario">
+									<input type="text" class="form-control txtnumber" id="txtValor" name="txtValor" placeholder="Valor Monetario" <?if($id>0){?>value="<?=$datos['coPrecioCLP'];?>"<?}?>>
 								<span class="input-group-addon">CLP</span>
 							</div>
 							<div class="input-group" style="margin-top:2%;">
 								<!-- <label for="txtValor">Valor</label>  -->
 								<!-- <span class="input-group-addon"><i class="fa fa-dollar"></i></span> -->
-									<input type="text" class="form-control txtnumber" id="txtvaluf" name="txtvaluf" placeholder="Valor en Unidad de Fomento">
+									<input type="text" class="form-control txtnumber" id="txtvaluf" name="txtvaluf" placeholder="Valor en Unidad de Fomento" <?if($id>0){?>value="<?=$datos['coPreciouF'];?>"<?}?> >
 								<span class="input-group-addon">UF</span>
 							</div>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="form-group">
-										<label for="txtDetalles">Dirección</label>
-										<input type="text" class="form-control" id="txtDireccion" name="txtDireccion" placeholder="">
+										<label for="txtDetalles">Dirección</label> 
+										<input type="text" class="form-control" id="txtDireccion" name="txtDireccion" placeholder="" <?if($id>0){?>value="<?=$datos['coPrecioCLP'];?>"<?}?>>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="form-group">
 										<label for="txtDetalles">Comuna</label>
 										<!-- <input type="text" class="form-control" id="txtDetalles" placeholder=""> -->
@@ -293,16 +324,35 @@ function formulario_contenido(){
 										</select>
 									</div>
 								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label for="txtDetalles">Tipo Contenido</label>
+										<!-- <input type="text" class="form-control" id="txtDetalles" placeholder=""> -->
+										<?
+											if($datos['coestadoContenido'] == 1){
+												 $select1='selected="selected"';
+												
+											}else if($datos['coestadoContenido'] == 2){
+													$select2 = 'selected="selected"';
+											}
+										?>
+										<select class="form-control" name="slctEstado" id="slctEstado" >
+											<option value="0" >Seleccionar</option>
+											<option value="1" <?=$select1;?>>Venta</option>
+											<option value="2" <?=$select2;?>>Arriendo</option>
+										</select>
+										
+									</div>
+								</div>
 							</div>
-							 
 										<div class="row mb20">
 											<div class="col-lg-3">
 												<label for="txtDetalles">Baños</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox" name="chkboxBanos" id="chkboxBanos">
+														<input type="checkbox" <?=$chkbox;?> name="chkboxBanos" id="chkboxBanos">
 														</span>
-													<input type="text" class="form-control txtnumber" id="txtBanos"  name="txtBanos" disabled="disabled" value="">
+										<input type="text" class="form-control txtnumber" id="txtBanos"  name="txtBanos" <?if($id>0){echo 'value="'.$val.'"'; }else{?> disabled="disabled"<?}?>>
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -310,9 +360,9 @@ function formulario_contenido(){
 												<label for="txtDetalles">Pisos</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox"  name="chkboxPiso" id="chkboxPiso">
+														<input type="checkbox"  <?=$chkbox;?>  name="chkboxPiso" id="chkboxPiso">
 														</span>
-													<input type="text" class="form-control txtnumber"  name="txtPiso" id="txtPiso" disabled="disabled" value="">
+													<input type="text" class="form-control txtnumber"  name="txtPiso" id="txtPiso" <?if($id>0){echo 'value="'.$val.'"'; }else{?> disabled="disabled"<?}?>>
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -320,20 +370,23 @@ function formulario_contenido(){
 												<label for="txtDetalles">Oficinas</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox" name="chkboxOficinas" id="chkboxOficinas">
+														<input type="checkbox"  <?=$chkbox;?> name="chkboxOficinas" id="chkboxOficinas">
 														</span>
-													<input type="text" class="form-control txtnumber" name="txtOficinas" id="txtOficinas" disabled="disabled" value="">
+													<input type="text" class="form-control txtnumber" name="txtOficinas" id="txtOficinas" <?if($id>0){echo 'value="'.$val.'"'; }else{?> disabled="disabled"<?}?>>
 												</div>
 												<!-- /input-group -->
 											</div>
 											<div class="col-lg-3">
 												<label for="txtDetalles">Estacionamiento</label>
 												<div class="input-group">
-														<input type="checkbox" data-toggle="data-toggle" name="chkboxEstacion" id="chkboxEstacion">
+														<input type="checkbox"  <?=$chkbox;?> data-toggle="data-toggle" name="chkboxEstacion" id="chkboxEstacion">
 												</div>
 												<!-- /input-group -->
 											</div>
 										</div>
+										<?
+									
+										?>
 								<div class="panel panel-info">
 									<div class="panel-heading"><h5><strong>IMAGENES</strong>
 										<small> [Imagenes de los Sectores.]</small></h5>
@@ -380,6 +433,9 @@ function formulario_contenido(){
 
 						<div class="box-footer">
 							<input type="hidden" id="opcion" name="opcion" value=<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?> > <!-- value="" -->
+							<?if($id>0){?>
+									<input type="hidden" id="id_registro" name="id_registro" value=<?=$datos['idContenido'];?> > 
+							<?}?>
 							<button type="submit" class="btn-block btn-block-sm btn btn-primary">Ingresar</button>
 						</div>
 						</form>

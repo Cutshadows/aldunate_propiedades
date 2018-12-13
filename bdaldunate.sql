@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.1.36-MariaDB)
-# Date: 2018-12-13 12:50:16
+# Date: 2018-12-13 17:29:15
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -32,7 +32,7 @@ CREATE TABLE `tb_comuna` (
   `coidComuna` varchar(11) NOT NULL DEFAULT '',
   `coNomComuna` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`coidComuna`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 #
 # Data for table "tb_comuna"
@@ -65,7 +65,6 @@ CREATE TABLE `tb_contenido` (
 # Data for table "tb_contenido"
 #
 
-INSERT INTO `tb_contenido` VALUES (1,'titulo','Descripcion','P2C2CO07','Avenida del Mar','{\"fechaContenido\":\"2018-12-13 12:15:33\",\" bano \":{ \"validation\" :\"1\",\"cantidad\":\"2\"},\" pisos \":{ \"validation\":\"1\",\"cantidad\":\"1\"},\" oficina \":{\"validation\":\"1\",\"cantidad\":\"2\"},\" estacionamiento \":{\"validation\":\"1\"}}','12345','542','1','2018-12-13 12:15:33',1);
 
 #
 # Structure for table "tb_imagenes"
@@ -80,13 +79,12 @@ CREATE TABLE `tb_imagenes` (
   PRIMARY KEY (`coidImagen`),
   KEY `fk_contenido` (`tb_contenido_coidContenido`),
   KEY `fk_usuario` (`tb_usuario_coidUsuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "tb_imagenes"
 #
 
-INSERT INTO `tb_imagenes` VALUES (1,'../../img/contenido/starlord.jpg',1,1,'normal'),(2,'../../img/contenido/XXI3y4g.jpg',1,1,'normal');
 
 #
 # Structure for table "tb_producto"
