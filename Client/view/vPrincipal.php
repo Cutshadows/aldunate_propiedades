@@ -200,7 +200,18 @@ function inicio(){?>
 function formulario_contenido(){
 	include_once('../include/conexion.php');
 	$conn=conectar();
-	$id=$_POST['id']; 
+	$id=$_POST['id'];
+	if ($id > 0) {
+		//echo "area de actualizar usuario";
+		include_once("../include/conexion.php");
+		$conn = conectar();
+		$boton = "Modificar";
+		$consul = $conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuario_coidUsuario, cofechaCreacion FROM tb_contenido WHERE coidContenido=" . $id);
+		$datos = $consul->fetch_assoc();
+
+
+
+	} 
 	?>
 	<section class="content-header">
 		<h1>
@@ -781,10 +792,11 @@ function todo_contenido(){?>
               <table id="tabla_usuario" name="tabla_usuario" class="table table-bordered table-striped display"  >
                 <thead>
                 <tr>
-                  <th>Nombres</th>
-                  <th>Email</th>
-                  <th>Ultima Conexi&oacute;n(es)</th>
-                  <th>Privilegios</th>
+                  <th>ID</th>
+									<th>Titulo</th>
+                  <th>Comuna</th>
+                  <th>Usuario</th>
+                  <th>Fecha Creacion</th>
                   <th>Acciones</th>
                 </tr>
                 </thead>
@@ -794,33 +806,30 @@ function todo_contenido(){?>
 			include_once("../include/conexion.php");
 			$conn = conectar();
 
-			$consulta = $conn->query("SELECT coidUsuario, coNomUsuario, coEmailUsuario, coPrivilegiosUsuario, coUltimaLog FROM tb_usuario");
+			$consulta = $conn->query("SELECT coidContenido, coTitulo, coComuna, tb_usuario_coidUsuario, cofechaCreacion FROM tb_contenido");
 			while ($resultado = $consulta->fetch_assoc()) {
+				$reqComuna= $conn->query("SELECT coidComuna, coNomComuna FROM tb_comuna WHERE coidComuna='".$resultado['coComuna']."'");
+				
+				$resComuna = $reqComuna->fetch_array();
+				
+				$reqUsuario = $conn->query("SELECT coidUsuario, coNomUsuario FROM tb_usuario WHERE coidUsuario='" . $resultado['tb_usuario_coidUsuario'] . "'");
+				$resUsuario = $reqUsuario->fetch_array();
+			
 				?>
 				<tr>
-                  <td><?= $resultado['coNomUsuario']; ?></td>
-                  <td><?= $resultado['coEmailUsuario']; ?></td>
-                  <th><?= fecha_formato_espanol_hora($resultado['coUltimaLog']); ?></th>
-                  <td><? switch ($resultado['coPrivilegiosUsuario']) {
-					  case 'admin':
-					  echo 'Administrador';
-					  break;
-					  case 'super':
-					  echo 'Super Usuario';
-					  break;
-					  case 'digi':
-					  echo 'Digitador';
-					  break;
-					}
-				?></td>
-                  <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidUsuario']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 4)">
+                  <td><?=$resultado['coidContenido']; ?></td>
+                  <td><?=utf8_encode($resultado['coTitulo']); ?></td>
+									<td><?= $resComuna['coNomComuna']; ?></td>
+									<td><?= $resUsuario['coNomUsuario']; ?></td>
+                  <th><?=fecha_formato_espanol_hora($resultado['cofechaCreacion']); ?></th>
+                  <td><a href="javascript:void(0)" onclick="cargaFormulario(<?=$resultado['coidContenido']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 2)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">
                         <!-- <input type="" name="options"  autocomplete="off" checked> -->
                         <span class="fa fa-pencil"></span>
                     </label>
                 </a>
-                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-usuario',<?= $resultado['coidUsuario']; ?>,'<?= _controlador_ ?>')">
+                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-usuario',<?= $resultado['coidContenido']; ?>,'<?= _controlador_ ?>')">
                     <label class="btn btn-danger">
                     <!-- <input type="radio" name="options" autocomplete="off" > -->
                     <span class="fa fa-trash"></span>

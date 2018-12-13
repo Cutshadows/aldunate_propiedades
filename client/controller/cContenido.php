@@ -20,8 +20,9 @@ if (isset($opcion) || trim($opcion)) {
 define("_pathfile_", "/");
 
 function crearContenido(){
-    include_once('../include/conexion.php');
-    $conn = conectar();
+    try{
+        include_once('../include/conexion.php');
+        $conn = conectar();
 
         if(isset($_FILES['cnombreimg'])){
             $titulo= htmlspecialchars($_POST['txtTitulo']);
@@ -40,8 +41,8 @@ function crearContenido(){
                 $banos = 0;
             }
             $txtBanos=$_POST['txtBanos'];
-             $cadenaBano=array('bano'=> $banos, 'cantidad'=> $txtBanos);
-            echo var_dump($cadenaBano);
+            //$cadenaBano=array('bano'=> $banos, 'cantidad'=> $txtBanos);
+           // echo var_dump($cadenaBano);
             
             //CHECKBOX PISO
             $chkpiso = (bool)filter_input(INPUT_POST, 'chkboxPiso', FILTER_VALIDATE_BOOLEAN);
@@ -52,8 +53,8 @@ function crearContenido(){
                 $piso = 0;
             }
             $txtPiso = $_POST['txtPiso'];
-            $cadenaPiso = array('bano' => $piso, 'cantidad' => $txtPiso);
-            echo var_dump($cadenaPiso);
+            //$cadenaPiso = array('bano' => $piso, 'cantidad' => $txtPiso);
+            //echo var_dump($cadenaPiso);
             //CHECKBOX OFICINAS
             $chkoficina = (bool)filter_input(INPUT_POST, 'chkboxOficinas', FILTER_VALIDATE_BOOLEAN);
                 //echo "cpublicado estado es :". $publicado;
@@ -63,8 +64,8 @@ function crearContenido(){
                 $oficina = 0;
             }
             $txtOficina = $_POST['txtOficinas'];
-            $cadenaOficina = array('bano' => $oficina, 'cantidad' => $txtOficina);
-            echo var_dump($cadenaOficina);
+            //$cadenaOficina = array('bano' => $oficina, 'cantidad' => $txtOficina);
+            //echo var_dump($cadenaOficina);
 
             //CHechbox Estacionamientos
             $chkoEstacionamiento = (bool)filter_input(INPUT_POST, 'chkboxEstacion', FILTER_VALIDATE_BOOLEAN);
@@ -77,7 +78,7 @@ function crearContenido(){
 
             
             /* die(json_encode($_POST)); */
-            $targetDir = "../img/contenido/";
+            $targetDir = "../../img/contenido/";
             $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
             
             $images_arr = array();
@@ -100,33 +101,69 @@ function crearContenido(){
                     }
                 }
             }
-            
-            $fecha = fecha_formato_base_gore(date("Y-m-d")) . " " . $hora;
-            
-            $cadenaCheckbox = '{"contenido":' . $titulo . '," bano ":' . $cadenaBano . '," pisos ":' . $cadenaPiso . '," oficina ":" ' . $cadenaOficina . ' "," estacionamiento ":" ' . $estacionamiento . ' "}';
+            $tipoimg="normal";
+            $estado=1;
+            $fecha = date("Y-m-d H:i:s");
+            $cadenaCheckbox = '{"fechaContenido":"'.$fecha.'"," bano ":{ "validation" :"' . $banos . '","cantidad":"'.$txtBanos.'"}," pisos ":{ "validation":"'.$piso .'","cantidad":"'.$txtPiso.'"}," oficina ":{"validation":"' . $oficina . '","cantidad":"'.$txtOficina.'"}," estacionamiento ":{"validation":"' . $estacionamiento . '"}}';
 
             $conn->begin_transaction();
-            $stmt = $conn->prepare("INSERT INTO db_contenido (coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuarios_coidUsuario, coFechaCreacion) VALUES(?,?,?,?,?,?,?,?,?)");
+            $stmt = $conn->prepare("INSERT INTO tb_contenido (coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuario_coidUsuario, cofechaCreacion, coestadoContenido) VALUES(?,?,?,?,?,?,?,?,?,?)");
             //$stmt->bind_param("sssssss", $cadenaUpdateCabecera, $textInfo, $tituloInfo, $alias, fecha_formato_base_gore($cfecha)." ".$hora, $publicado, $_SESSION['id_usuario']);
-            $stmt->bind_param("sssssiiis", $titulo, $descripcion, $Comuna, $direccion, $cadenaCheckbox, $valorClp, $valorUf, $_SESSION['id_usuario'], $fecha);
+            $stmt->bind_param("sssssiiisi", $titulo, $descripcion, $Comuna, $direccion, $cadenaCheckbox, $valorClp, $valorUf, $_SESSION['id_usuario'], $fecha, $estado);
             
             $stmt->execute();
-            
-            
-            
-            $respuesta = array(
-                'respuesta' => "exito"
-            );
 
-        
+            $id_registro = $stmt->insert_id;
+
+            if ($stmt->affected_rows) {
+                $respuesta = array(
+                    'respuesta' => 'exito',
+                    'registro' => $id_registro
+                );
+            }else{
+                $respuesta = array(
+                    'respuesta' => "Error"
+                );
+            }
+            foreach ($images_arr as $key => $value) :
+                /* $value; */
+                $stmt = $conn->prepare("INSERT INTO tb_imagenes (coNomimg, tb_contenido_coidContenido, tb_usuario_coidUsuario, cotipoImg) VALUES(?,?,?,?)");
+                $stmt->bind_param("siis", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg);
+                $stmt->execute();
+                if ($stmt->affected_rows) {
+                    $resultado = array(
+                        'respuesta' => 'exito',
+                        'img'=>$value
+                    );
+                }
+            endforeach;
+            //die(json_encode($_POST));
+            
+            
+            //reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 2, $id_registro);
+            
         } else {
             $respuesta = array(
                 'respuesta' => "vacio"
             );
         }
-            
+        $conn->commit();
+
+        $stmt->close();
+        $conn->close();
+    } catch (Exception $e){
+        $conn->rollBack();
+        echo "Error".$e->getMessage();
+    }    
     
-        die(json_encode($_POST));
+     die(json_encode($respuesta));
         
+
+}
+
+function editarContenido(){
+
+}
+function eliminarContenido(){
 
 }

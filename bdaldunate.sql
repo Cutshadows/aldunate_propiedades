@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.1.36-MariaDB)
-# Date: 2018-12-12 17:29:22
+# Date: 2018-12-13 12:50:16
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -55,15 +55,17 @@ CREATE TABLE `tb_contenido` (
   `coPreciouF` varchar(255) DEFAULT NULL,
   `tb_usuario_coidUsuario` varchar(255) DEFAULT NULL,
   `cofechaCreacion` datetime DEFAULT NULL,
+  `coestadoContenido` int(3) DEFAULT NULL,
   PRIMARY KEY (`coidContenido`),
   KEY `fk_usuario` (`tb_usuario_coidUsuario`),
   KEY `fk_comuna` (`coComuna`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "tb_contenido"
 #
 
+INSERT INTO `tb_contenido` VALUES (1,'titulo','Descripcion','P2C2CO07','Avenida del Mar','{\"fechaContenido\":\"2018-12-13 12:15:33\",\" bano \":{ \"validation\" :\"1\",\"cantidad\":\"2\"},\" pisos \":{ \"validation\":\"1\",\"cantidad\":\"1\"},\" oficina \":{\"validation\":\"1\",\"cantidad\":\"2\"},\" estacionamiento \":{\"validation\":\"1\"}}','12345','542','1','2018-12-13 12:15:33',1);
 
 #
 # Structure for table "tb_imagenes"
@@ -74,15 +76,17 @@ CREATE TABLE `tb_imagenes` (
   `coNomimg` varchar(255) DEFAULT NULL,
   `tb_contenido_coidContenido` int(11) DEFAULT NULL,
   `tb_usuario_coidUsuario` int(11) DEFAULT NULL,
+  `cotipoImg` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`coidImagen`),
   KEY `fk_contenido` (`tb_contenido_coidContenido`),
   KEY `fk_usuario` (`tb_usuario_coidUsuario`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "tb_imagenes"
 #
 
+INSERT INTO `tb_imagenes` VALUES (1,'../../img/contenido/starlord.jpg',1,1,'normal'),(2,'../../img/contenido/XXI3y4g.jpg',1,1,'normal');
 
 #
 # Structure for table "tb_producto"
@@ -116,4 +120,4 @@ CREATE TABLE `tb_usuario` (
 # Data for table "tb_usuario"
 #
 
-INSERT INTO `tb_usuario` VALUES (1,'Douglas Barraza','douglasbarraza@hotmail.com','super','$2y$12$KteJ1u5CqrLj1Uzr53ygXez27XUP2LLAFwexFCxUV554xnglaZVOO','2018-12-12 14:32:15');
+INSERT INTO `tb_usuario` VALUES (1,'Douglas Barraza','douglasbarraza@hotmail.com','super','$2y$12$KteJ1u5CqrLj1Uzr53ygXez27XUP2LLAFwexFCxUV554xnglaZVOO','2018-12-13 08:38:29');
