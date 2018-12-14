@@ -227,10 +227,58 @@ function formulario_contenido(){
 		
 		foreach($jsonDetalles as $detalles => $extras):
 			echo $detalles."<br />";
-			echo $extras."<br />";
+			/* echo $extras."<br />"; */
+			foreach($jsonDetalles['contenido'] as $contenedor => $resultado):
+				echo $contenedor . "<br />";
+				foreach($jsonDetalles['contenido'][$contenedor] as $llave => $valor):
+					echo $llave . "<br />";
+					//echo $valor . "<br />";
+						foreach ($jsonDetalles['contenido'][0][$llave] as $key => $value){ //=> $value) {
+								echo $key  . "<br />"; //. $value;
+								switch($key){
+									case 'validation_bano':
+										if($value==1){
+											echo	$banoval='checked';
+										}else if($value == 0){
+											echo $banoval = '';
+										}
+									break;
+									case 'cantidad_bano':
+										$banocant=$value;
+									break;
+								case 'validation_pisos':
+									if ($value == 1) {
+										echo $pisosval = 'checked';
+									} else if ($value == 0) {
+										echo $pisosval = '';
+									}
+									break;
+								case 'cantidad_pisos':
+									$pisoscant = $value;
+									break;
+								case 'validation_oficina':
+									if ($value == 1) {
+										echo $oficinaval = 'checked';
+									} else if ($value == 0) {
+										echo $oficinaval = '';
+									}
+									break;
+								case 'cantidad_oficina':
+									$oficinacant = $value;
+									break;
+								case 'validation_estacionamiento':
+									if ($value == 1) {
+										echo $estaval = 'checked';
+									} else if ($value == 0) {
+										echo $estaval = '';
+									}
+									break;
+								}
+						}
+				endforeach;
+			endforeach;
 		endforeach;
-		
-		
+	
 
 		
 		/* foreach ($jsonDetalles as $llave => $valor):
@@ -314,7 +362,7 @@ function formulario_contenido(){
 											$pregunta=$conn->query("SELECT * FROM tb_comuna ORDER BY coidComuna ='P2C2CO07' DESC");
 										
 											$numOrden = 1;
-											$seleccionado = $id > 0 ? 'selected="selected"' : "";
+											$seleccionado = $id == 0 ? 'selected="selected"' : "";
 											while ($row = $pregunta->fetch_assoc()) {
 												$nombre = utf8_encode($row['coNomComuna']);
 												echo '<option value="' . $row['coidComuna'] . '" ' . $seleccionado . '  > ' . $numOrden . '. ' . $nombre . ' </option>'; 
@@ -350,9 +398,9 @@ function formulario_contenido(){
 												<label for="txtDetalles">Baños</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox" <?=$chkbox;?> name="chkboxBanos" id="chkboxBanos">
+														<input type="checkbox" <?=$banoval;?> name="chkboxBanos" id="chkboxBanos">
 														</span>
-										<input type="text" class="form-control txtnumber" id="txtBanos"  name="txtBanos" <?if($id>0){echo 'value="'.$val.'"'; }else{?> disabled="disabled"<?}?>>
+										<input type="text" class="form-control txtnumber" id="txtBanos"  name="txtBanos" <?if($id>0 && $banocant != 0){echo 'value="'.$banocant.'"'; }else{?> disabled="disabled"<?}?>>
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -360,9 +408,9 @@ function formulario_contenido(){
 												<label for="txtDetalles">Pisos</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox"  <?=$chkbox;?>  name="chkboxPiso" id="chkboxPiso">
+														<input type="checkbox"  <?=$pisosval;?>  name="chkboxPiso" id="chkboxPiso">
 														</span>
-													<input type="text" class="form-control txtnumber"  name="txtPiso" id="txtPiso" <?if($id>0){echo 'value="'.$val.'"'; }else{?> disabled="disabled"<?}?>>
+													<input type="text" class="form-control txtnumber"  name="txtPiso" id="txtPiso" <?if($id>0 && $pisoscant != 0){echo 'value="'.$pisoscant.'"'; }else{?> disabled="disabled"<?}?>>
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -370,16 +418,16 @@ function formulario_contenido(){
 												<label for="txtDetalles">Oficinas</label>
 												<div class="input-group">
 														<span class="input-group-addon">
-														<input type="checkbox"  <?=$chkbox;?> name="chkboxOficinas" id="chkboxOficinas">
+														<input type="checkbox"  <?=$oficinaval;?> name="chkboxOficinas" id="chkboxOficinas">
 														</span>
-													<input type="text" class="form-control txtnumber" name="txtOficinas" id="txtOficinas" <?if($id>0){echo 'value="'.$val.'"'; }else{?> disabled="disabled"<?}?>>
+													<input type="text" class="form-control txtnumber" name="txtOficinas" id="txtOficinas" <?if($id>0 && $oficinacant!=0){echo 'value="'.$oficinacant.'"'; }else{?> disabled="disabled"<?}?>>
 												</div>
 												<!-- /input-group -->
 											</div>
 											<div class="col-lg-3">
 												<label for="txtDetalles">Estacionamiento</label>
 												<div class="input-group">
-														<input type="checkbox"  <?=$chkbox;?> data-toggle="data-toggle" name="chkboxEstacion" id="chkboxEstacion">
+														<input type="checkbox"  <?=$estaval;?> data-toggle="data-toggle" name="chkboxEstacion" id="chkboxEstacion">
 												</div>
 												<!-- /input-group -->
 											</div>
@@ -410,7 +458,16 @@ function formulario_contenido(){
 														</button>
 													</div>	
 												</div> -->
-												<div class="row"><div class="col-md-12"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple /></div></div></div></div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group">
+															<div class="input-group">
+																<span class="input-group-addon"><b>1</b></span>
+																<input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple />				
+															</div>
+														</div>
+													</div>
+												</div>
 											</div>
 											<!-- <div class="col-md-1">
 												<label></label>

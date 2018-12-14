@@ -104,7 +104,7 @@ function crearContenido(){
             $tipoimg="normal";
             $estado=$_POST['slctEstado'];
             $fecha = date("Y-m-d H:i:s");
-            $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation" :"' . $banos . '","cantidad":"' . $txtBanos . '"}," pisos ":{ "validation":"' . $piso . '","cantidad":"' . $txtPiso . '"}," oficina ":{"validation":"' . $oficina . '","cantidad":"' . $txtOficina . '"}," estacionamiento ":{"validation":"' . $estacionamiento . '"}}]}';
+            $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation_bano" :"' . $banos . '","cantidad_bano":"' . $txtBanos . '"}," pisos ":{ "validation_pisos":"' . $piso . '","cantidad_pisos":"' . $txtPiso . '"}," oficina ":{"validation_oficina":"' . $oficina . '","cantidad_oficina":"' . $txtOficina . '"}," estacionamiento ":{"validation_estacionamiento":"' . $estacionamiento . '"}}]}';
 
             $conn->begin_transaction();
             $stmt = $conn->prepare("INSERT INTO tb_contenido (coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuario_coidUsuario, cofechaCreacion, coestadoContenido) VALUES(?,?,?,?,?,?,?,?,?,?)");
@@ -247,7 +247,7 @@ function editarContenido(){
             $tipoimg = "normal";
             $estado = $_POST['slctEstado'];
             $fecha = date("Y-m-d H:i:s");
-            $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation" :"' . $banos . '","cantidad":"' . $txtBanos . '"}," pisos ":{ "validation":"' . $piso . '","cantidad":"' . $txtPiso . '"}," oficina ":{"validation":"' . $oficina . '","cantidad":"' . $txtOficina . '"}," estacionamiento ":{"validation":"' . $estacionamiento . '"}}]}';
+            $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation_bano" :"' . $banos . '","cantidad_bano":"' . $txtBanos . '"}," pisos ":{ "validation_pisos":"' . $piso . '","cantidad_pisos":"' . $txtPiso . '"}," oficina ":{"validation_oficina":"' . $oficina . '","cantidad_oficina":"' . $txtOficina . '"}," estacionamiento ":{"validation_estacionamiento":"' . $estacionamiento . '"}}]}';
 
             $conn->begin_transaction();
             $stmt = $conn->prepare("UPDATE tb_contenido SET coTitulo=?, coDescripcion=?, coComuna=?, coDireccion=?, coDetalles=?, coPrecioCLP=?, coPreciouF=?, tb_usuario_coidUsuario=?, cofechaCreacion=?, coestadoContenido=? WHERE coidContenido=?");
