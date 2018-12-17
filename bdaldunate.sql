@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.1.36-MariaDB)
-# Date: 2018-12-13 17:29:15
+# Date: 2018-12-17 09:24:43
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -59,12 +59,13 @@ CREATE TABLE `tb_contenido` (
   PRIMARY KEY (`coidContenido`),
   KEY `fk_usuario` (`tb_usuario_coidUsuario`),
   KEY `fk_comuna` (`coComuna`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "tb_contenido"
 #
 
+INSERT INTO `tb_contenido` VALUES (1,'titulo','descripcion','P2C2CO07','Las Margaritas Sector las Rojas','{\"contenido\":[{\"bano \":{ \"validation_bano\" :\"1\",\"cantidad_bano\":\"2\"},\" pisos \":{ \"validation_pisos\":\"1\",\"cantidad_pisos\":\"1\"},\" oficina \":{\"validation_oficina\":\"\",\"cantidad_oficina\":\"\"},\" estacionamiento \":{\"validation_estacionamiento\":\"0\"}}]}','12345','423','1','2018-12-14 08:57:16',1),(2,'titulo','descripcion','P2C2CO07','Las Margaritas Sector las Rojas','{\"contenido\":[{\"bano \":{ \"validation_bano\" :\"1\",\"cantidad_bano\":\"2\"},\" pisos \":{ \"validation_pisos\":\"1\",\"cantidad_pisos\":\"1\"},\" oficina \":{\"validation_oficina\":\"1\",\"cantidad_oficina\":\"2\"},\" estacionamiento \":{\"validation_estacionamiento\":\"1\"}}]}','12345','423','1','2018-12-14 08:57:34',1);
 
 #
 # Structure for table "tb_imagenes"
@@ -85,6 +86,7 @@ CREATE TABLE `tb_imagenes` (
 # Data for table "tb_imagenes"
 #
 
+INSERT INTO `tb_imagenes` VALUES (1,'../../img/contenido/starlord.jpg',1,1,'normal'),(2,'../../img/contenido/XXI3y4g.jpg',1,1,'normal'),(3,'../../img/contenido/starlord.jpg',2,1,'normal'),(4,'../../img/contenido/XXI3y4g.jpg',2,1,'normal');
 
 #
 # Structure for table "tb_producto"
@@ -118,4 +120,4 @@ CREATE TABLE `tb_usuario` (
 # Data for table "tb_usuario"
 #
 
-INSERT INTO `tb_usuario` VALUES (1,'Douglas Barraza','douglasbarraza@hotmail.com','super','$2y$12$KteJ1u5CqrLj1Uzr53ygXez27XUP2LLAFwexFCxUV554xnglaZVOO','2018-12-13 08:38:29');
+INSERT INTO `tb_usuario` VALUES (1,'Douglas Barraza','douglasbarraza@hotmail.com','super','$2y$12$KteJ1u5CqrLj1Uzr53ygXez27XUP2LLAFwexFCxUV554xnglaZVOO','2018-12-17 09:14:49');

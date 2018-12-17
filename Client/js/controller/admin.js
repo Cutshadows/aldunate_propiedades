@@ -33,6 +33,30 @@ $(document).ready(function () {
     /* $('#buscadorContenido').on('keyup', function () {
         table.search(this.value).draw();
     }); */
+    $('#txtRepiteClave').on('blur', function(){
+        var password_nuevo=$('#txtClave').val();
+        if($(this).val()==password_nuevo){
+            mkNoti(
+                'Clave Correcta',
+                'Correcto',
+                {
+                    status: "success",
+                    duration: 2000
+                }
+            );
+        }else{
+            mkNoti(
+                'No Coinciden las Claves',
+                'Incorrecto', {
+                    status: "danger",
+                    duration: 2000
+                }
+            );
+            $(this).val('');
+        }
+    })
+
+
     $("#form-usuarios").on("submit", function (e) {
         e.preventDefault();
         var form = $(this);

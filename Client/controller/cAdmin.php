@@ -92,12 +92,19 @@ function editarUsuario(){
         $nomUser = htmlspecialchars($_POST['txtNomUsuario']);
         $emailUser = htmlspecialchars($_POST['txtEmail']);
         $tipoUsuario = htmlspecialchars($_POST['tipoUsuario']);
+        $claveUsuario= htmlspecialchars($_POST['txtClave']);
         $id=htmlspecialchars($_POST['id_usuario']);
+
+        $opciones = array(
+            'cost' => 12
+        );
+        $hash_password = password_hash($claveUsuario, PASSWORD_BCRYPT, $opciones);
+
         $conn->begin_transaction();
-        $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?,coEmailUsuario= ?,coPrivilegiosUsuario= ? WHERE coidUsuario= ?");
+        $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?, coEmailUsuario= ?, coPrivilegiosUsuario= ?, coClaveUsuario=? WHERE coidUsuario= ?");
         
 		//$stmt->bind_param("sssssss", $cadenaUpdateCabecera, $textInfo, $tituloInfo, $alias, fecha_formato_base_gore($cfecha)." ".$hora, $publicado, $_SESSION['id_usuario']);
-        $stmt->bind_param("sssi", $nomUser, $emailUser, $tipoUsuario, $id);
+        $stmt->bind_param("ssssi", $nomUser, $emailUser, $tipoUsuario, $hash_password, $id);
 
         $stmt->execute();
 		

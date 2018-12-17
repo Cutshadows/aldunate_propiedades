@@ -349,8 +349,9 @@ function formulario_contenido(){
 											$pregunta=$conn->query("SELECT * FROM tb_comuna ORDER BY coidComuna ='P2C2CO07' DESC");
 										
 											$numOrden = 1;
-											$seleccionado = $id == 0 ? 'selected="selected"' : "";
+											
 											while ($row = $pregunta->fetch_assoc()) {
+												$seleccionado = $datos['coComuna'] == $row['coidComuna'] ? 'selected="selected"' : "";
 												$nombre = utf8_encode($row['coNomComuna']);
 												echo '<option value="' . $row['coidComuna'] . '" ' . $seleccionado . '  > ' . $numOrden . '. ' . $nombre . ' </option>'; 
 												$numOrden++;
@@ -595,7 +596,7 @@ function agregar_admin(){
 								</div>
 								<div class="form-group">
 									<label for="txtEmail">Email Usuario:</label>
-									<input type="text" class="form-control" id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
+									<input type="text" class="form-control"  id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
 								</div>
 								<div class="form-group">
 									<label for="tipoUsuario" class="small">Orden en el Menú</label>
@@ -608,7 +609,11 @@ function agregar_admin(){
 								
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input type="password"  pattern=".{6,}"  autocomplete="new-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" <?if($id>0){?>value=""<?}?>>
+									<input type="password"  pattern=".{6,}"  autocomplete="new-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
+								</div>
+								<div class="form-group">
+									<label for="txtClave">Contraseña:</label>
+									<input type="password"  pattern=".{6,}"  autocomplete="new-password"  class="form-control" id="txtRepiteClave" name="txtRepiteClave" placeholder="Repetir Clave para la Session" >
 								</div>
 								
 								
