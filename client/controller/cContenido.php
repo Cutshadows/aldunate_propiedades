@@ -82,6 +82,7 @@ function crearContenido(){
             $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
             
             $images_arr = array();
+            $NombreArchivo= array();
             
             foreach ($_FILES['cnombreimg']['name'] as $key => $value) {
                 $name = $_FILES['cnombreimg']['name'][$key];
@@ -93,17 +94,26 @@ function crearContenido(){
                 
                 $fileName = basename($_FILES['cnombreimg']['name'][$key]);
                 $targetFilePath = $targetDir . $fileName;
+                //$targetFilePath = $fileName;
                 
-                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-                if (in_array($fileType, $allowTypes)) {
+                /*$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                if (in_array($fileType, $allowTypes)) { */
                     if (move_uploaded_file($_FILES['cnombreimg']['tmp_name'][$key], $targetFilePath)) {
                         $images_arr[] = $targetFilePath;
+                        $NombreArchivo[]= $fileName;
+                    } else {
+                        $respuesta = array(
+                            'respuesta' => error_get_last()
+                        );
                     }
-                }
+               /*  } */
             }
             $tipoimg="normal";
             $estado=$_POST['slctEstado'];
             $fecha = date("Y-m-d H:i:s");
+            
+    
+
             $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation_bano" :"' . $banos . '","cantidad_bano":"' . $txtBanos . '"}," pisos ":{ "validation_pisos":"' . $piso . '","cantidad_pisos":"' . $txtPiso . '"}," oficina ":{"validation_oficina":"' . $oficina . '","cantidad_oficina":"' . $txtOficina . '"}," estacionamiento ":{"validation_estacionamiento":"' . $estacionamiento . '"}}]}';
 
             $conn->begin_transaction();
@@ -125,18 +135,21 @@ function crearContenido(){
                     'respuesta' => "Error"
                 );
             }
-            foreach ($images_arr as $key => $value) :
-                /* $value; */
-                $stmt = $conn->prepare("INSERT INTO tb_imagenes (coNomimg, tb_contenido_coidContenido, tb_usuario_coidUsuario, cotipoImg) VALUES(?,?,?,?)");
-                $stmt->bind_param("siis", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg);
-                $stmt->execute();
-                if ($stmt->affected_rows) {
-                    $resultado = array(
-                        'respuesta' => 'exito',
-                        'img'=>$value
-                    );
-                }
+
+            foreach ($NombreArchivo as $key => $value) :
+                /* echo $key;
+                echo $value; */
+            $stmt = $conn->prepare("INSERT INTO tb_imagenes (coNomimg, tb_contenido_coidContenido, tb_usuario_coidUsuario, cotipoImg) VALUES(?,?,?,?)");
+            $stmt->bind_param("siis", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg);
+            $stmt->execute();
+            if ($stmt->affected_rows) {
+                $respuesta = array(
+                    'respuesta' => 'exito',
+                    'img' => $value
+                );
+            }
             endforeach;
+
             //die(json_encode($_POST));
             
             
@@ -225,6 +238,7 @@ function editarContenido(){
             $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
 
             $images_arr = array();
+            $NombreArchivo = array();
 
             foreach ($_FILES['cnombreimg']['name'] as $key => $value) {
                 $name = $_FILES['cnombreimg']['name'][$key];
@@ -236,16 +250,29 @@ function editarContenido(){
 
                 $fileName = basename($_FILES['cnombreimg']['name'][$key]);
                 $targetFilePath = $targetDir . $fileName;
+                //$targetFilePath = $fileName;
 
-                $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-                if (in_array($fileType, $allowTypes)) {
+               /*  $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                if (in_array($fileType, $allowTypes)) { */
                     if (move_uploaded_file($_FILES['cnombreimg']['tmp_name'][$key], $targetFilePath)) {
                         $images_arr[] = $targetFilePath;
+                        $NombreArchivo[]= $fileName;
+                    } else {
+                        $respuesta = array(
+                            'respuesta' => "Error"
+                        );
                     }
-                }
+                /* } */
             }
             $tipoimg = "normal";
             $estado = $_POST['slctEstado'];
+            
+            
+           
+            
+
+            
+            die(json_encode($_POST));
             $fecha = date("Y-m-d H:i:s");
             $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation_bano" :"' . $banos . '","cantidad_bano":"' . $txtBanos . '"}," pisos ":{ "validation_pisos":"' . $piso . '","cantidad_pisos":"' . $txtPiso . '"}," oficina ":{"validation_oficina":"' . $oficina . '","cantidad_oficina":"' . $txtOficina . '"}," estacionamiento ":{"validation_estacionamiento":"' . $estacionamiento . '"}}]}';
 
@@ -269,19 +296,20 @@ function editarContenido(){
                     'respuesta' => "Error"
                 );
             }
-
-            foreach ($images_arr as $key => $value) :
-                /* $value; */
-            $stmt = $conn->prepare("UPDATE tb_imagenes SET coNomimg=?, tb_contenido_coidContenido=?, tb_usuario_coidUsuario=?, cotipoImg=?");
-            $stmt->bind_param("siis", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg);
-            $stmt->execute();
-            if ($stmt->affected_rows) {
-                $resultado = array(
-                    'respuesta' => 'exito',
-                    'img_actualizado' => $value
-                );
+            foreach ($_POST['idImagen'] as $llave => $valor) {
+                foreach ($NombreArchivo as $key => $value) :
+                    /* $value; */
+                $stmt = $conn->prepare("UPDATE tb_imagenes SET coNomimg=?, tb_contenido_coidContenido=?, tb_usuario_coidUsuario=?, cotipoImg=? WHERE tb_contenido_coidContenido=? AND coidImagen=?");
+                $stmt->bind_param("siisii", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg, $id, $valor);
+                $stmt->execute();
+                if ($stmt->affected_rows) {
+                    $resultado = array(
+                        'respuesta' => 'exito',
+                        'img_actualizado' => $value
+                    );
+                }
+                endforeach;
             }
-            endforeach;
             //die(json_encode($_POST));
             
             
@@ -304,5 +332,50 @@ function editarContenido(){
     die(json_encode($respuesta));
 }
 function eliminarContenido(){
+    try {
+        include_once('../include/conexion.php');
+        $conn = conectar();
 
+
+        $id = $_POST['id_registro'];
+        $destino = 'vPrincipal.php';
+
+        $conn->begin_transaction();
+        $stmt = $conn->prepare("DELETE FROM tb_contenido WHERE coidContenido=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                'respuesta' => 'exito',
+                'id_eliminado' => $id,
+                'destino' => $destino
+            );
+        } else {
+            $respuesta = array(
+                'respuesta' => 'Error'
+            );
+        }
+        $stmt = $conn->prepare("DELETE FROM tb_imagenes WHERE tb_contenido_coidContenido=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                'respuesta' => 'exito',
+                'id_eliminado' => $id
+            );
+        } else {
+            $respuesta = array(
+                'respuesta' => 'Error'
+            );
+        }
+        reg_acciones("Eliminar Contenido e Imagenes Exitosamente.", 4, $id);
+        $conn->commit();
+        $stmt->close();
+        $conn->close();
+
+    } catch (Exception $e) {
+        $conn->rollBack();
+        echo "Error: " . $e->getMessage();
+    }
+    die(json_encode($respuesta));
 }

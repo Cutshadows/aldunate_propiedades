@@ -12,7 +12,7 @@ $(document).ready(function(){
             var size=archivos[x].size,
             type= archivos[x].type,
             name=archivos[x].name;
-            if(size > 5120*5120){
+            if (size > 720000 * 720000) {
                 mkNoti(
                     'Alerta de Notificación',
                     'El archivo'+name+'No puede superar los 5 mb',
@@ -116,6 +116,7 @@ $(document).ready(function(){
         $.ajax({
             url: 'controller/cContenido.php',
             type: 'POST',
+            dataType: 'JSON',
             cache: false,
             contentType: false,
             processData: false,
@@ -146,7 +147,7 @@ $(document).ready(function(){
                 console.log(data);
                 mkNoti(
                     'Alerta de Notificación',
-                    'Error en el Ingreso de Datos', {
+                    'Se Creo el contenido Con Detalles', {
                         status: 'warning',
                         duration: 3000
                     }
@@ -156,3 +157,37 @@ $(document).ready(function(){
     });
 });
 
+function eliminararchivos(ac, id_registro, destino) {
+    $.ajax({
+        url: 'controller/' + destino,
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            opcion: ac,
+            id_registro: id_registro
+        },
+        success: function (d) {
+            var resultado = d;
+            if (resultado.respuesta == 'exito') {
+                mkNoti(
+                    'Contenido Eliminado ',
+                    'Exitosamente', {
+                        status: "primary",
+                        duration: 1500
+                    }
+                );
+                setTimeout(function () {
+                    verContenedor(resultado.destino, 7);
+                }, 1800);
+            } else if (resultado.respuesta == 'Error') {
+                mkNoti(
+                    'Error del Sistema',
+                    'Error al intentar eliminar', {
+                        status: "danger",
+                        duration: 1500
+                    }
+                );
+            }
+        }
+    });
+};

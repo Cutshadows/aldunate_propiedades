@@ -209,38 +209,25 @@ function formulario_contenido(){
 		$consul = $conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, coDetalles, coPrecioCLP, coPreciouF, tb_usuario_coidUsuario, cofechaCreacion, coestadoContenido FROM tb_contenido WHERE coidContenido=" . $id);
 		$datos = $consul->fetch_assoc();
 
-		echo "<pre>";
-		echo var_dump($datos['coidContenido']);
-		echo var_dump($datos['coTitulo']);
-		echo var_dump($datos['coDescripcion']);
-		echo var_dump($datos['coComuna']);
-		echo var_dump($datos['coDireccion']);
-		echo var_dump($datos['coDetalles']);
-		echo var_dump($datos['coPrecioCLP']);
-		echo var_dump($datos['coPreciouF']);
-		echo var_dump($datos['tb_usuario_coidUsuario']);
-		echo var_dump($datos['cofechaCreacion']);
-		echo var_dump($datos['coestadoContenido']);
-		echo "</pre>";
 
 		$jsonDetalles=json_decode($datos['coDetalles'], true);
 		
 		foreach($jsonDetalles as $detalles => $extras):
-			echo $detalles."<br />";
+			/* echo $detalles."<br />"; */
 			/* echo $extras."<br />"; */
 			foreach($jsonDetalles['contenido'] as $contenedor => $resultado):
-				echo $contenedor . "<br />";
+				//echo $contenedor . "<br />";
 				foreach($jsonDetalles['contenido'][$contenedor] as $llave => $valor):
-					echo $llave . "<br />";
+					//echo $llave . "<br />";
 					//echo $valor . "<br />";
 						foreach ($jsonDetalles['contenido'][0][$llave] as $key => $value){ //=> $value) {
-								echo $key  . "<br />"; //. $value;
+								//echo $key  . "<br />"; //. $value;
 								switch($key){
 									case 'validation_bano':
 										if($value==1){
-											echo	$banoval='checked';
+												$banoval='checked';
 										}else if($value == 0){
-											echo $banoval = '';
+											 $banoval = '';
 										}
 									break;
 									case 'cantidad_bano':
@@ -248,9 +235,9 @@ function formulario_contenido(){
 									break;
 								case 'validation_pisos':
 									if ($value == 1) {
-										echo $pisosval = 'checked';
+										 $pisosval = 'checked';
 									} else if ($value == 0) {
-										echo $pisosval = '';
+										 $pisosval = '';
 									}
 									break;
 								case 'cantidad_pisos':
@@ -258,9 +245,9 @@ function formulario_contenido(){
 									break;
 								case 'validation_oficina':
 									if ($value == 1) {
-										echo $oficinaval = 'checked';
+										 $oficinaval = 'checked';
 									} else if ($value == 0) {
-										echo $oficinaval = '';
+										 $oficinaval = '';
 									}
 									break;
 								case 'cantidad_oficina':
@@ -268,9 +255,9 @@ function formulario_contenido(){
 									break;
 								case 'validation_estacionamiento':
 									if ($value == 1) {
-										echo $estaval = 'checked';
+										 $estaval = 'checked';
 									} else if ($value == 0) {
-										echo $estaval = '';
+										 $estaval = '';
 									}
 									break;
 								}
@@ -458,16 +445,7 @@ function formulario_contenido(){
 														</button>
 													</div>	
 												</div> -->
-												<div class="row">
-													<div class="col-md-12">
-														<div class="form-group">
-															<div class="input-group">
-																<span class="input-group-addon"><b>1</b></span>
-																<input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple />				
-															</div>
-														</div>
-													</div>
-												</div>
+												<div class="row"><div class="col-md-12"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple /></div></div></div></div>
 											</div>
 											<!-- <div class="col-md-1">
 												<label></label>
@@ -479,6 +457,20 @@ function formulario_contenido(){
 										<div class="row">
 											<div class="col-md-12">
 												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen">
+													<?$datos['coidContenido'];
+													$pregunta = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido FROM tb_imagenes WHERE tb_contenido_coidContenido=". $datos['coidContenido']);
+												define("_ruta_", "../img/contenido/");
+													if($id > 0){
+														while($reqImagen=$pregunta->fetch_assoc()){?>
+														<div class="row">
+															<img src="<?= _ruta_ . $reqImagen['coNomimg']; ?>" width='180px' height='180px'>
+															<input type="hidden" name="idImagen[]" id="idImagen" value="<?= $reqImagen['coidImagen'] ?>">
+															<input type="button" name="imgCambio" id="imgCambio"  value="">
+														</div>
+															
+														<?}
+													}
+													?>
 												</div>
 											</div>
 											<div class="col-md-3">
@@ -915,7 +907,7 @@ function todo_contenido(){?>
                 </thead>
                 <tbody>
 				<?
-			define("_controlador_", 'cAdmin.php');
+			define("_controlador_", 'cContenido.php');
 			include_once("../include/conexion.php");
 			$conn = conectar();
 
@@ -942,7 +934,7 @@ function todo_contenido(){?>
                         <span class="fa fa-pencil"></span>
                     </label>
                 </a>
-                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-usuario',<?= $resultado['coidContenido']; ?>,'<?= _controlador_ ?>')">
+                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-contenido',<?= $resultado['coidContenido']; ?>,'<?= _controlador_ ?>')">
                     <label class="btn btn-danger">
                     <!-- <input type="radio" name="options" autocomplete="off" > -->
                     <span class="fa fa-trash"></span>
@@ -971,7 +963,7 @@ function todo_contenido(){?>
 		<!-- <script src="js/controller/admin.js"></script> -->
 		<!-- /.content -->
 		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
-		<script type="text/javascript" src="js/controller/admin.js"></script>
+		<script type="text/javascript" src="js/controller/contenido.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
 		<script  src="js/jquery.dataTables.min.js"></script>
 		<script src="js/notifications.min.js"></script>
