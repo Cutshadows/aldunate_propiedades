@@ -446,7 +446,9 @@ function formulario_contenido(){
 														</button>
 													</div>	
 												</div> -->
+												<?if($id==0) {?>
 												<div class="row"><div class="col-md-12"><div class="form-group"><div class="input-group"><span class="input-group-addon"><b>1</b></span><input type="file" class="form-control" name="cnombreimg[]" id="cnombreimg" multiple /></div></div></div></div>
+												<?}?>
 											</div>
 											<!-- <div class="col-md-1">
 												<label></label>
@@ -464,9 +466,24 @@ function formulario_contenido(){
 													if($id > 0){
 														while($reqImagen=$pregunta->fetch_assoc()){?>
 														<div class="row">
-															<img src="<?= _ruta_ . $reqImagen['coNomimg']; ?>" width='180px' height='180px'>
-															<input type="hidden" name="idImagen[]" id="idImagen" value="<?= $reqImagen['coidImagen'] ?>">
-															<input type="button" name="imgCambio" id="imgCambio"  value="">
+														<form  method="post" enctype="multipart/form-data"></form>
+															<div class="col-md-4">
+																<div class="input-group">
+																	<img src="<?= _ruta_ . $reqImagen['coNomimg']; ?>" width='180px' height='180px'>
+																	<input type="hidden" name="idImagen[]" id="idImagen" value="<?= $reqImagen['coidImagen'] ?>">
+																</div>
+															</div>
+															<div class="col-md-6">
+																<div class="input-group">
+																	<input type="file" name="imgEditar[]" id="imgEditar">
+																</div>
+															</div>
+															<div class="col-md-1">							
+																	<input type="button" class="btn btn-sm btn-block btn-info" name="imgCambio" id="imgCambio"  value="">
+															</div>
+															<div class="col-md-1">							
+																	<input type="button" class="btn btn-sm btn-block btn-danger" name="imgCambio" id="imgCambio"  value="">
+															</div>
 														</div>
 															
 														<?}
