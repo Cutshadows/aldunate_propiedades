@@ -466,24 +466,27 @@ function formulario_contenido(){
 													if($id > 0){
 														while($reqImagen=$pregunta->fetch_assoc()){?>
 														<div class="row">
-														<form  method="post" enctype="multipart/form-data"></form>
+														<form  method="post" class="form-img-update"  enctype="multipart/form-data">
+															<input type="hidden" name="opcionImg" id="opcionImg" value="editar-imagen">
 															<div class="col-md-4">
 																<div class="input-group">
 																	<img src="<?= _ruta_ . $reqImagen['coNomimg']; ?>" width='180px' height='180px'>
-																	<input type="hidden" name="idImagen[]" id="idImagen" value="<?= $reqImagen['coidImagen'] ?>">
+																	<input type="hidden" name="idImagen" id="idImagen" value="<?= $reqImagen['coidImagen'] ?>">
 																</div>
 															</div>
 															<div class="col-md-6">
 																<div class="input-group">
-																	<input type="file" name="imgEditar[]" id="imgEditar">
+																	<input type="file" name="imgEditar" id="imgEditar">
 																</div>
 															</div>
 															<div class="col-md-1">							
-																	<input type="button" class="btn btn-sm btn-block btn-info" name="imgCambio" id="imgCambio"  value="">
+																	<button type="button" class="btn btn-sm btn-block btn-info fa fa-upload" name="imgCargar" onclick="uploadImage(<?= $reqImagen['coidImagen'] ?>)" id="imgCargar" ></button>
 															</div>
 															<div class="col-md-1">							
-																	<input type="button" class="btn btn-sm btn-block btn-danger" name="imgCambio" id="imgCambio"  value="">
+																	<button type="button" class="btn btn-sm btn-block btn-danger fa fa-trash-o" name="imgCancelar" id="imgCancelar" ></button>
 															</div>
+																
+															</form>
 														</div>
 															
 														<?}

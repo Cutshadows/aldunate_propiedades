@@ -155,7 +155,77 @@ $(document).ready(function(){
             }
         });
     });
+    /* $("#imgCargar").on("click", function (e) {
+        e.preventDefault();
+        var img = $("#imgEditar")[0].files;
+        var opcion = $('#opcionImg').val();
+        var idimg=$('#idImagen').val();
+        
+        uploadImage(img, opcion, idimg);
+    }); */
 });
+
+
+function uploadImage(idimg){
+    /* var formData = new formData($form[0]); */ // elemento del form
+
+    var img = $("#imgEditar")[0].files;
+   /*  var form = $(this); */
+    var formData = new FormData();
+    /* var params = form.serializeArray(); */
+    formData.append("imagenes", img);
+    formData.append("id", idimg);
+    formData.append("tipo", 'editar-imagen');
+    
+
+    /* $(params).each(function (index, element) {
+        formData.append(element.name, element.value);
+    }); */
+   var datos = formData;
+    $.ajax({
+        url: 'controller/cimgContenido.php',
+        /* type: 'POST', */
+        method: 'POST',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        /* async: true, */ 
+        data: datos,
+        success: function (data) {
+            //console.log(data);
+            var resultado = data;
+            console.log(resultado);
+            /* if (resultado.respuesta == 'exito') { */
+            //llamamos a la notificacion para que se muestre en el escritorio con su body y url 
+            /* mkNoti(
+                'Alerta de Notificación',
+                'Contenido Ingresado Correctamente', {
+                    status: 'success',
+                    duration: 3000
+                }
+            ); */
+            /* notificar(resultado.texto, resultado.alias); */
+            /* setTimeout(function () {
+                verContenedor('vContenido.php');
+            }, 1800); */
+
+            /* } */
+
+        },
+        error: function (data) {
+            console.log(data);
+            /* mkNoti(
+                'Alerta de Notificación',
+                'Se Creo el contenido Con Detalles', {
+                    status: 'warning',
+                    duration: 3000
+                }
+            ); */
+        }
+    });
+
+}
 
 function eliminararchivos(ac, id_registro, destino) {
     $.ajax({

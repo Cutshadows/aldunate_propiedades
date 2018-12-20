@@ -234,37 +234,37 @@ function editarContenido(){
 
             
             /* die(json_encode($_POST)); */
-            $targetDir = "../../img/contenido/";
+           /*  $targetDir = "../../img/contenido/";
             $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
 
             $images_arr = array();
-            $NombreArchivo = array();
+            $NombreArchivo = array(); */
 
-            foreach ($_FILES['cnombreimg']['name'] as $key => $value) {
+            /* foreach ($_FILES['cnombreimg']['name'] as $key => $value) {
                 $name = $_FILES['cnombreimg']['name'][$key];
                 $tmp_name = $_FILES['cnombreimg']['tmp_name'][$key];
                 $size = $_FILES['cnombreimg']['size'][$key];
                 $type = $_FILES['cnombreimg']['type'][$key];
-                $error = $_FILES['cnombreimg']['error'][$key];
+                $error = $_FILES['cnombreimg']['error'][$key]; */
                 # code...
 
-                $fileName = basename($_FILES['cnombreimg']['name'][$key]);
-                $targetFilePath = $targetDir . $fileName;
+                /* $fileName = basename($_FILES['cnombreimg']['name'][$key]);
+                $targetFilePath = $targetDir . $fileName; */
                 //$targetFilePath = $fileName;
 
                /*  $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
                 if (in_array($fileType, $allowTypes)) { */
-                    if (move_uploaded_file($_FILES['cnombreimg']['tmp_name'][$key], $targetFilePath)) {
+                   /*  if (move_uploaded_file($_FILES['cnombreimg']['tmp_name'][$key], $targetFilePath)) {
                         $images_arr[] = $targetFilePath;
                         $NombreArchivo[]= $fileName;
                     } else {
                         $respuesta = array(
                             'respuesta' => "Error"
                         );
-                    }
+                    } */
                 /* } */
-            }
-            $tipoimg = "normal";
+            /* } */
+            /* $tipoimg = "normal"; */
             $estado = $_POST['slctEstado'];
             
             
@@ -296,9 +296,9 @@ function editarContenido(){
                     'respuesta' => "Error"
                 );
             }
-            foreach ($_POST['idImagen'] as $llave => $valor) {
+            /* foreach ($_POST['idImagen'] as $llave => $valor) {
                 foreach ($NombreArchivo as $key => $value) :
-                    /* $value; */
+                
                 $stmt = $conn->prepare("UPDATE tb_imagenes SET coNomimg=?, tb_contenido_coidContenido=?, tb_usuario_coidUsuario=?, cotipoImg=? WHERE tb_contenido_coidContenido=? AND coidImagen=?");
                 $stmt->bind_param("siisii", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg, $id, $valor);
                 $stmt->execute();
@@ -309,7 +309,7 @@ function editarContenido(){
                     );
                 }
                 endforeach;
-            }
+            } */
             //die(json_encode($_POST));
             
             
@@ -379,3 +379,4 @@ function eliminarContenido(){
     }
     die(json_encode($respuesta));
 }
+
