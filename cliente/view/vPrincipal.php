@@ -593,10 +593,10 @@ function admin_contenido(){?>
                 <tr>
                   <th>ID</th>
 				  <th>Imagen</th>
-                  <th>Contenido</th>
+                  <th>Titulo Contenido</th>
                   <th>Usuario</th>
                   <th>Tipo de Imagen</th>
-                  <th>Accion</th>
+                  <!-- <th>Accion</th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -637,26 +637,25 @@ function admin_contenido(){?>
 
 									}
 									?>
-										<select class="form-control" name="slctEstado" id="slctEstado" >
-											<option value="0" >Seleccionar</option>
+										<select class="form-control" name="slectTipo" id="slectTipo" onchange="cambiarTipo(<?= $resultado['tb_contenido_coidContenido'];?>,<?= $resultado['coidImagen']; ?>)" >
 											<option value="carrusel" <?= $select3; ?>>Carrusel</option>
 											<option value="normal" <?= $select1; ?>>Normal</option>
 											<option value="principal" <?= $select2; ?>>Principal</option>
 										</select>
 									</div></th>
-                  <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidContenido']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 2)">
+                  <!-- <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidContenido']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 2)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">
-                        <!-- <input type="" name="options"  autocomplete="off" checked> -->
+                       
                         <span class="fa fa-pencil"></span>
                     </label>
                 </a>
                 <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-contenido',<?= $resultado['coidContenido']; ?>,'<?= _controlador_ ?>')">
                     <label class="btn btn-danger">
-                    <!-- <input type="radio" name="options" autocomplete="off" > -->
+                   
                     <span class="fa fa-trash"></span>
                     </label> 
-                </a></td>
+                </a></td> -->
 				</tr>
 				<?
 		} ?>
@@ -759,7 +758,7 @@ function agregar_admin(){
 								</div>
 								<div class="form-group">
 									<label for="txtEmail">Email Usuario:</label>
-									<input type="text" class="form-control"  id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
+									<input type="text" class="form-control" autocomplete="off"  id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
 								</div>
 								<div class="form-group">
 									<label for="tipoUsuario" class="small">Orden en el Menú</label>

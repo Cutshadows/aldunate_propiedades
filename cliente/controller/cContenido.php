@@ -13,6 +13,9 @@ if (isset($opcion) || trim($opcion)) {
         case 'eliminar-contenido':
             eliminarContenido();
             exit;
+        case 'modificar-tipo':
+            cambiarTipo();
+            exit;
     }
 }
 
@@ -151,9 +154,9 @@ function crearContenido(){
             endforeach;
 
             //die(json_encode($_POST));
-            
-            
-            //reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 2, $id_registro);
+
+
+            reg_acciones("Ingresar Nuevo Contenido (" . $titulo . ")", 4, $id);
             
         } else {
             $respuesta = array(
@@ -265,9 +268,9 @@ function editarContenido(){
                     'respuesta' => "Error"
                 );
             }
-            
-            
-            
+
+
+                reg_acciones("Editar Solo Contenido (".$titulo.")", 4, $id);
             //reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 2, $id_registro);
 
         
@@ -331,3 +334,40 @@ function eliminarContenido(){
     die(json_encode($respuesta));
 }
 
+function cambiarTipo(){
+    try {
+        include_once('../include/conexion.php');
+        $conn = conectar();
+
+        $id_contenido = $_POST['id_contenido'];
+		$id_imagen=$_POST['id_img'];
+        $tipoImgs = $_POST['tipo'];
+		
+
+
+        $stmt = $conn->prepare("UPDATE tb_imagenes SET cotipoImg=? WHERE  coidImagen=? AND tb_contenido_coidContenido=?");
+        $stmt->bind_param("sii", $tipoImgs, $id_imagen, $id_contenido);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            $respuesta = array(
+                "respuesta" => "exito",
+                "cambio_tipo_id" => $id_imagen,
+                'tipo' => $tipoImgs
+            );
+            reg_acciones("Cambiar Tipo de Imagen", 4, $id_imagen);
+        } else {
+            $respuesta = array(
+                'respuesta' => 'Error',
+                'tipo' => $tipoImgs
+            );
+        }
+
+        $stmt->close();
+        $conn->close();
+
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    die(json_encode($respuesta));
+    /* die(json_encode($_POST)); */
+}

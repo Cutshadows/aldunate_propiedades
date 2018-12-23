@@ -1,4 +1,22 @@
 $(document).ready(function(){
+    $('#tabla_usuario').DataTable({
+        responsive: true,
+        paging: true,
+        pageLength: 10,
+        lengthChange: false,
+        searching: true,
+        scrollCollapse: true,
+        order: [
+            [3, 'desc'],
+            [0, 'asc']
+        ],
+        scroller: false,
+        language: {
+            emptyTable: 'No hay Registros',
+            zeroRecords: 'No Encontrado - Lo Siento',
+            infoFiltered: "(Filtrada de _MAX_ total entradas)"
+        }
+    });
 /**
       * AQUI EMPIEZA LA INTERACCION CON EL TEXTAREA
       */
@@ -244,3 +262,46 @@ function eliminararchivos(ac, id_registro, destino) {
         }
     });
 };
+
+function cambiarTipo(id_registros, id_imagen){
+    var tipo = $("#slectTipo").val();
+  /*   console.log("el tipo de imagen es :"+tipo);
+
+    console.log("id contenido :"+id_registros);
+    console.log("id Imagen"+id_imagen);
+     */
+        $.ajax({
+            url: 'controller/cContenido.php',
+            type: 'POST',
+            dataType: 'JSON',
+            cache: false,
+            data: {
+                opcion: 'modificar-tipo',
+                id_contenido: id_registros,
+                id_img: id_imagen,
+                tipo: tipo
+            },
+            success: function (d) {
+                var resultado = d;
+               /*  console.log(resultado); */
+                if (resultado.respuesta == 'exito') {
+                    mkNoti(
+                        'Notificación',
+                        'Imagen :  Cambio de Tipo a!!'+resultado.respuesta.tipo, {
+                            status: 'success',
+                            duration: 3000
+                        }
+                    );
+                } else {
+                    mkNoti(
+                        'Notificación',
+                        'Imagen con Problemas al cambiar Tipo!!', {
+                            status: 'warning',
+                            duration: 3000
+                        }
+                    );
+                }
+            }
+        });
+    
+}

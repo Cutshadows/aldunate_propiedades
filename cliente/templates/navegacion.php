@@ -31,6 +31,7 @@
         <li>
           
         </li>
+        <? if ($_SESSION['privilegios'] == 'super' || $_SESSION['privilegios'] == 'admin') { ?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
@@ -44,6 +45,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Grafico de Visitas por Sector</a></li>
           </ul>
         </li>
+        <?}?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-laptop"></i>
@@ -57,7 +59,7 @@
             <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',2)"><i class="fa fa-plus-circle"></i> Crear Contenido</a></li>
             <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',3)"><i class="fa fa-edit"></i> Administrar Contenido</a></li>
           </ul>
-        </li>
+        </li><?if($_SESSION['privilegios']=='super'){?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i> <span>Usuarios</span>
@@ -70,7 +72,7 @@
           <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',4)"><i class="fa fa-user-plus"></i> Nuevo Usuario</a></li>
           <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',6)"><i class="fa fa-eye"></i> Historial de Actividades</a></li>  
           </ul>
-        </li>
+        </li><?}?>
     </section>
     <!-- /.sidebar -->
   </aside>
