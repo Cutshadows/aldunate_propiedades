@@ -135,13 +135,9 @@ $(document).ready(function(){
                             duration: 3000
                         }
                     );
-                    /* notificar(resultado.texto, resultado.alias); */
-                    /* setTimeout(function () {
-                        verContenedor('vContenido.php');
-                    }, 1800); */
-                
-                /* } */
-
+                setTimeout(function () {
+                    verContenedor('vPrincipal.php', 3);
+                }, 1800);
             },
             error: function (data) {
                 console.log(data);
@@ -155,32 +151,19 @@ $(document).ready(function(){
             }
         });
     });
-    /* $("#imgCargar").on("click", function (e) {
-        e.preventDefault();
-        var img = $("#imgEditar")[0].files;
-        var opcion = $('#opcionImg').val();
-        var idimg=$('#idImagen').val();
-        
-        uploadImage(img, opcion, idimg);
-    }); */
 });
 
 
-function uploadImage(idimg){
-    /* var formData = new formData($form[0]); */ // elemento del form
-
-    var img = $("#imgEditar")[0].files;
-   /*  var form = $(this); */
+function uploadImage(idimg, idContenido){
+    
+    var img = $("#imgEditar"+idimg)[0].files;
     var formData = new FormData();
-    /* var params = form.serializeArray(); */
-    formData.append("imagenes", img);
+    formData.append("imagenes", img[0]);
     formData.append("id", idimg);
+    formData.append("id_registro", idContenido);
     formData.append("tipo", 'editar-imagen');
     
 
-    /* $(params).each(function (index, element) {
-        formData.append(element.name, element.value);
-    }); */
    var datos = formData;
     $.ajax({
         url: 'controller/cimgContenido.php',
@@ -195,33 +178,33 @@ function uploadImage(idimg){
         success: function (data) {
             //console.log(data);
             var resultado = data;
-            console.log(resultado);
+            /* console.log(resultado); */
             /* if (resultado.respuesta == 'exito') { */
             //llamamos a la notificacion para que se muestre en el escritorio con su body y url 
-            /* mkNoti(
+            mkNoti(
                 'Alerta de Notificación',
-                'Contenido Ingresado Correctamente', {
+                'Contenido Actualizado Correctamente', {
                     status: 'success',
                     duration: 3000
                 }
-            ); */
+            );
             /* notificar(resultado.texto, resultado.alias); */
-            /* setTimeout(function () {
-                verContenedor('vContenido.php');
-            }, 1800); */
+            setTimeout(function () {
+                cargaFormulario(resultado.registro, 'vPrincipal.php', 2);
+            }, 1800);
 
             /* } */
 
         },
         error: function (data) {
-            console.log(data);
-            /* mkNoti(
+            /* console.log(data); */
+            mkNoti(
                 'Alerta de Notificación',
-                'Se Creo el contenido Con Detalles', {
-                    status: 'warning',
+                'Hubo un Problema al ingresar la imagen', {
+                    status: 'danger',
                     duration: 3000
                 }
-            ); */
+            );
         }
     });
 

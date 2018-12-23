@@ -179,7 +179,7 @@ function editarContenido(){
         include_once('../include/conexion.php');
         $conn = conectar();
 
-        if (isset($_FILES['cnombreimg'])) {
+        
             $id=$_POST['id_registro'];
             $titulo = htmlspecialchars($_POST['txtTitulo']);
             $descripcion = htmlspecialchars($_POST['txtdescripcion']);
@@ -233,37 +233,6 @@ function editarContenido(){
             }
 
             
-            /* die(json_encode($_POST)); */
-           /*  $targetDir = "../../img/contenido/";
-            $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
-
-            $images_arr = array();
-            $NombreArchivo = array(); */
-
-            /* foreach ($_FILES['cnombreimg']['name'] as $key => $value) {
-                $name = $_FILES['cnombreimg']['name'][$key];
-                $tmp_name = $_FILES['cnombreimg']['tmp_name'][$key];
-                $size = $_FILES['cnombreimg']['size'][$key];
-                $type = $_FILES['cnombreimg']['type'][$key];
-                $error = $_FILES['cnombreimg']['error'][$key]; */
-                # code...
-
-                /* $fileName = basename($_FILES['cnombreimg']['name'][$key]);
-                $targetFilePath = $targetDir . $fileName; */
-                //$targetFilePath = $fileName;
-
-               /*  $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-                if (in_array($fileType, $allowTypes)) { */
-                   /*  if (move_uploaded_file($_FILES['cnombreimg']['tmp_name'][$key], $targetFilePath)) {
-                        $images_arr[] = $targetFilePath;
-                        $NombreArchivo[]= $fileName;
-                    } else {
-                        $respuesta = array(
-                            'respuesta' => "Error"
-                        );
-                    } */
-                /* } */
-            /* } */
             /* $tipoimg = "normal"; */
             $estado = $_POST['slctEstado'];
             
@@ -272,14 +241,14 @@ function editarContenido(){
             
 
             
-            die(json_encode($_POST));
+            /* die(json_encode($_POST)); */
             $fecha = date("Y-m-d H:i:s");
             $cadenaCheckbox = '{"contenido":[{"bano ":{ "validation_bano" :"' . $banos . '","cantidad_bano":"' . $txtBanos . '"}," pisos ":{ "validation_pisos":"' . $piso . '","cantidad_pisos":"' . $txtPiso . '"}," oficina ":{"validation_oficina":"' . $oficina . '","cantidad_oficina":"' . $txtOficina . '"}," estacionamiento ":{"validation_estacionamiento":"' . $estacionamiento . '"}}]}';
 
             $conn->begin_transaction();
             $stmt = $conn->prepare("UPDATE tb_contenido SET coTitulo=?, coDescripcion=?, coComuna=?, coDireccion=?, coDetalles=?, coPrecioCLP=?, coPreciouF=?, tb_usuario_coidUsuario=?, cofechaCreacion=?, coestadoContenido=? WHERE coidContenido=?");
 			//echo $conn -> error;
-            $stmt->bind_param("ssssiiisii", $titulo, $descripcion, $Comuna, $direccion, $cadenaCheckbox, $valorClp, $valorUf, $_SESSION['id_usuario'], $fecha, $estado, $id);
+            $stmt->bind_param("sssssiiisii", $titulo, $descripcion, $Comuna, $direccion, $cadenaCheckbox, $valorClp, $valorUf, $_SESSION['id_usuario'], $fecha, $estado, $id);
 
             $stmt->execute();
 
@@ -289,37 +258,19 @@ function editarContenido(){
             if ($stmt->affected_rows > 0) {
                 $respuesta = array(
                     'respuesta' => 'exito',
-                    'registro' => $id_registro
+                    'registro' => $id
                 );
             } else {
                 $respuesta = array(
                     'respuesta' => "Error"
                 );
             }
-            /* foreach ($_POST['idImagen'] as $llave => $valor) {
-                foreach ($NombreArchivo as $key => $value) :
-                
-                $stmt = $conn->prepare("UPDATE tb_imagenes SET coNomimg=?, tb_contenido_coidContenido=?, tb_usuario_coidUsuario=?, cotipoImg=? WHERE tb_contenido_coidContenido=? AND coidImagen=?");
-                $stmt->bind_param("siisii", $value, $id_registro, $_SESSION["id_usuario"], $tipoimg, $id, $valor);
-                $stmt->execute();
-                if ($stmt->affected_rows) {
-                    $resultado = array(
-                        'respuesta' => 'exito',
-                        'img_actualizado' => $value
-                    );
-                }
-                endforeach;
-            } */
-            //die(json_encode($_POST));
+            
             
             
             //reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 2, $id_registro);
 
-        } else {
-            $respuesta = array(
-                'respuesta' => "vacio"
-            );
-        }
+        
         $conn->commit();
 
         $stmt->close();

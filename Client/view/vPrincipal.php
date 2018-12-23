@@ -460,6 +460,7 @@ function formulario_contenido(){
 										<div class="row">
 											<div class="col-md-12">
 												<div class="container-fluid" id="constructor-imagen" name="constructor-imagen">
+												
 													<?$datos['coidContenido'];
 													$pregunta = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido FROM tb_imagenes WHERE tb_contenido_coidContenido=". $datos['coidContenido']);
 												define("_ruta_", "../img/contenido/");
@@ -467,7 +468,7 @@ function formulario_contenido(){
 														while($reqImagen=$pregunta->fetch_assoc()){?>
 														<div class="row">
 														<form  method="post" class="form-img-update"  enctype="multipart/form-data">
-															<input type="hidden" name="opcionImg" id="opcionImg" value="editar-imagen">
+															
 															<div class="col-md-4">
 																<div class="input-group">
 																	<img src="<?= _ruta_ . $reqImagen['coNomimg']; ?>" width='180px' height='180px'>
@@ -476,15 +477,17 @@ function formulario_contenido(){
 															</div>
 															<div class="col-md-6">
 																<div class="input-group">
-																	<input type="file" name="imgEditar" id="imgEditar">
+																	<input type="file" name="imgEditar<?=$reqImagen['coidImagen'];?>" id="imgEditar<?= $reqImagen['coidImagen']; ?>">
+																	
 																</div>
 															</div>
 															<div class="col-md-1">							
-																	<button type="button" class="btn btn-sm btn-block btn-info fa fa-upload" name="imgCargar" onclick="uploadImage(<?= $reqImagen['coidImagen'] ?>)" id="imgCargar" ></button>
+																	<button type="button" class="btn btn-sm btn-block btn-info fa fa-upload" name="imgCargar" onclick="uploadImage(<?= $reqImagen['coidImagen'] ?>, <?= $datos['coidContenido']; ?>)" id="imgCargar" ></button>
+																	<input type="hidden" name="opcionImg" id="opcionImg" value="editar-imagen">
 															</div>
-															<div class="col-md-1">							
+											<!-- 				<div class="col-md-1">							
 																	<button type="button" class="btn btn-sm btn-block btn-danger fa fa-trash-o" name="imgCancelar" id="imgCancelar" ></button>
-															</div>
+															</div> -->
 																
 															</form>
 														</div>
@@ -504,7 +507,7 @@ function formulario_contenido(){
 						<div class="box-footer">
 							<input type="hidden" id="opcion" name="opcion" value=<?if($id==0){echo "crear-contenido";}else{?><?echo "editar-contenido";}?> > <!-- value="" -->
 							<?if($id>0){?>
-									<input type="hidden" id="id_registro" name="id_registro" value=<?=$datos['idContenido'];?> > 
+									<input type="hidden" id="id_registro" name="id_registro" value=<?=$datos['coidContenido'];?> > 
 							<?}?>
 							<button type="submit" class="btn-block btn-block-sm btn btn-primary">Ingresar</button>
 						</div>
@@ -556,9 +559,149 @@ function formulario_contenido(){
 <?}
 
 /**FUNCION PARA ABRIR EL ADMINISTRADOR DE CONTENIDO */
-function admin_contenido(){
+function admin_contenido(){?>
+<section class="content-header">
+		<h1>
+			Administrador 
+			<small>Administrar Imagenes Web</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+			<li><a href="#">Usuarios</a></li>
+			<li class="active">Tabla Imagenes del Frontis</li>
+		</ol>
+		</section>
+		<div class="row">
+			<div class="col-md-12">
+			
+			<!-- Main content -->
+			<section class="content">
 
-}
+				<!-- Default box -->
+				<div class="box">
+				<!-- <div class="box-header">
+					<h3 class="box-title">Todos los Usuarios</h3>
+				<div class="box"> -->
+					<div class="box-header">
+              			<h3 class="box-title">Tabla de Imagenes que Muestra en Frontis</h3>
+            		</div>							
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="tabla_usuario" name="tabla_usuario" class="table table-bordered table-striped display"  >
+                <thead>
+                <tr>
+                  <th>ID</th>
+				  <th>Imagen</th>
+                  <th>Contenido</th>
+                  <th>Usuario</th>
+                  <th>Tipo de Imagen</th>
+                  <th>Accion</th>
+                </tr>
+                </thead>
+                <tbody>
+				<?
+			define("_controlador_", 'cContenido.php');
+			include_once("../include/conexion.php");
+			$conn = conectar();
+
+			$consulta = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, tb_usuario_coidUsuario, cotipoImg FROM tb_imagenes");
+			while ($resultado = $consulta->fetch_assoc()) {
+				$reqContenido = $conn->query("SELECT coidContenido, coTitulo FROM tb_contenido WHERE coidContenido='" . $resultado['tb_contenido_coidContenido'] . "'");
+
+				$resContenido = $reqContenido->fetch_array();
+
+				$reqUsuario = $conn->query("SELECT coidUsuario, coNomUsuario FROM tb_usuario WHERE coidUsuario='" . $resultado['tb_usuario_coidUsuario'] . "'");
+				$resUsuario = $reqUsuario->fetch_array();
+				define("_ruta_", "../img/contenido/");
+				?>
+				<tr>
+                  <td><?= $resultado['coidImagen']; ?></td>
+                  <td><img src="<?= _ruta_ . $resultado['coNomimg']; ?>" width='120px' height='120px'></td>
+				  <td><?= $resContenido['coTitulo']; ?></td>
+				  <td><?= $resUsuario['coNomUsuario']; ?></td>
+				  <th><? //$resultado['cotipoImg'];
+				   ?>
+				   					<div class="form-group">
+										<?
+									switch($resultado['cotipoImg']){
+										case 'normal':
+											$select1 = 'selected="selected"';
+											break;
+										case 'principal':
+											$select2 = 'selected="selected"';
+											break;
+										case 'carrusel':
+											$select3 = 'selected="selected"';
+											break;
+
+									}
+									?>
+										<select class="form-control" name="slctEstado" id="slctEstado" >
+											<option value="0" >Seleccionar</option>
+											<option value="carrusel" <?= $select3; ?>>Carrusel</option>
+											<option value="normal" <?= $select1; ?>>Normal</option>
+											<option value="principal" <?= $select2; ?>>Principal</option>
+										</select>
+									</div></th>
+                  <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidContenido']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 2)">
+                    <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <!-- <input type="" name="options"  autocomplete="off" checked> -->
+                        <span class="fa fa-pencil"></span>
+                    </label>
+                </a>
+                <a href="javascript:void(0)" onclick="eliminararchivos('eliminar-contenido',<?= $resultado['coidContenido']; ?>,'<?= _controlador_ ?>')">
+                    <label class="btn btn-danger">
+                    <!-- <input type="radio" name="options" autocomplete="off" > -->
+                    <span class="fa fa-trash"></span>
+                    </label> 
+                </a></td>
+				</tr>
+				<?
+		} ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+				<!-- /.box-body -->
+				<!--  <div class="box-footer">
+					Footer
+				</div> -->
+				<!-- /.box-footer-->
+				</div>
+				<!-- /.box -->
+
+			</section>
+			</div>
+		</div>
+		<!-- <script src="js/controller/admin.js"></script> -->
+		<!-- /.content -->
+		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
+		<script type="text/javascript" src="js/controller/contenido.js"></script>
+		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
+		<script  src="js/jquery.dataTables.min.js"></script>
+		<script src="js/notifications.min.js"></script>
+		
+		 <script>
+			$(document).ready( function() {
+				/* MK Web Notification init */
+				var config = {
+					// Default, Primary, Success, Danger, Warning, Info, Light, Dark, Purple
+					positionY: "left",
+					positionX: "top",
+					scrollable: false, //true
+					rtl: false, // true = ltr
+					max: 5, // number of notifications to display,
+					dismissable: true
+				};
+				mkNotifications(config);
+				
+			}); 
+		</script>
+<?}
 
 /* CONTROL DE USUARIOS Y CREACION */
 function agregar_admin(){
