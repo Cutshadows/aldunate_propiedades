@@ -306,9 +306,9 @@
 
   /* Make the image fully responsive */
 .carousel-inner{
-    height: 600px!important;
+    height: 20%!important;
 }
-.carousel-inner img {
+.carousel-item img {
     width: 100%;
     height: 99%;
 }

@@ -1,3 +1,8 @@
+<?include_once("includes/conexion.php");
+$conn=conectar();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,26 +19,37 @@
 
 <?include("includes/pages/menu.php");?>
 
+
+
 <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
     <li data-target="#sliderAldunate" data-slide-to="0" class="active"></li>
     <li data-target="#sliderAldunate" data-slide-to="1"></li>
-    <li data-target="#sliderAldunate" data-slide-to="2"></li>
+    <!-- <li data-target="#sliderAldunate" data-slide-to="2"></li> -->
   </ul>
   <div class="carousel-inner">
-    <div class="carousel-item active" style="height: 100%;">
-      <img src="img/imagenes_aldunate/074.jpg" alt="Colina">
+    <? $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
+    while ($resultContenido = $consulContenido->fetch_assoc()) {
+      /* echo $resultContenido['coTitulo']; */
+      $consultImg = $conn->query("SELECT coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido['coidContenido'] . " AND cotipoImg='carrusel'");
+      $resultImagen = $consultImg->fetch_assoc();
+      
+    ?>
+    <div class="carousel-item active" style="height: 100%; margin-top:10%;" >
+      <img src="img/contenido/<?=$resultImagen['coNomimg'];?>" ><!-- alt="Colina" -->
       <div class="carousel-caption fadeInLeft ">
         <div class="caption-titulo" >
-          <p>Subida a La Colina</p>
+          <p><?= substr($resultContenido['coTitulo'],0, 20); ?></p>
         </div>
         <div class="caption-contenido">
-          <p>Se Vende Amplio Terreno...</p>
+          <p><?= substr($resultContenido['coDescripcion'], 0, 40); ?>...</p>
           <p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>          
         </div>
       </div>   
     </div>
-    <div class="carousel-item">
+
+    <?}?>
+    <!-- <div class="carousel-item">
       <img src="img/imagenes_aldunate/IMG_2888.jpg" alt="">
       <div class="carousel-caption">
         <h3>Sector Centro</h3>
@@ -46,7 +62,7 @@
         <h3>Arriendo Departamento</h3>
         <p>Amplio Departamento!</p>
       </div>   
-    </div>
+    </div> -->
   </div>
   <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>

@@ -1,23 +1,6 @@
 $(document).ready(function(){
-    $('#tabla_usuario').DataTable({
-        responsive: true,
-        paging: true,
-        pageLength: 10,
-        lengthChange: false,
-        searching: true,
-        scrollCollapse: true,
-        order: [
-            [3, 'desc'],
-            [0, 'asc']
-        ],
-        scroller: false,
-        language: {
-            emptyTable: 'No hay Registros',
-            zeroRecords: 'No Encontrado - Lo Siento',
-            infoFiltered: "(Filtrada de _MAX_ total entradas)"
-        }
-    });
-/**
+    
+      /**
       * AQUI EMPIEZA LA INTERACCION CON EL TEXTAREA
       */
      $('#cnombreimg').on('change', function(){
@@ -223,6 +206,24 @@ function uploadImage(idimg, idContenido){
                     duration: 3000
                 }
             );
+        }
+    });
+    $('#tabla_usuario').DataTable({
+        responsive: true,
+        paging: true,
+        pageLength: 10,
+        lengthChange: false,
+        searching: true,
+        scrollCollapse: true,
+        order: [
+            [3, 'desc'],
+            [0, 'asc']
+        ],
+        scroller: false,
+        language: {
+            emptyTable: 'No hay Registros',
+            zeroRecords: 'No Encontrado - Lo Siento',
+            infoFiltered: "(Filtrada de _MAX_ total entradas)"
         }
     });
 

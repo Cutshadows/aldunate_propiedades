@@ -709,6 +709,7 @@ function agregar_admin(){
 	$id=$_POST['id'];
 	if($id>0){
 		//echo "area de actualizar usuario";
+		$opcion = "editar-usuario";
 		include_once("../include/conexion.php");
 		$conn=conectar();
 		$boton="Modificar";
@@ -760,29 +761,43 @@ function agregar_admin(){
 									<label for="txtEmail">Email Usuario:</label>
 									<input type="text" class="form-control" autocomplete="off"  id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
 								</div>
+								
 								<div class="form-group">
 									<label for="tipoUsuario" class="small">Orden en el Menú</label>
+									
+									<?$datos['coPrivilegiosUsuario'];
+									switch ($datos['coPrivilegiosUsuario']) {
+										case 'super':
+											$slct1='selected="selected"';
+											break;
+										case 'admin':
+										$slct2 = 'selected="selected"';
+											break;
+										case 'digi':
+											$slct3 = 'selected="selected"';
+											break;										
+									}?>
 									<select class="form-control" name="tipoUsuario" id="tipoUsuario" >
-									<option value="admin">Administrador</option>
-									<option value="digi">Digitador</option>
-									<option value="super">Super Usuario</option>
+									<option value="admin" <?=$slct2;?> >Administrador</option>
+									<option value="digi" <?=$slct3; ?>>Digitador</option>
+									<option value="super" <?= $slct1; ?>>Super Usuario</option>
 									</select>
 								</div>
 								
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input type="password"  pattern=".{6,}"  autocomplete="new-password"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
+									<input type="password"  pattern=".{6,}"  autocomplete="off"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" >
 								</div>
 								<div class="form-group">
 									<label for="txtClave">Contraseña:</label>
-									<input type="password"  pattern=".{6,}"  autocomplete="new-password"  class="form-control" id="txtRepiteClave" name="txtRepiteClave" placeholder="Repetir Clave para la Session" >
+									<input type="password"  pattern=".{6,}"  autocomplete="off"  class="form-control" id="txtRepiteClave" name="txtRepiteClave" placeholder="Repetir Clave para la Session" >
 								</div>
 								
 								
 							<div class="box-footer">
-							<input type="hidden" name="opcion" <?if($id==0){?>value="<?echo $opcion;}else{echo $opcion;};?>">
+							<input type="hidden" name="opcion" id="opcion" value="<?if($id==0){echo $opcion;}else{echo $opcion;}?>">
 							<? if($id > 0){ ?>
-							<input type="hidden" name="id_usuario" value="<?=$datos['coidUsuario'];?>">
+							<input type="hidden" name="id_usuario" id="id_usuario" value="<?=$datos['coidUsuario'];?>">
 							<?};?>
 								<button type="submit" class="btn-block btn-block-sm btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
 							</div>

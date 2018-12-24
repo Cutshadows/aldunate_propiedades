@@ -56,14 +56,6 @@ function crearUsuario(){
                 'respuesta' => 'exito',
                 'registro' => $id_registro
             );
-            /*  $stmt = $conn->prepare("INSERT INTO db_bk_contenido (db_miniSitios_id_minisitios, db_menu_web_id_menu, db_noticias_id_noticias) VALUES(?,?,?)");
-            $stmt->bind_param("iii", $_SESSION["SitiosPer"], $menu, $id_registro);
-            $stmt->execute();
-            if ($stmt->affected_rows) {
-                $resultado = array(
-                    'respuesta' => 'exito'
-                );
-            } */
             reg_acciones("Registro de Usuario (" . $nomUser . "), con Privilegios de :". $tipoUsuario ."",1, $id_registro);
         } else {
             $respuesta = array(
@@ -91,25 +83,32 @@ function editarUsuario(){
 
         $nomUser = htmlspecialchars($_POST['txtNomUsuario']);
         $emailUser = htmlspecialchars($_POST['txtEmail']);
-        $tipoUsuario = htmlspecialchars($_POST['tipoUsuario']);
+        $tipoUsuario = $_POST['tipoUsuario'];
         $claveUsuario= htmlspecialchars($_POST['txtClave']);
         $id=htmlspecialchars($_POST['id_usuario']);
-
+        
         $opciones = array(
             'cost' => 12
         );
         $hash_password = password_hash($claveUsuario, PASSWORD_BCRYPT, $opciones);
-
+       
         $conn->begin_transaction();
-        $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?, coEmailUsuario= ?, coPrivilegiosUsuario= ?, coClaveUsuario=? WHERE coidUsuario= ?");
+        
+        if(isset($claveUsuario) && $claveUsuario != ''){
+            $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?, coEmailUsuario= ?, coPrivilegiosUsuario= ?, coClaveUsuario=? WHERE coidUsuario= ?");
         
 		//$stmt->bind_param("sssssss", $cadenaUpdateCabecera, $textInfo, $tituloInfo, $alias, fecha_formato_base_gore($cfecha)." ".$hora, $publicado, $_SESSION['id_usuario']);
-        $stmt->bind_param("ssssi", $nomUser, $emailUser, $tipoUsuario, $hash_password, $id);
+            $stmt->bind_param("ssssi", $nomUser, $emailUser, $tipoUsuario, $hash_password, $id);
 
+        }else{
+
+            $stmt = $conn->prepare("UPDATE tb_usuario SET coNomUsuario= ?, coEmailUsuario= ?, coPrivilegiosUsuario= ? WHERE coidUsuario= ?");
+        
+		//$stmt->bind_param("sssssss", $cadenaUpdateCabecera, $textInfo, $tituloInfo, $alias, fecha_formato_base_gore($cfecha)." ".$hora, $publicado, $_SESSION['id_usuario']);
+            $stmt->bind_param("sssi", $nomUser, $emailUser, $tipoUsuario, $id);
+            
+        }
         $stmt->execute();
-		
-		//$id_registro=$stmt->insert_id;
-            //$id_registro = $stmt->insert_id;
 
         if ($stmt->affected_rows > 0) {
             $respuesta = array(
@@ -117,20 +116,13 @@ function editarUsuario(){
                 'registro' => $nomUser,
                 'tipo' => $tipoUsuario
             );
-            /*  $stmt = $conn->prepare("INSERT INTO db_bk_contenido (db_miniSitios_id_minisitios, db_menu_web_id_menu, db_noticias_id_noticias) VALUES(?,?,?)");
-            $stmt->bind_param("iii", $_SESSION["SitiosPer"], $menu, $id_registro);
-            $stmt->execute();
-            if ($stmt->affected_rows) {
-                $resultado = array(
-                    'respuesta' => 'exito'
-                );
-            } */
-            reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : ".  $tipoUsuario . " ", 2, $id_registro);
+            
         } else {
             $respuesta = array(
                 'respuesta' => 'Error'
             );
         }
+        reg_acciones("Actualizacion de Usuario(" . $nomUser . "), con Privilegios de : " . $tipoUsuario . " ", 2, $id);
         $conn->commit();
         $stmt->close();
         $conn->close();

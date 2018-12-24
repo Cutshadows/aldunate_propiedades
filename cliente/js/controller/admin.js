@@ -11,24 +11,7 @@ $(document).ready(function () {
         );
     });
     
-    $('#tabla_usuario').DataTable({
-        responsive: true,
-        paging: true,
-        pageLength: 10,
-        lengthChange: false,
-        searching: true,
-        scrollCollapse: true,
-        order: [
-            [3, 'asc'],
-            [0, 'desc']
-        ],
-        scroller: false,
-        language: {
-            emptyTable: 'No hay Registros',
-            zeroRecords: 'No Encontrado - Lo Siento',
-            infoFiltered: "(Filtrada de _MAX_ total entradas)"
-        }
-    });
+    
     // #myInput is a <input type="text"> element
     /* $('#buscadorContenido').on('keyup', function () {
         table.search(this.value).draw();
@@ -99,6 +82,24 @@ $(document).ready(function () {
                 console.log(data);
             }
         })
+    });
+    $('#tabla_usuario').DataTable({
+        responsive: true,
+        paging: true,
+        pageLength: 10,
+        lengthChange: false,
+        searching: true,
+        scrollCollapse: true,
+        order: [
+            [3, 'asc'],
+            [0, 'desc']
+        ],
+        scroller: false,
+        language: {
+            emptyTable: 'No hay Registros',
+            zeroRecords: 'No Encontrado - Lo Siento',
+            infoFiltered: "(Filtrada de _MAX_ total entradas)"
+        }
     });
 });
 

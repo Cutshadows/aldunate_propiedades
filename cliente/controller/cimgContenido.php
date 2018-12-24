@@ -41,23 +41,10 @@ if(isset($opcion) && $opcion=='editar-imagen'){
             'registro'=>$id
         );
     }
+    reg_acciones("Cambio de Imagen en (" . $id . ")", 5, $idimg);
     die(json_encode($resultado));
 
 }
 
 
 
-/* if (isset($opcion) || trim($opcion)) {
-    switch ($opcion) {
-        case 'editar-imagen':
-            editarImagen();
-            exit;
-    }
-} */
-
-/* function editarImagen()
-{ */
-    
-    
-    /*  */
-/* } */
