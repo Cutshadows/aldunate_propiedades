@@ -9,9 +9,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#">¿Quienes Somos?</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="#">Contactenos</a>
           </li>

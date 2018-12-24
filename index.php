@@ -23,46 +23,58 @@ $conn=conectar();
 
 <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
-    <li data-target="#sliderAldunate" data-slide-to="0" class="active"></li>
-    <li data-target="#sliderAldunate" data-slide-to="1"></li>
-    <!-- <li data-target="#sliderAldunate" data-slide-to="2"></li> -->
-  </ul>
-  <div class="carousel-inner">
-    <? $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
-    while ($resultContenido = $consulContenido->fetch_assoc()) {
-      /* echo $resultContenido['coTitulo']; */
-      $consultImg = $conn->query("SELECT coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido['coidContenido'] . " AND cotipoImg='carrusel'");
-      $resultImagen = $consultImg->fetch_assoc();
+  <?
+  $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
+  $activarItem2 = 0;
+  while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
+      /* echo $resultContenido2['coTitulo']; */
+    $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido2['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
+    while ($resultImagen2 = $consultImg1->fetch_assoc()) {
       
-    ?>
-    <div class="carousel-item active" style="height: 100%; margin-top:10%;" >
-      <img src="img/contenido/<?=$resultImagen['coNomimg'];?>" ><!-- alt="Colina" -->
-      <div class="carousel-caption fadeInLeft ">
-        <div class="caption-titulo" >
-          <p><?= substr($resultContenido['coTitulo'],0, 20); ?></p>
-        </div>
-        <div class="caption-contenido">
-          <p><?= substr($resultContenido['coDescripcion'], 0, 40); ?>...</p>
-          <p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>          
-        </div>
-      </div>   
-    </div>
+  ?>
+  <li data-target="#sliderAldunate" data-slide-to="<?=$activarItem2; ?>" <?if ($activarItem2 == 0) {?>class="<?echo 'active'; ?>"<?}?>></li>
+    <!-- <li data-target="#sliderAldunate" data-slide-to="1"></li> -->
+    <!-- <li data-target="#sliderAldunate" data-slide-to="2"></li> -->
+    <?
+    $activarItem2++;
+  }
+}
+?>
+    </ul>
+    <div class="carousel-inner">
+  <?
+  $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
+  $activarItem = 0;
+  while ($resultContenido = $consulContenido->fetch_assoc()) {
+      /* echo $resultContenido['coTitulo']; */
+    $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
+    while ($resultImagen = $consultImg->fetch_assoc()) {
+      if ($activarItem == 0) {
+        $item = "active";
+      } else {
+        $item = "";
+      }
+  
+  ?>
+  
+     	<div class="carousel-item <?=$item;?>" style="height: 60%!important; margin-top:10%;" >
+     	 	<img src="img/contenido/<?=$resultImagen['coNomimg'];?>" ><!-- alt="Colina" -->
+     	 	<div class="carousel-caption fadeInLeft ">
+				<div class="caption-titulo" >
+					<p><?= substr($resultContenido['coTitulo'],0, 20); ?></p>
+				</div>
+				<div class="caption-contenido">
+					<p><?= substr($resultContenido['coDescripcion'], 0, 40); ?>...</p>
+					<p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>          
+				</div>
+     	 	</div>   
+	  	</div>
 
-    <?}?>
-    <!-- <div class="carousel-item">
-      <img src="img/imagenes_aldunate/IMG_2888.jpg" alt="">
-      <div class="carousel-caption">
-        <h3>Sector Centro</h3>
-        <p>Se Vende Casa!</p>
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="img/imagenes_aldunate/IMG_2882.jpg" alt="">
-      <div class="carousel-caption">
-        <h3>Arriendo Departamento</h3>
-        <p>Amplio Departamento!</p>
-      </div>   
-    </div> -->
+    <?
+    $activarItem ++;
+  }
+}?>
+  
   </div>
   <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
