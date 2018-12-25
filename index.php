@@ -91,48 +91,62 @@ $conn=conectar();
     <div class="container">
         <h1 class="jumbotron-heading">Filtro de Busqueda</h1>
         <div class="row">
-            <div class="col-md-3">
-                <fieldset>
-                    <label for="busqueda" class="small">Buscar</label>
-        	           <input type="text" id="busqueda"  name="busqueda" class="input-sm" placeholder="Busqueda">
-        	    </fieldset>
-            </div>
-            <div class="col-md-3">
-                <div class="input-group">
-                    <label for="busqueda" class="small">Numero de piezas</label>
-                    <select name="" id="">
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="input-group">
-                    <label for="busqueda" class="small">Numero de piezas</label>
-                    <select name="" id="">
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="input-group">
-                    <label for="busqueda" class="small">Numero de piezas</label>
-                    <select name="" id="">
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>        
+			<div class="col-md-6">
+					<fieldset>
+						<label for="busqueda" class="small">Buscar</label>
+						<input type="text" id="busqueda"  name="busqueda" class="form-control input-sm" placeholder="Busqueda">
+					</fieldset>
+			</div>
+			
+            <div class="row mb20">
+				<div class="col-md-3">
+					<div class="input-group">
+						<label for="busqueda" class="small">¿Cuantos Baños?</label>
+						<select class="form-control" name="" id="">
+							<option value="">Seleccionar</option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="input-group">
+						<label for="busqueda" class="small">¿Cuantos Pisos?.</label>
+						<select class="form-control" name="" id="">
+							<option value="">Seleccionar</option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="input-group">
+						<label for="busqueda" class="small">¿Cuantas Oficinas?.</label>
+						<select class="form-control" name="" id="">
+							<option value="">Seleccionar</option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+						</select>                  
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="input-group">
+						<label for="busqueda" class="small">¿Estacionamiento?</label>
+						<select class="form-control" name="" id="">
+							<option value="">Seleccionar</option>
+							<option value=""></option>
+							<option value=""></option>
+							<option value=""></option>
+						</select>
+					</div>
+				</div> 
+            </div>       
         </div>        
     </div>
-    <div class="row">
+    <div class="row mb20">
             <div class="col-md-12 pull-right" >
                     <input type="button" class="btn btn-success small col-md-1 pull-right" value="Filtrar">
             </div>
