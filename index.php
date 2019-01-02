@@ -14,6 +14,9 @@ $conn=conectar();
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/min.css">
+	<link rel="stylesheet" href="css/price_range_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+
 </head>
 <body>
 
@@ -57,8 +60,8 @@ $conn=conectar();
   
   ?>
   
-     	<div class="carousel-item <?=$item;?>" style="height: 60%!important; margin-top:10%;" >
-     	 	<img src="img/contenido/<?=$resultImagen['coNomimg'];?>" ><!-- alt="Colina" -->
+     	<div class="carousel-item <?=$item;?>" style="height: 60%!important;" >
+     	 	<img src="img/contenido/<?=$resultImagen['coNomimg'];?>" style="height:750px;" ><!-- alt="Colina" -->
      	 	<div class="carousel-caption fadeInLeft ">
 				<div class="caption-titulo" >
 					<p><?= substr($resultContenido['coTitulo'],0, 20); ?></p>
@@ -89,68 +92,126 @@ $conn=conectar();
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Filtro de Busqueda</h1>
-        <div class="row">
+        <h1 class="jumbotron-heading">Busqueda de Propiedad</h1>
+        <div class="row mb20">
 			<div class="col-md-6">
-					<fieldset>
-						<label for="busqueda" class="small">Buscar</label>
-						<input type="text" id="busqueda"  name="busqueda" class="form-control input-sm" placeholder="Busqueda">
-					</fieldset>
+				<fieldset>
+					<label for="busqueda" class="form-label large">Buscar Propiedad por Palabra Clave</label>
+					<input type="text" id="busqueda"  name="busqueda" class="form-control input-sm" placeholder="Busqueda">
+				</fieldset>
+			  </div>
+			  <div class="col-md-3">
+				  <label for="busqueda" class="form-label large">&nbsp;</label>
+			  	<div class="input-group">
+					  <!-- <label for="busqueda" class="small">¿Estacionamiento?</label> -->
+			  		<select class="form-control" name="slctComuna" id="slctComuna" >
+			  			<option value="0">Comuna</option>
+			  			<?
+			  		$pregunta = $conn->query("SELECT * FROM tb_comuna ORDER BY coidComuna ='P2C2CO07' DESC");
+			  		$numOrden = 1;
+			  		while ($row = $pregunta->fetch_assoc()) {
+			  			$seleccionado = $datos['coComuna'] == $row['coidComuna'] ? 'selected="selected"' : "";
+			  			$nombre = utf8_encode($row['coNomComuna']);
+			  			echo '<option value="' . $row['coidComuna'] . '" ' . $seleccionado . '  > ' . $numOrden . '. ' . $nombre . ' </option>';
+			  			$numOrden++;
+			  		}
+			  		?>
+			  		</select>
+			  	</div>
+			  </div> 
+		  </div>
+		  <div class="row">
+			<div class="col-md-1">
+				<label class="form-label small">Valor :</label>
+			</div>
+			<div class="col-md-2">
+				<div class="row ">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="optradio">Valor CLP
+						</label>
+					</div> 
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" name="optradio"> Valor UF
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label class="form-label small"> Rango de Valor :</label>
+			</div>
+			<div class="col-md-6">
+				<div class="price-range-block" style="margin:10px!important;">
+					<!-- <div class="sliderText">jQuery UI Price Range Slider</div> --> 
+							<div id="slider-range" class="price-filter-range" style="width:80%!important;" name="rangeInput">
+								
+							</div>
+							<div class="col-md-8">
+								<input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" style="width: 45%!important;" />
+								<input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" style="width: 45%!important;" />
+							</div>
+						<!-- <button class="price-range-search" id="price-range-submit">Search</button> -->
+						<!-- <div id="searchResults" class="search-results-block"></div> -->
+				</div>
 			</div>
 			
-            <div class="row mb20">
-				<div class="col-md-3">
-					<div class="input-group">
-						<label for="busqueda" class="small">¿Cuantos Baños?</label>
-						<select class="form-control" name="" id="">
-							<option value="">Seleccionar</option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>
+			
+			
+		</div>
+        <div class="row mb20">
+			<div class="col-md-3">
+				<div class="input-group">
+					<!-- <label for="busqueda" class="small">¿Cuantos Baños?</label> -->
+					<select class="form-control" name="tipoContenido" id="tipoContenido">
+						<option value="">Seleccionar</option>
+						<option value="">Arriendos</option>
+						<option value="">Ventas</option>
+						<!-- <option value=""></option> -->
+					</select>
 				</div>
-				<div class="col-md-3">
-					<div class="input-group">
-						<label for="busqueda" class="small">¿Cuantos Pisos?.</label>
-						<select class="form-control" name="" id="">
-							<option value="">Seleccionar</option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>
+			</div>
+			<div class="col-md-3">
+				<div class="input-group">
+					<!-- <label for="busqueda" class="small">¿Cuantos Pisos?.</label> -->
+					<select class="form-control" name="" id="">
+						<option value="">Pisos</option>
+						<option value="">1 Piso</option>
+						<option value="">2 Pisos</option>
+						<option value="">3 Pisos o más</option>
+					</select>
 				</div>
-				<div class="col-md-3">
-					<div class="input-group">
-						<label for="busqueda" class="small">¿Cuantas Oficinas?.</label>
-						<select class="form-control" name="" id="">
-							<option value="">Seleccionar</option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>                  
-					</div>
+			</div>
+			<div class="col-md-3">
+				<div class="input-group">
+				<!-- 	<label for="busqueda" class="small">¿Cuantas Oficinas?.</label> -->
+					<select class="form-control" name="" id="">
+						<option value="">Oficinas</option>
+						<option value="">1 Oficinas</option>
+						<option value="">2 Oficinas</option>
+						<option value="">3 Oficinas o más</option>
+					</select>                  
 				</div>
-				<div class="col-md-3">
-					<div class="input-group">
-						<label for="busqueda" class="small">¿Estacionamiento?</label>
-						<select class="form-control" name="" id="">
-							<option value="">Seleccionar</option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-					</div>
-				</div> 
-            </div>       
-        </div>        
-    </div>
+			</div>
+			<div class="col-md-3">
+				<div class="input-group">
+					<!-- <label for="busqueda" class="small">¿Estacionamiento?</label> -->
+					<select class="form-control" name="" id="">
+						<option value="">Estacionamiento</option>
+						<option value="">Sin Estacionamiento</option>
+						<option value="">Con Estacionamiento</option>
+						<!-- <option value=""></option> -->
+					</select>
+				</div>
+			</div> 
+		</div>
+	</div>       
+    <!-- </div> -->
     <div class="row mb20">
-            <div class="col-md-12 pull-right" >
-                    <input type="button" class="btn btn-success small col-md-1 pull-right" value="Filtrar">
-            </div>
-        </div>
+    	<div class="col-md-12 pull-right" >
+    	        <input type="button" class="btn btn-success small col-md-3 pull-right" value="Buscar Propiedad">
+    	</div>
+    </div>
 </section>
 
 
@@ -322,7 +383,8 @@ $conn=conectar();
 <script src="js/jquery.js"></script>
 <script src="js/carousel.js"></script>    
 <script src="js/bootstrap.min.js"></script>
-
+<script src="js/price_range_script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 
 
 
