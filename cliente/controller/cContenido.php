@@ -342,6 +342,8 @@ function cambiarTipo(){
         $id_contenido = $_POST['id_contenido'];
 		$id_imagen=$_POST['id_img'];
         $tipoImgs = $_POST['tipo'];
+
+        //echo $tipoImgs;
 		
 
 

@@ -265,12 +265,13 @@ function eliminararchivos(ac, id_registro, destino) {
 };
 
 function cambiarTipo(id_registros, id_imagen){
-    var tipo = $("#slectTipo").val();
+    var tipo = $("#slectTipo"+id_imagen).val();
   /*   console.log("el tipo de imagen es :"+tipo);
 
     console.log("id contenido :"+id_registros);
     console.log("id Imagen"+id_imagen);
      */
+    console.log(tipo);
         $.ajax({
             url: 'controller/cContenido.php',
             type: 'POST',

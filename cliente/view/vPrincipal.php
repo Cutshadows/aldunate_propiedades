@@ -620,29 +620,23 @@ function admin_contenido(){?>
                   <td><img src="<?= _ruta_ . $resultado['coNomimg']; ?>" width='120px' height='120px'></td>
 				  <td><?= $resContenido['coTitulo']; ?></td>
 				  <td><?= $resUsuario['coNomUsuario']; ?></td>
-				  <th><? //$resultado['cotipoImg'];
-				   ?>
-				   					<div class="form-group">
-										<?
+				  <th><div class="form-group"><?
 									switch($resultado['cotipoImg']){
-										case 'normal':
-											$select1 = 'selected="selected"';
+										case 'carrusel':
+											$select1 = '<option value="carrusel" selected="selected" >Carrusel</option><option value="normal" >Normal</option><option value="principal" >Principal</option>';
 											break;
 										case 'principal':
-											$select2 = 'selected="selected"';
+											$select1 .= '<option value="carrusel">Carrusel</option><option value="normal">Normal</option><option value="principal" selected="selected">Principal</option>';
 											break;
-										case 'carrusel':
-											$select3 = 'selected="selected"';
+										case 'normal':
+											$select1 .= '<option value="carrusel" >Carrusel</option><option value="normal" selected="selected">Normal</option><option value="principal" >Principal</option>';
 											break;
-
 									}
-									?>
-										<select class="form-control" name="slectTipo" id="slectTipo" onchange="cambiarTipo(<?= $resultado['tb_contenido_coidContenido'];?>,<?= $resultado['coidImagen']; ?>)" >
-											<option value="carrusel" <?= $select3; ?>>Carrusel</option>
-											<option value="normal" <?= $select1; ?>>Normal</option>
-											<option value="principal" <?= $select2; ?>>Principal</option>
+									?>	<select class="form-control" name="slectTipo<?=$resultado['coidImagen']; ?>" id="slectTipo<?=$resultado['coidImagen']; ?>" onchange="return cambiarTipo(<?=$resultado['tb_contenido_coidContenido'];?>,<?=$resultado['coidImagen']; ?>)" >
+											<?= $select1; ?>
 										</select>
-									</div></th>
+									</div>
+					</th>
                   <!-- <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidContenido']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 2)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">
