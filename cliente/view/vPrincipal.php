@@ -620,7 +620,7 @@ function admin_contenido(){?>
                   <td><img src="<?= _ruta_ . $resultado['coNomimg']; ?>" width='120px' height='120px'></td>
 				  <td><?= $resContenido['coTitulo']; ?></td>
 				  <td><?= $resUsuario['coNomUsuario']; ?></td>
-				  <th><div class="form-group"><?
+				  <td><div class="form-group"><?
 									switch($resultado['cotipoImg']){
 										case 'carrusel':
 											$select1 = '<option value="carrusel" selected="selected" >Carrusel</option><option value="normal" >Normal</option><option value="principal" >Principal</option>';
@@ -636,7 +636,7 @@ function admin_contenido(){?>
 											<?= $select1; ?>
 										</select>
 									</div>
-					</th>
+					</td>
                   <!-- <td><a href="javascript:void(0)" onclick="cargaFormulario(<?= $resultado['coidContenido']; ?>,'<?= basename($_SERVER['PHP_SELF']) ?>', 2)">
                     <div id="editar" class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-primary">

@@ -271,7 +271,7 @@ function cambiarTipo(id_registros, id_imagen){
     console.log("id contenido :"+id_registros);
     console.log("id Imagen"+id_imagen);
      */
-    console.log(tipo);
+    //console.log(tipo);
         $.ajax({
             url: 'controller/cContenido.php',
             type: 'POST',

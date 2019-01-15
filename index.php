@@ -4,9 +4,10 @@ $conn=conectar();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; utf-8">
+    <!-- <meta charset="UTF-8"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Propiedades Aldunate</title>
@@ -91,9 +92,11 @@ $conn=conectar();
 <!-- FILTRO DE LA BUSQUEDAS -->
 
 <section class="jumbotron text-center">
+<form action="" id="frmFiltro" name="frmFiltro">
     <div class="container">
         <h1 class="jumbotron-heading">Busqueda de Propiedad</h1>
         <div class="row mb20">
+        <div class="col-md-2"></div>
 			<div class="col-md-6">
 				<fieldset>
 					<label for="busqueda" class="form-label large">Buscar Propiedad por Palabra Clave</label>
@@ -121,10 +124,11 @@ $conn=conectar();
 			  </div> 
 		  </div>
 		  <div class="row">
-			<div class="col-md-1">
+			
+      <!--<div class="col-md-1">
 				<label class="form-label small">Valor :</label>
 			</div>
-			<div class="col-md-2">
+			 <div class="col-md-2">
 				<div class="row ">
 					<div class="form-check-inline">
 						<label class="form-check-label">
@@ -137,7 +141,8 @@ $conn=conectar();
 						</label>
 					</div>
 				</div>
-			</div>
+			</div> -->
+      <div class="col-md-2"></div>
 			<div class="col-md-2">
 				<label class="form-label small"> Rango de Valor :</label>
 			</div>
@@ -160,50 +165,52 @@ $conn=conectar();
 			
 		</div>
         <div class="row mb20">
-			<div class="col-md-3">
+        <div class="col-md-3"></div>
+      <div class="col-md-3">
 				<div class="input-group">
 					<!-- <label for="busqueda" class="small">¿Cuantos Baños?</label> -->
 					<select class="form-control" name="tipoContenido" id="tipoContenido">
-						<option value="">Seleccionar</option>
-						<option value="">Arriendos</option>
-						<option value="">Ventas</option>
+						<option value="">¿Venta o Arriendo?</option>
+						<option value="">Arriendo</option>
+						<option value="">Venta</option>
 						<!-- <option value=""></option> -->
 					</select>
 				</div>
 			</div>
-			<div class="col-md-3">
+        <div class="col-md-3">
 				<div class="input-group">
-					<!-- <label for="busqueda" class="small">¿Cuantos Pisos?.</label> -->
-					<select class="form-control" name="" id="">
-						<option value="">Pisos</option>
-						<option value="">1 Piso</option>
-						<option value="">2 Pisos</option>
-						<option value="">3 Pisos o más</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
+            <!-- <label for="busqueda" class="small">¿Cuantos Pisos?.</label> -->
+            <select class="form-control" name="" id="">
+              <option value="">¿Que Busca?</option>
+              <option value="">Casa</option>
+              <option value="">Departamento</option>
+              <option value="">Terreno</option>
+            </select>
+          </div>
+        </div>
+		
+		<!-- 	<div class="col-md-3">
+				<div class="input-group"> -->
 				<!-- 	<label for="busqueda" class="small">¿Cuantas Oficinas?.</label> -->
-					<select class="form-control" name="" id="">
+					<!-- <select class="form-control" name="" id="">
 						<option value="">Oficinas</option>
 						<option value="">1 Oficinas</option>
 						<option value="">2 Oficinas</option>
 						<option value="">3 Oficinas o más</option>
 					</select>                  
 				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
+			</div> -->
+		<!-- 	<div class="col-md-3">
+				<div class="input-group"> -->
 					<!-- <label for="busqueda" class="small">¿Estacionamiento?</label> -->
-					<select class="form-control" name="" id="">
+					<!-- <select class="form-control" name="" id="">
 						<option value="">Estacionamiento</option>
 						<option value="">Sin Estacionamiento</option>
-						<option value="">Con Estacionamiento</option>
+						<option value="">Con Estacionamiento</option> -->
 						<!-- <option value=""></option> -->
-					</select>
+				<!-- 	</select>
 				</div>
-			</div> 
+			</div>  -->
 		</div>
 	</div>       
     <!-- </div> -->
@@ -212,6 +219,7 @@ $conn=conectar();
     	        <input type="button" class="btn btn-success small col-md-3 pull-right" value="Buscar Propiedad">
     	</div>
     </div>
+    </form>
 </section>
 
 
@@ -231,7 +239,7 @@ $conn=conectar();
               <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="img/contenido/<?=$Imagen['coNomimg']; ?>" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"  data-holder-rendered="true"> <!-- data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166aba16d02%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166aba16d02%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22116.71875%22%20y%3D%22120.15%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true"> -->
                 <div class="card-body">
-                  <p class="card-text"><?=utf8_encode($resultadoContenido['coDescripcion']);?></p>
+                  <p class="card-text"><?=$resultadoContenido['coDescripcion'];?></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-primary">Detalles</button>

@@ -48,10 +48,10 @@ $(document).ready(function(){
 	  $("#slider-range").slider({
 		range: true,
 		orientation: "horizontal",
-		min: 0,
-		max: 10000,
-		values: [0, 10000],
-		step: 100,
+		min: 200000,
+		max: 15000000,
+		values: [200000, 500000000],
+		step: 4000000,
 
 		slide: function (event, ui) {
 		  if (ui.values[0] == ui.values[1]) {
