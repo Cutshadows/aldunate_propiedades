@@ -48,20 +48,21 @@ $(document).ready(function(){
                 //llamamos a la notificacion para que se muestre en el escritorio con su body y url 
                 mkNoti(
                     'Alerta de Notificación',
-                    'Contenido Ingresado Correctamente', {
+                    'Datos encontrados', {
                         status: 'success',
                         duration: 3000
                     }
                 );
-                setTimeout(function () {
+                $('#mostrar_resultado').html();
+                /* setTimeout(function () {
                     verContenedor('vPrincipal.php', 3);
-                }, 1800);
+                }, 1800); */
             },
             error: function (data) {
                 console.log(data);
                 mkNoti(
                     'Alerta de Notificación',
-                    'Se Creo el contenido Con Detalles', {
+                    'No fue posible encontrar la busqueda!!!', {
                         status: 'warning',
                         duration: 3000
                     }

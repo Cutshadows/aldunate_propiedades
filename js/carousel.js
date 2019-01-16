@@ -3,5 +3,8 @@ $(document).ready(function () {
     $("#sliderAldunate").carousel({
         interval:5000
     });
+    //CARGA FORMULARIO
+    
 
 });
+
