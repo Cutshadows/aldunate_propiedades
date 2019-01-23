@@ -259,78 +259,82 @@ function detalles(){
   $conn = conectar();
   $id=$_POST['id_propiedad'];
   
+  echo '<prev>'.var_dump($id).'</prev>';
+  
 ?>
+
 
 <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
   <?
-    $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=". $id);
-    $activarItem2 = 0;
-    while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
+  $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=".$id);
+  $activarItem2 = 0;
+  while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
       /* echo $resultContenido2['coTitulo']; */
-        $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido='. $id.' ORDER BY coidImagen ASC");
-        
-        while ($resultImagen2 = $consultImg1->fetch_assoc()) {
+    $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=$id ORDER BY coidImagen ASC");
+    while ($resultImagen2 = $consultImg1->fetch_assoc()) {
 
-            ?>
-  <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="<? echo 'active'; ?>"<?} ?>></li>
+      ?>
+  <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="<? echo 'active'; ?>"<?
+                                                                                                                                  } ?>></li>
     <!-- <li data-target="#sliderAldunate" data-slide-to="1"></li> -->
     <!-- <li data-target="#sliderAldunate" data-slide-to="2"></li> -->
     <?
     $activarItem2++;
-}
+  }
 }
 ?>
     </ul>
     <div class="carousel-inner">
   <?
-    $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=" . $id );
-    $activarItem = 0;
-    while ($resultContenido = $consulContenido->fetch_assoc()) {
+  $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=".$id);
+  $activarItem = 0;
+  while ($resultContenido = $consulContenido->fetch_assoc()) {
       /* echo $resultContenido['coTitulo']; */
-        $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=' . $id . ' ORDER BY coidImagen ASC");
-        while ($resultImagen = $consultImg->fetch_assoc()) {
-            if ($activarItem == 0) {
-                $item = "active";
-            } else {
-                $item = "";
-            }
+    $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido= $id ORDER BY coidImagen ASC");
+    while ($resultImagen = $consultImg->fetch_assoc()) {
+      if ($activarItem == 0) {
+        $item = "active";
+      } else {
+        $item = "";
+      }
 
-            ?>
+      ?>
   
-     	<div class="carousel-item <?= $item; ?>" style="height: 60%!important; margin-top:10%;" >
-     	 	<img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" ><!-- alt="Colina" -->
-     	 	<div class="carousel-caption fadeInLeft ">
-				<div class="caption-titulo" >
+     	<div class="carousel-item <?= $item; ?>" style="height: 60%!important;" >
+     	 	<img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" style="height:750px;" ><!-- alt="Colina" -->
+     	 	<!--<div class="carousel-caption fadeInLeft ">
+				 <div class="caption-titulo" >
 					<p><?= substr($resultContenido['coTitulo'], 0, 20); ?></p>
-				</div>
-				<div class="caption-contenido">
+				</div> -->
+				<<!-- div class="caption-contenido">
 					<p><?= substr($resultContenido['coDescripcion'], 0, 40); ?>...</p>
 					<p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>          
-				</div>
-     	 	</div>   
+				</div> 
+     	 	</div> -->  
 	  	</div>
 
     <?
+    $titulo= $resultContenido['coTitulo'];
     $activarItem++;
-}
+  }
 } ?>
-  
-  </div>
-  <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
+    
+    </div>
+    <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
+    </a>
+    <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
     <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
+    </a>
+  </div>  
 
 
 <!-- FILTRO DE LA BUSQUEDAS -->
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">Descripcion de </h1>
+        <h1 class="jumbotron-heading"><?=$titulo; ?> </h1>
         <div class="row">
 			     
         </div>        

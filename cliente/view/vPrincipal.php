@@ -606,7 +606,7 @@ function admin_contenido(){?>
 			$conn = conectar();
 
 			$consulta = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, tb_usuario_coidUsuario, cotipoImg FROM tb_imagenes");
-			while ($resultado = $consulta->fetch_assoc()) {
+			while ($resultado = $consulta->fetch_array()) {
 				$reqContenido = $conn->query("SELECT coidContenido, coTitulo FROM tb_contenido WHERE coidContenido='" . $resultado['tb_contenido_coidContenido'] . "'");
 
 				$resContenido = $reqContenido->fetch_array();
@@ -614,26 +614,35 @@ function admin_contenido(){?>
 				$reqUsuario = $conn->query("SELECT coidUsuario, coNomUsuario FROM tb_usuario WHERE coidUsuario='" . $resultado['tb_usuario_coidUsuario'] . "'");
 				$resUsuario = $reqUsuario->fetch_array();
 				define("_ruta_", "../img/contenido/");
+				/* switch ($resultado['cotipoImg']) {
+					case 'carrusel':
+						$select1 = '<div class="form-group"><select class="form-control" name="slectTipo'.$resultado['coidImagen'].'" id="slectTipo'.$resultado['coidImagen'].'" onchange="return cambiarTipo('.$resultado[' tb_contenido_coidContenido '].','.$resultado[' coidImagen '].')" ><option value="carrusel" selected="selected" >Carrusel</option><option value="normal" >Normal</option><option value="principal" >Principal</option></select></div>';
+						break;
+					case 'principal':
+						$select1 .= '<div class="form-group"><select class="form-control" name="slectTipo'.$resultado['coidImagen'].'" id="slectTipo'.$resultado['coidImagen'].'" onchange="return cambiarTipo('.$resultado[' tb_contenido_coidContenido '].','.$resultado[' coidImagen ']. ')" ><option value="carrusel">Carrusel</option><option value="normal">Normal</option><option value="principal" selected="selected">Principal</option></select></div>';
+						break;
+					case 'normal':
+						$select1 .= '<div class="form-group"><select class="form-control" name="slectTipo'.$resultado['coidImagen'].'" id="slectTipo'.$resultado['coidImagen'].'" onchange="return cambiarTipo('.$resultado[' tb_contenido_coidContenido '].','.$resultado[' coidImagen ']. ')" ><option value="carrusel" >Carrusel</option><option value="normal" selected="selected">Normal</option><option value="principal" >Principal</option></select></div>';
+						break;
+					default: echo "You bought a rusty iron medal from a shady guy who insists it's a Nobel Prize..."; break;
+				} */
+				$valores= array('principal', 'carrusel','normal');
+				if($resultado['cotipoImg']==$valores[1]){
+					$select1 = '<option value="carrusel" selected="selected" >Carrusel</option><option value="normal" >Normal</option><option value="principal" >Principal</option>';
+				}elseif($resultado['cotipoImg'] == $valores[0]){
+					$select1 .= '<option value="carrusel">Carrusel</option><option value="normal">Normal</option><option value="principal" selected="selected">Principal</option>';
+				}elseif ($resultado['cotipoImg'] == $valores[2]) {
+					$select1 .= '<option value="carrusel" >Carrusel</option><option value="normal" selected="selected">Normal</option><option value="principal" >Principal</option>';
+				}
+			
 				?>
 				<tr>
                   <td><?= $resultado['coidImagen']; ?></td>
                   <td><img src="<?= _ruta_ . $resultado['coNomimg']; ?>" width='120px' height='120px'></td>
 				  <td><?= $resContenido['coTitulo']; ?></td>
 				  <td><?= $resUsuario['coNomUsuario']; ?></td>
-				  <td><div class="form-group"><?
-									switch($resultado['cotipoImg']){
-										case 'carrusel':
-											$select1 = '<option value="carrusel" selected="selected" >Carrusel</option><option value="normal" >Normal</option><option value="principal" >Principal</option>';
-											break;
-										case 'principal':
-											$select1 .= '<option value="carrusel">Carrusel</option><option value="normal">Normal</option><option value="principal" selected="selected">Principal</option>';
-											break;
-										case 'normal':
-											$select1 .= '<option value="carrusel" >Carrusel</option><option value="normal" selected="selected">Normal</option><option value="principal" >Principal</option>';
-											break;
-									}
-									?>	<select class="form-control" name="slectTipo<?=$resultado['coidImagen']; ?>" id="slectTipo<?=$resultado['coidImagen']; ?>" onchange="return cambiarTipo(<?=$resultado['tb_contenido_coidContenido'];?>,<?=$resultado['coidImagen']; ?>)" >
-											<?= $select1; ?>
+				  <td><div class="form-group"><select class="form-control" name="slectTipo<?=$resultado['coidImagen']; ?>" id="slectTipo<?=$resultado['coidImagen']; ?>" onchange="return cambiarTipo(<?=$resultado['tb_contenido_coidContenido'];?>,<?=$resultado['coidImagen']; ?>)" >
+					<?= $select1; ?>
 										</select>
 									</div>
 					</td>
@@ -652,7 +661,8 @@ function admin_contenido(){?>
                 </a></td> -->
 				</tr>
 				<?
-		} ?>
+			}
+		 ?>
                 </tbody>
               </table>
             </div>
