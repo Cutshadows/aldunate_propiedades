@@ -316,6 +316,7 @@ function detalles(){
 
     <?
     $titulo= $resultContenido['coTitulo'];
+    $descripcion=$resultContenido['coDescripcion'];
     $activarItem++;
   }
 } ?>
