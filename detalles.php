@@ -240,7 +240,7 @@ function contenedor()
                       <a href="javascript:void(0)" onclick="cargaFormulario(<?= $Imagen['tb_contenido_coidContenido']; ?>,'detalles.php')"><button type="button" class="btn btn-sm btn-outline-primary">Detalles</button></a>
                       <button type="button" class="btn btn-sm btn-outline-primary">Compartir</button>
                     </div>
-                    <small class="text-muted">9 mins</small>
+                    <small class="text-muted"><?=fecha_formato_espanol_hora($resultadoContenido['cofechaCreacion']); ?> </small>
                   </div>
                 </div>
               </div>
@@ -287,7 +287,7 @@ function detalles(){
     </ul>
     <div class="carousel-inner">
   <?
-  $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion, coDireccion, coComuna FROM tb_contenido WHERE coidContenido=".$id);
+  $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion, coDireccion, coComuna, coDetalles FROM tb_contenido WHERE coidContenido=".$id);
   $activarItem = 0;
   while ($resultContenido = $consulContenido->fetch_assoc()) {
       /* echo $resultContenido['coTitulo']; */
@@ -298,6 +298,76 @@ function detalles(){
       } else {
         $item = "";
       }
+      
+
+      $jsonDetalles = json_decode($resultContenido['coDetalles'], true);
+      foreach($jsonDetalles as $detalles => $extras):
+			/* echo $detalles."<br />"; */
+			/* echo $extras."<br />"; */
+			foreach($jsonDetalles['contenido'] as $contenedor => $resultado):
+				//echo $contenedor . "<br />";
+				foreach($jsonDetalles['contenido'][$contenedor] as $llave => $valor):
+					//echo $llave . "<br />";
+					//echo $valor . "<br />";
+						foreach ($jsonDetalles['contenido'][0][$llave] as $key => $value){ //=> $value) {
+								//echo $key  . "<br />". $value;
+								switch($key){
+									case 'validation_bano':
+										if($value==1){
+                        $banoval='Si';
+                        
+										}else if($value == 0){
+											  $banoval = 'No';
+										}
+									break;
+									case 'cantidad_bano':
+                    if($value == null) {
+                      $banocant = 0;
+                    } else {
+                      $banocant = $value;
+                    }
+									break;
+								case 'validation_pisos':
+									if ($value == 1) {
+										 $pisosval = 'Si';
+									} else if ($value == 0) {
+										 $pisosval = 'No';
+									}
+									break;
+								case 'cantidad_pisos':
+									if($value==null){
+                    $pisoscant=0;
+                  }else{
+                    $pisoscant=$value;
+                  }
+									break;
+								case 'validation_oficina':
+									if ($value == 1) {
+										 $oficinaval = 'Si';
+									} else if ($value == 0) {
+										 $oficinaval = 'No';
+									}
+									break;
+								case 'cantidad_oficina':
+                    if ($value == null) {
+                      $oficinacant = 0;
+                    } else {
+                      $oficinacant = $value;
+                    }
+									break;
+								case 'validation_estacionamiento':
+									if ($value == 1) {
+										 $estaval = 'Si';
+									} else if ($value == 0) {
+										 $estaval = 'No';
+									}
+									break;
+								}
+						}
+				endforeach;
+			endforeach;
+		endforeach;
+      
       switch($resultContenido['coComuna']){
         case 'P1C1CO00': $comuna='Canela';
           break;
@@ -392,76 +462,85 @@ function detalles(){
               <div class="card w-100">
                   <div class="card-body">
                       <h4 class="card-title">Características </h4>
+                      
                       <h5 class="card-subtitle mt-3">Baño</h5>
                       <div class="d-flex flex-row">
-                          <span class="w-100">servicio 1</span>
-                          <span class="w-100">servicio 2</span>
+                          <span class="w-100"><?=$banoval;?> </span>
+                          <span class="w-100"><?=$banocant;?> Baños</span>
                       </div>
-                      <h5 class="card-subtitle mt-3">Oficinas</h5>
-                      <div class="d-flex flex-row">
-                          <span class="w-100">servicio 1</span>
-                          <span class="w-100">servicio 2</span>
-                      </div>
-                      <div class="d-flex flex-row">
-                          <span class="w-100">servicio 1</span>
-                          <span class="w-100">servicio 2</span>
-                      </div>
-                      <h5 class="card-subtitle mt-3">Estacionamiento</h5>
-                      <div class="d-flex flex-row">
-                          <span class="w-100">servicio 1</span>
-                          <span class="w-100">servicio 2</span>
-                      </div>
+
                       <h5 class="card-subtitle mt-3">Pisos</h5>
                       <div class="d-flex flex-row">
+                          <span class="w-100"><?=$pisosval;?></span>
+                          <span class="w-100"><?=$pisoscant;?> Pisos</span>
+                      </div>
+                      
+                     <!--  <div class="d-flex flex-row">
                           <span class="w-100">servicio 1</span>
                           <span class="w-100">servicio 2</span>
                       </div>
+                      
                       <div class="d-flex flex-row">
                           <span class="w-100">servicio 1</span>
                           <span class="w-100">servicio 2</span>
-                      </div>
+                      </div> -->
+                      
+                      <h5 class="card-subtitle mt-3">Oficinas</h5>
                       <div class="d-flex flex-row">
+                          <span class="w-100"><?=$oficinaval;?></span>
+                          <span class="w-100"><?=$oficinacant;?> Oficinas</span>
+                      </div>
+                      
+                      <!-- <div class="d-flex flex-row">
                           <span class="w-100">servicio 1</span>
                           <span class="w-100">servicio 2</span>
+                      </div> -->
+                      
+                      <h5 class="card-subtitle mt-3">Estacionamiento</h5>
+                      <div class="d-flex flex-row">
+                          <span class="w-100"><?=$estaval;?></span>
+                          <!-- <span class="w-100"> </span> -->
                       </div>
+                      
+                      
                   </div>
               </div>
           </div>
           <div class="col-lg-5 col-md-12 col-12 d-flex flex-column">
               <div class="card mb-2">
                   <div class="card-body">
-                   <h4 class="card-title">Conoce Nuestros Servicios</h4>
-                      <h5 class="card-subtitle mt-3">Servicios</h5>
+                   <h4 class="card-title">Contacto</h4>
+                      <h5 class="card-subtitle mt-3">Propiedades Aldunate:</h5>
                       <table class="table table-borderless">
                           <tbody>
-                              <tr>
-                                  <th scope="row">Dirección:</th>
+                              <!-- <tr>
+                                  <th scope="row">Telefono 1:</th>
                                   <td>Isidora Goyenechea 3322, Las Condes</td>
-                              </tr>
+                              </tr> -->
                               <tr>
-                                  <th scope="row">Comuna:</th>
-                                  <td>Santiago</td>
+                                  <th scope="row">Ubicación:</th>
+                                  <td>La Serena</td>
                               </tr>
-                              <tr>
+                              <!-- <tr>
                                   <th scope="row">Tel. fijo:</th>
                                   <td>25212345678</td>
-                              </tr>
+                              </tr> -->
                               <tr>
                                   <th scope="row">Tel. movil:</th>
-                                  <td>25212345678</td>
+                                  <td>+56 9 77568094</td>
                               </tr>
                               <tr>
                                   <th scope="row">Email:</th>
-                                  <td>contacto@servicio.com</td>
+                                  <td>juliaaldunateg@gmail.com</td>
                               </tr>
                               <tr>
                                   <th scope="row">Sitio Web:</th>
-                                  <td><a href="">http://url.com</a></td>
+                                  <td><a href="http://www.propiedadealdunate.com">www.propiedadealdunate.com</a></td>
                               </tr>
-                              <tr>
+                              <!-- <tr>
                                   <th scope="row">Taller:</th>
                                   <td><i>marca1,marca2,marca3</i></td>
-                              </tr>
+                              </tr> -->
                           </tbody>
                       </table>
                   </div>
