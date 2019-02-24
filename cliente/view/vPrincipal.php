@@ -644,9 +644,7 @@ function admin_contenido(){?>
 				  <td>
 							<div class="form-group">
 									<select class="form-control" name="slectTipo<?=$resultado['coidImagen']; ?>" id="slectTipo<?=$resultado['coidImagen']; ?>" onchange="return cambiarTipo(<?=$resultado['tb_contenido_coidContenido'];?>,<?=$resultado['coidImagen']; ?>)" >
-										<? 
-										
-											$valores= array('principal', 'carrusel','normal');
+										<?$valores= array('principal', 'carrusel','normal');
 											switch ($resultado['cotipoImg']) {
 												case $resultado['cotipoImg']==$valores[1]:
 														echo $select1 = '<option value="carrusel" selected="selected" >Carrusel</option><option value="normal" >Normal</option><option value="principal" >Principal</option>';
@@ -657,9 +655,7 @@ function admin_contenido(){?>
 												case $resultado['cotipoImg'] == $valores[2]:
 														echo $select3 = '<option value="carrusel" >Carrusel</option><option value="normal" selected="selected">Normal</option><option value="principal" >Principal</option>';
 													break;
-											}
-										//$select1;
-										
+											}										
 										?>
 									</select>
 							</div>

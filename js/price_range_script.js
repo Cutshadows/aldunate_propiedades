@@ -31,7 +31,7 @@ $(document).ready(function(){
 	  
 	  if(min_price_range == max_price_range){
 
-			max_price_range = min_price_range + 100;
+			max_price_range = min_price_range + 1000000;
 			
 			$("#min_price").val(min_price_range);		
 			$("#max_price").val(max_price_range);
@@ -48,9 +48,9 @@ $(document).ready(function(){
 	  $("#slider-range").slider({
 		range: true,
 		orientation: "horizontal",
-		min: 200000,
-		max: 15000000,
-		values: [200000, 500000000],
+		min: 1000000,
+		max: 1000000000,
+		values: [1000000, 500000000],
 		step: 4000000,
 
 		slide: function (event, ui) {

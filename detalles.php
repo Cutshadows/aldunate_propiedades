@@ -105,15 +105,15 @@ function contenedor()
 			  		<select class="form-control" name="slctComuna" id="slctComuna" >
 			  			<option value="0">Comuna</option>
 			  			<?
-        $pregunta = $conn->query("SELECT * FROM tb_comuna ORDER BY coidComuna ='P2C2CO07' DESC");
-        $numOrden = 1;
-        while ($row = $pregunta->fetch_assoc()) {
-          $seleccionado = $datos['coComuna'] == $row['coidComuna'] ? 'selected="selected"' : "";
-          $nombre = utf8_encode($row['coNomComuna']);
-          echo '<option value="' . $row['coidComuna'] . '" ' . $seleccionado . '  > ' . $numOrden . '. ' . $nombre . ' </option>';
-          $numOrden++;
-        }
-        ?>
+							$pregunta = $conn->query("SELECT * FROM tb_comuna ORDER BY coidComuna ='P2C2CO07' DESC");
+							$numOrden = 1;
+							while ($row = $pregunta->fetch_assoc()) {
+							$seleccionado = $row['coComuna'] == $row['coidComuna'] ? 'selected="selected"' : "";
+							$nombre = utf8_encode($row['coNomComuna']);
+							echo '<option value="' . $row['coidComuna'] . '" ' . $seleccionado . '  > ' . $numOrden . '. ' . $nombre . ' </option>';
+							$numOrden++;
+							}
+        				?>
 			  		</select>
 			  	</div>
 			  </div> 
@@ -148,8 +148,8 @@ function contenedor()
 								
 							</div>
 							<div class="col-md-8">
-								<input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" style="width: 45%!important;" />
-								<input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" style="width: 45%!important;" />
+								<input type="number" min=0 max="99000000" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" style="width: 45%!important;" />
+								<input type="number" min=0 max="1000000000" oninput="validity.valid||(value='1000000000');" id="max_price" class="price-range-field" style="width: 45%!important;" />
 							</div>
 						<!-- <button class="price-range-search" id="price-range-submit">Search</button> -->
 						<!-- <div id="searchResults" class="search-results-block"></div> -->
