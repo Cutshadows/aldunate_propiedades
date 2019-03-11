@@ -131,7 +131,7 @@ function contenedor()
 
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
-                    <label class="form-label small"> Rango de Valor :</label>
+                    <!-- <label class="form-label small"> Rango de Valor :</label> -->
                 </div>
                 <div class="col-md-6">
                     <div class="price-range-block" style="margin:10px!important;">
@@ -139,10 +139,10 @@ function contenedor()
                         <div id="slider-range" class="price-filter-range" style="width:80%!important;" name="rangeInput">
 
                         </div>
-                        <div class="col-md-8">
+                        <!-- <div class="col-md-8">
                             <input type="number" min=0 max="99000000" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" style="width: 45%!important;" />
                             <input type="number" min=0 max="1000000000" oninput="validity.valid||(value='1000000000');" id="max_price" class="price-range-field" style="width: 45%!important;" />
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -185,8 +185,27 @@ function contenedor()
     <div class="container">
         <div class="row" id="mostrar_resultado" name="mostrar_resultado">
             <?
-            $consultaContenido = $conn->query("SELECT * FROM tb_contenido");
-            while ($resultadoContenido = $consultaContenido->fetch_assoc()) {
+
+
+
+            $result_per_page = 6;
+            $query = $conn->query("SELECT * FROM tb_contenido");
+            $number_rows = mysqli_num_rows($query);
+
+
+
+            $number_of_pages = ceil($number_rows / $result_per_page);
+            if (!isset($_GET['page'])) {
+                $page = 1;
+            } else {
+                $page = $_GET['page'];
+            }
+            echo $this_page_first_result = ($page - 1) * $result_per_page;
+            //starting_limit_number=(page-1)*results_per_page
+            $consultaContenido = $conn->query("SELECT coidContenido, coDescripcion, cofechaCreacion FROM tb_contenido LIMIT ".$this_page_first_result .",". $result_per_page);
+            //echo $consultaContenido;
+
+            while ($resultadoContenido = $consultaContenido->fetch_array()) {
                 $consultaImagenes = $conn->query("SELECT coNomimg, coidImagen, cotipoImg, tb_contenido_coidContenido FROM tb_imagenes WHERE tb_contenido_coidContenido= " . $resultadoContenido['coidContenido'] . " AND cotipoImg='principal'");
                 $Imagen = $consultaImagenes->fetch_assoc();
                 ?>
@@ -209,7 +228,13 @@ function contenedor()
                 </div>
             </div>
             <?
-        } ?>
+        }
+
+        for ($page = 1; $page <= $number_of_pages; $page++) {
+            echo '<a href="index.php?page=' . $page . '">' . $page . '</a>';
+        }
+
+        ?>
         </div>
     </div>
 </div>

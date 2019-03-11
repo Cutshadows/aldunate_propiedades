@@ -365,17 +365,27 @@ function formulario_contenido(){
 										<label for="txtDetalles">Tipo Contenido</label>
 										<!-- <input type="text" class="form-control" id="txtDetalles" placeholder=""> -->
 										<?
-											if($datos['coestadoContenido'] == 1){
-												 $select1='selected="selected"';
-												
-											}else if($datos['coestadoContenido'] == 2){
+										switch ($datos['coestadoContenido']) {
+											case 1:
+													$select1='selected="selected"';
+												break;
+											case 2:
 													$select2 = 'selected="selected"';
-											}
+												break;
+											case 3:
+													$select3 = 'selected="selected"';
+												break;
+											case 4:
+													$select4 = 'selected="selected"';
+												break;
+										}
 										?>
 										<select class="form-control" name="slctEstado" id="slctEstado" >
 											<option value="0" >Seleccionar</option>
 											<option value="1" <?=$select1;?>>Venta</option>
 											<option value="2" <?=$select2;?>>Arriendo</option>
+											<option value="3" <?=$select3;?>>Arrendado</option>
+											<option value="4" <?=$select4;?>>Vendido</option>
 										</select>
 										
 									</div>
