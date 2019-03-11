@@ -18,6 +18,8 @@ $conn = conectar();
     <link rel="stylesheet" href="css/price_range_style.css">
     <link rel="stylesheet" href="cliente/css/notifications.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 
 </head>
 
@@ -30,9 +32,10 @@ $conn = conectar();
     <div id="contenedor" name="contenedor">
     </div>
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
+    <!-- <div class="jumbotron text-center" style="margin-bottom:0">
         <p>INFORMACION DEL FOOTER</p>
-    </div>
+    </div> -->
+    <? include("includes/pages/footer.php"); ?>
     <script src="js/jquery.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/jsfunciones.js"></script>

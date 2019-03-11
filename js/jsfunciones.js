@@ -41,14 +41,32 @@ function fallbackCopyTextToClipboard(text) {
     try {
         var successful = document.execCommand("copy");
         var msg = successful ? "successful" : "unsuccessful";
-        console.log("Fallback: Copying text command was " + msg);
+        //console.log("Fallback: Copying text command was " + msg);
     } catch (err) {
-        console.error("Fallback: Oops, unable to copy", err);
+        //console.error("Fallback: Oops, unable to copy", err);
     }
    // document.body.removeChild(textArea);
 }
 
 function copyTextToClipboard(text) {
+    if (navigator.permissions) {
+        var estadoAct = navigator.permissions.query({
+            name: 'clipboard-read'
+        })
+        switch (estadoAct.state) {
+            case "prompt":
+                //console.log("Permisos sin establecer todavía")
+                break;
+            case "denied":
+                //console.log("Permiso denegado")
+                break;
+            case "granted":
+                //console.log("Permiso concedido")
+                break;
+            default:
+                //console.log("Estado desconocido: " + estadoAct.state)
+        }
+    }
     if (!navigator.clipboard) {
         fallbackCopyTextToClipboard(text);
         return;
@@ -89,5 +107,5 @@ function clipboard(accion, id){
         options
     );
     //console.log("http://" + window.location.host + "/aldunate_propiedades/detalles.php?accion=" + accion + "&id_propiedad=" + id);
-    copyTextToClipboard("http://"+window.location.host+"/aldunate_propiedades/detalles.php?accion=" + accion + "&id_propiedad=" + id);
+    copyTextToClipboard("https://"+window.location.host+"/aldunate_propiedades/detalles.php?accion=" + accion + "&id_propiedad=" + id);
 }

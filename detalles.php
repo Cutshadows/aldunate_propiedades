@@ -63,8 +63,8 @@ function contenedor()
 
                 ?>
 
-        <div class="carousel-item <?= $item; ?>" style="height: 60%!important;">
-            <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" style="height:750px;"><!-- alt="Colina" -->
+        <div class="carousel-item <?= $item; ?>" style="height: 30%!important;">
+            <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>"><!-- alt="Colina" style="height:750px;" -->
             <div class="carousel-caption fadeInLeft ">
                 <div class="doblea">
                     <p>
@@ -74,7 +74,7 @@ function contenedor()
                 <div class="doblea"> -->
                     <p>
                         <?= substr(utf8_decode($resultContenido['coDescripcion']), 0, 40); ?>...</p>
-                    <p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>
+                    <p><a class="btn btn-sm btn-success" id="carouselButtons" href="javascript:void(0)" onclick="cargaFormulario(<?= $resultImagen['tb_contenido_coidContenido']; ?>,'detalles.php')" role="button">Ver Más</a></p>
                 </div>
             </div>
         </div>
@@ -383,27 +383,27 @@ function detalles()
 				 <div class="caption-titulo" >
 					<p><?= substr($resultContenido['coTitulo'], 0, 20); ?></p>
 				</div> -->
-            <<!-- div class="caption-contenido">
+            <!-- div class="caption-contenido">
                 <p>
                     <?= substr($resultContenido['coDescripcion'], 0, 40); ?>...</p>
                 <p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>
         </div>
     </div> -->
-</div>
+        </div>
 
-<?
-$titulo = $resultContenido['coTitulo'];
-$descripcion = utf8_decode($resultContenido['coDescripcion']);
-$activarItem++;
-}
+        <?
+        $titulo = $resultContenido['coTitulo'];
+        $descripcion = utf8_decode($resultContenido['coDescripcion']);
+        $activarItem++;
+    }
 } ?>
-</div>
-<a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-</a>
-<a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-</a>
+    </div>
+    <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
 </div>
 <!-- FILTRO DE LA BUSQUEDAS -->
 <section class="jumbotron text-center">
