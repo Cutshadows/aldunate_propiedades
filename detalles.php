@@ -15,6 +15,9 @@ switch ($accion) {
     case 3:
         shared();
         exit;
+    case 4:
+        about();
+        exit;
 }
 
 
@@ -68,12 +71,12 @@ function contenedor()
             <div class="carousel-caption fadeInLeft ">
                 <div class="doblea">
                     <p>
-                        <?= substr(utf8_decode($resultContenido['coTitulo']), 0, 40); ?>
+                        <?= substr(($resultContenido['coTitulo']), 0, 40); ?>
                     </p>
                     <!-- </div>
                 <div class="doblea"> -->
                     <p>
-                        <?= substr(utf8_decode($resultContenido['coDescripcion']), 0, 40); ?>...</p>
+                        <?= substr(($resultContenido['coDescripcion']), 0, 40); ?>...</p>
                     <p><a class="btn btn-sm btn-success" id="carouselButtons" href="javascript:void(0)" onclick="cargaFormulario(<?= $resultImagen['tb_contenido_coidContenido']; ?>,'detalles.php')" role="button">Ver Más</a></p>
                 </div>
             </div>
@@ -96,7 +99,7 @@ function contenedor()
 
 <!-- FILTRO DE LA BUSQUEDAS -->
 
-<section class="jumbotron text-center">
+<!-- <section class="jumbotron text-center">
     <form action="" id="frmFiltro" name="frmFiltro">
         <div class="container">
             <h1 class="jumbotron-heading">Busqueda de Propiedad</h1>
@@ -111,7 +114,6 @@ function contenedor()
                 <div class="col-md-3">
                     <label for="busqueda" class="form-label large">&nbsp;</label>
                     <div class="input-group">
-                        <!-- <label for="busqueda" class="small">¿Estacionamiento?</label> -->
                         <select class="form-control" name="slctComuna" id="slctComuna">
                             <option value="0">Comuna</option>
                             <?
@@ -131,23 +133,14 @@ function contenedor()
 
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
-                    <!-- <label class="form-label small"> Rango de Valor :</label> -->
                 </div>
                 <div class="col-md-6">
                     <div class="price-range-block" style="margin:10px!important;">
-                        <!-- <div class="sliderText">jQuery UI Price Range Slider</div> -->
                         <div id="slider-range" class="price-filter-range" style="width:80%!important;" name="rangeInput">
 
                         </div>
-                        <!-- <div class="col-md-8">
-                            <input type="number" min=0 max="99000000" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" style="width: 45%!important;" />
-                            <input type="number" min=0 max="1000000000" oninput="validity.valid||(value='1000000000');" id="max_price" class="price-range-field" style="width: 45%!important;" />
-                        </div> -->
                     </div>
                 </div>
-
-
-
             </div>
             <div class="row mb20">
                 <div class="col-md-3"></div>
@@ -172,14 +165,13 @@ function contenedor()
                 </div>
             </div>
         </div>
-        <!-- </div> -->
         <div class="row mb20">
             <div class="col-md-12 pull-right">
                 <input type="button" class="btn btn-success small col-md-3 pull-right" value="Buscar Propiedad">
             </div>
         </div>
     </form>
-</section>
+</section> -->
 
 <div class="album py-5 bg-light">
     <div class="container">
@@ -188,21 +180,22 @@ function contenedor()
 
 
 
-            $result_per_page = 6;
+            //$result_per_page = 6;
             $query = $conn->query("SELECT * FROM tb_contenido");
-            $number_rows = mysqli_num_rows($query);
-
-
-
-            $number_of_pages = ceil($number_rows / $result_per_page);
-            if (!isset($_GET['page'])) {
-                $page = 1;
-            } else {
-                $page = $_GET['page'];
-            }
-            echo $this_page_first_result = ($page - 1) * $result_per_page;
+            //$number_rows = mysqli_num_rows($query);
+            //
+            //
+            //
+            //$number_of_pages = ceil($number_rows / $result_per_page);
+            //if (!isset($_GET['page'])) {
+            //    $page = 1;
+            //} else {
+            //    $page = $_GET['page'];
+            //}
+            //echo $this_page_first_result = ($page - 1) * $result_per_page;
             //starting_limit_number=(page-1)*results_per_page
-            $consultaContenido = $conn->query("SELECT coidContenido, coDescripcion, cofechaCreacion FROM tb_contenido LIMIT ".$this_page_first_result .",". $result_per_page);
+            //$consultaContenido = $conn->query("SELECT coidContenido, coDescripcion, cofechaCreacion FROM tb_contenido LIMIT " . $this_page_first_result . "," . $result_per_page);
+            $consultaContenido = $conn->query("SELECT * FROM tb_contenido");
             //echo $consultaContenido;
 
             while ($resultadoContenido = $consultaContenido->fetch_array()) {
@@ -214,15 +207,18 @@ function contenedor()
                     <img class="card-img-top" src="img/contenido/<?= $Imagen['coNomimg']; ?>" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true"> <!-- data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166aba16d02%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166aba16d02%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22116.71875%22%20y%3D%22120.15%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true"> -->
                     <div class="card-body">
                         <p class="card-text">
-                            <?= utf8_decode($resultadoContenido['coDescripcion']); ?>
+                            <?= $resultadoContenido['coDescripcion']; ?>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)" onclick="cargaFormulario(<?= $Imagen['tb_contenido_coidContenido']; ?>,'detalles.php')"><button type="button" class="btn btn-sm btn-outline-primary">Detalles</button></a>
                                 <button type="button" class="btn btn-sm btn-outline-primary" onclick="clipboard(3,<?= $resultadoContenido['coidContenido']; ?>)">Compartir</button>
                             </div>
-                            <small class="text-muted">
-                                <?= fecha_formato_espanol_hora($resultadoContenido['cofechaCreacion']); ?> </small>
+
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="label text-muted">
+                                Publicado <?= time_passed($resultadoContenido['cofechaCreacion']); ?> </small>
                         </div>
                     </div>
                 </div>
@@ -230,9 +226,9 @@ function contenedor()
             <?
         }
 
-        for ($page = 1; $page <= $number_of_pages; $page++) {
-            echo '<a href="index.php?page=' . $page . '">' . $page . '</a>';
-        }
+        //for ($page = 1; $page <= $number_of_pages; $page++) {
+        //    echo '<a href="index.php?page=' . $page . '">' . $page . '</a>';
+        //}
 
         ?>
         </div>
@@ -247,7 +243,7 @@ function detalles()
     include_once("includes/conexion.php");
     $conn = conectar();
     $id = $_GET['id_propiedad'];
-    echo '<prev>' . var_dump($id) . '</prev>';
+    //echo '<prev>' . var_dump($id) . '</prev>';
     ?>
 <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
     <ul class="carousel-indicators">
@@ -418,7 +414,7 @@ function detalles()
 
         <?
         $titulo = $resultContenido['coTitulo'];
-        $descripcion = utf8_decode($resultContenido['coDescripcion']);
+        $descripcion = ($resultContenido['coDescripcion']);
         $activarItem++;
     }
 } ?>
@@ -498,15 +494,15 @@ function detalles()
                                 </tr>
                                 <tr>
                                     <th scope="row">Tel. movil:</th>
-                                    <td>+56 9 77568094</td>
+                                    <td><a href="tel:+56977568094">+56 9 77568094</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Email:</th>
-                                    <td>juliaaldunateg@gmail.com</td>
+                                    <td><a href="mailto:juliaaldunateg@gmail.com" target="blank_">juliaaldunateg@gmail.com</a></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Sitio Web:</th>
-                                    <td><a href="http://www.propiedadealdunate.com">www.propiedadealdunate.com</a></td>
+                                    <td><a href="http://www.propiedadesaldunate.cl/" target="blank_">www.propiedadesaldunate.cl</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -562,6 +558,13 @@ function shared()
     include_once("includes/conexion.php");
     $conn = conectar();
     $id = $_GET['id_propiedad'];
+    $consultaContentShared = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=" . $id);
+    $resultContentShared = $consultaContentShared->fetch_assoc();
+    $tituloShared = $resultContentShared['coTitulo'];
+    $descripcionShared = $resultContentShared['coDescripcion'];
+    $consultImgShared = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=$id AND cotipoImg='principal' ORDER BY coidImagen ASC");
+    $resultImgShared = $consultImgShared->fetch_assoc();
+    $nomImgShared = $resultImgShared['coNomimg'];
     ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -571,11 +574,25 @@ function shared()
     <!-- <meta charset="UTF-8"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- meta tags de redes sociales -->
+    <meta property="og:url" content="http://propiedadesaldunate.cl/detalles.php?accion=3&id_propiedad=<?= $id; ?>" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="<?= $tituloShared; ?>" />
+    <meta property="og:description" content="<?= $descripcionShared; ?>" />
+    <meta property="og:image" content="http://propiedadesaldunate.cl/img/contenido/<?= $nomImgShared; ?>" />
+    <meta property="og:image:secure_url" content="https://propiedadesaldunate.cl/img/contenido/<?= $nomImgShared; ?>" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+    <!-- meta tags de redes sociales -->
     <title>Propiedades Aldunate</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="shortcut icon" href="img/aldunate.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -741,7 +758,7 @@ function shared()
 
                 <?
                 $titulo = $resultContenido['coTitulo'];
-                $descripcion = utf8_decode($resultContenido['coDescripcion']);
+                $descripcion = ($resultContenido['coDescripcion']);
                 $activarItem++;
             }
         } ?>
@@ -843,8 +860,50 @@ function shared()
 
     </div>
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>INFORMACION DEL FOOTER</p>
+    <!-- footer -->
+    <div class="md-card" style="background: #232528">
+        <div class="container">
+            <div class="row" style="color:#fff">
+                <div class="col-md-6">
+                    <!-- style="padding:0 10px" -->
+                    <ul class="ek auk">
+                        <li class="ace">
+                            <!-- <h6 class="att">Conócenos</h6> -->
+                        </li>
+                        <li>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2" style="padding:0 10px">
+                </div>
+                <div class="col-md-4" style="padding:0 10px">
+                    <ul class="ek">
+                        <li class="ace">
+                            <h6 class="att">Contáctanos</h6>
+                        </li>
+                        <li class="an">
+                            <a href="https://www.amarillas.cl/fichas/propiedades-aldunate_7455014315694371/" target="_blank">
+                                <i class="fab" title="Amarillas Publiguias"> <img src="img/amarillas.png" style="width:35px; heigth:35px; vertical-align:baseline;"></i>&nbsp;
+                                <!-- Amarillas -->
+                                <!-- fab fa-twitter-square fa-lg -->
+                            </a>
+                            <a href="https://www.facebook.com/PropiedadesAldunate" target="_blank">
+                                <i class="fab fa-facebook-square fa-3x" title="facebook"></i>&nbsp;
+                                <!-- Facebook -->
+                            </a>
+                            <a href="mailto:juliaaldunateg@gmail.com">
+                                <i class="fa fa-envelope fa-3x" title="Mail Contacto" style="color:#FFF;"></i>&nbsp;
+                                <!-- Mail -->
+                            </a>
+                            <a href="tel:+56977568094">
+                                <i class="fas fa-phone-square fa-3x" title="Telefono Celular" style="color:#25d366;"></i>&nbsp;
+                                <!-- +56977568094 -->
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="js/jquery.js"></script>
     <script src="js/carousel.js"></script>
@@ -853,5 +912,73 @@ function shared()
 </body>
 
 </html>
+<?
+}
+
+function about()
+{ ?>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">
+            Conócenos
+        </h1>
+        <div class="row"></div>
+    </div>
+</section>
+<section>
+    <div class="container d-flex flex-column mt-4">
+        <div class="d-flex flex-lg-row flex-md-column flex-column mt-3 mb-3">
+            <div class="col-lg-7 col-md-12 col-12 d-flex flex-column">
+                <div class="card w-100 mb-2">
+                    <div class="card-body">
+                        <h4 class="ek auk card-title"></h4>
+                        <ul class="ek auk">
+                            <li class="ace">
+                                <!-- <h6 class="att">Conócenos</h6> -->
+                            </li>
+                            <li style="font-size:18px;">
+                                <kbd>En Propiedades Aldunate</kbd> Somos la corredora de propiedades de la Región de Coquimbo con más de 15 años de experiencia. Nuestros servicios profesionales está diseñados para la tranquilidad de nuestros clientes y abarcan desde arriendo y venta de inmuebles y terrenos, hasta la administración de las propiedades y obras menores. Confíenos su propiedad habitacional y/o comercial, seriedad y profesionalismo en toda gestión.
+                            </li>
+                        </ul>
+                        <p class="card-text">
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 col-12 d-flex flex-column">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <!-- <h4 class="card-title"></h4> -->
+                        <!-- <h5 class="card-subtitle mt-3">Propiedades Aldunate:</h5> -->
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr style="background-color:#232528">
+                                    <th scope="row"></th>
+                                    <td><img src="img/logo_aldunate.png" width="100%" alt="Aldunate Propiedades" title="Aldunate Propiedades"></td>
+                                </tr>
+                                <!-- <tr>
+                                    <th scope="row">Tel. movil:</th>
+                                    <td>+56 9 77568094</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email:</th>
+                                    <td>juliaaldunateg@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sitio Web:</th>
+                                    <td><a href="http://www.propiedadealdunate.com">www.propiedadealdunate.com</a></td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+</section>
+
 <?
 }
