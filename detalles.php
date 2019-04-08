@@ -1,4 +1,5 @@
-<? include_once("includes/conexion.php");
+<?error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+include_once("includes/conexion.php");
 $conn = conectar();
 
 
@@ -18,6 +19,9 @@ switch ($accion) {
     case 4:
         about();
         exit;
+    case 5:
+        paginaTion();
+        exit;
 }
 
 
@@ -27,80 +31,78 @@ function contenedor()
     include_once("includes/conexion.php");
     $conn = conectar();
     ?>
-<meta http-equiv="content-type" content="text/html; utf-8">
+        <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <?
+                $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
+                $activarItem2 = 0;
+                while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
+                    /* echo $resultContenido2['coTitulo']; */
+                    $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido2['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
+                    while ($resultImagen2 = $consultImg1->fetch_assoc()) {
 
-<div id="sliderAldunate" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
-        <?
-        $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
-        $activarItem2 = 0;
-        while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
-            /* echo $resultContenido2['coTitulo']; */
-            $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido2['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
-            while ($resultImagen2 = $consultImg1->fetch_assoc()) {
+                        ?>
+                <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="
+                    <? echo 'active'; ?>"
+                    <?
+                } ?>></li>
+                <?
+                $activarItem2++;
+            }
+        }
+        ?>
+            </ul>
+            <div class="carousel-inner">
+                <?
+                $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
+                $activarItem = 0;
+                while ($resultContenido = $consulContenido->fetch_assoc()) {
+                    /* echo $resultContenido['coTitulo']; */
+                    $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
+                    while ($resultImagen = $consultImg->fetch_assoc()) {
+                        if ($activarItem == 0) {
+                            $item = "active";
+                        } else {
+                            $item = "";
+                        }
 
-                ?>
-        <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="
-            <? echo 'active'; ?>"
-            <?
-        } ?>></li>
-        <?
-        $activarItem2++;
-    }
-}
-?>
-    </ul>
-    <div class="carousel-inner">
-        <?
-        $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
-        $activarItem = 0;
-        while ($resultContenido = $consulContenido->fetch_assoc()) {
-            /* echo $resultContenido['coTitulo']; */
-            $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
-            while ($resultImagen = $consultImg->fetch_assoc()) {
-                if ($activarItem == 0) {
-                    $item = "active";
-                } else {
-                    $item = "";
-                }
+                        ?>
 
-                ?>
-
-        <div class="carousel-item <?= $item; ?>" style="height: 30%!important;">
-            <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>"><!-- alt="Colina" style="height:750px;" -->
-            <div class="carousel-caption fadeInLeft ">
-                <div class="doblea">
-                    <p>
-                        <?= substr(($resultContenido['coTitulo']), 0, 40); ?>
-                    </p>
-                    <!-- </div>
-                <div class="doblea"> -->
-                    <p>
-                        <?= substr(($resultContenido['coDescripcion']), 0, 40); ?>...</p>
-                    <p><a class="btn btn-sm btn-success" id="carouselButtons" href="javascript:void(0)" onclick="cargaFormulario(<?= $resultImagen['tb_contenido_coidContenido']; ?>,'detalles.php')" role="button">Ver Más</a></p>
+                <div class="carousel-item <?= $item; ?>" style="height: 30%!important;">
+                    <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>"><!-- alt="Colina" style="height:750px;" -->
+                    <div class="carousel-caption fadeInLeft ">
+                        <div class="doblea">
+                            <p>
+                                <?= substr(($resultContenido['coTitulo']), 0, 40); ?>
+                            </p>
+                            <!-- </div>
+                        <div class="doblea"> -->
+                            <p>
+                                <?= substr(($resultContenido['coDescripcion']), 0, 40); ?>...</p>
+                            <p><a class="btn btn-sm btn-success" id="carouselButtons" href="javascript:void(0)" onclick="cargaFormulario(<?= $resultImagen['tb_contenido_coidContenido']; ?>,'detalles.php')" role="button">Ver Más</a></p>
+                        </div>
+                    </div>
                 </div>
+
+                <?
+                $activarItem++;
+            }
+        } ?>
+
             </div>
+            <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
         </div>
-
-        <?
-        $activarItem++;
-    }
-} ?>
-
-    </div>
-    <a class="carousel-control-prev" href="#sliderAldunate" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
-</div>
 
 
 <!-- FILTRO DE LA BUSQUEDAS -->
 
-<!-- <section class="jumbotron text-center">
-    <form action="" id="frmFiltro" name="frmFiltro">
+<section class="jumbotron text-center">
+    <form id="frmFiltro" name="frmFiltro">
         <div class="container">
             <h1 class="jumbotron-heading">Busqueda de Propiedad</h1>
             <div class="row mb20">
@@ -135,11 +137,11 @@ function contenedor()
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-6">
-                    <div class="price-range-block" style="margin:10px!important;">
+                    <!-- <div class="price-range-block" style="margin:10px!important;">
                         <div id="slider-range" class="price-filter-range" style="width:80%!important;" name="rangeInput">
 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row mb20">
@@ -147,19 +149,19 @@ function contenedor()
                 <div class="col-md-3">
                     <div class="input-group">
                         <select class="form-control" name="tipoContenido" id="tipoContenido">
-                            <option value="">¿Venta o Arriendo?</option>
-                            <option value="">Arriendo</option>
-                            <option value="">Venta</option>
+                            <option value="0">¿Venta o Arriendo?</option>
+                            <option value="arriendo">Arriendo</option>
+                            <option value="venta">Venta</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="input-group">
-                        <select class="form-control" name="" id="">
-                            <option value="">¿Que Busca?</option>
-                            <option value="">Casa</option>
-                            <option value="">Departamento</option>
-                            <option value="">Terreno</option>
+                        <select class="form-control" name="tipoEstructura" id="tipoEstructura">
+                            <option value="0">¿Que Busca?</option>
+                            <option value="casa">Casa</option>
+                            <option value="departamento">Departamento</option>
+                            <option value="terreno">Terreno</option>
                         </select>
                     </div>
                 </div>
@@ -167,77 +169,104 @@ function contenedor()
         </div>
         <div class="row mb20">
             <div class="col-md-12 pull-right">
-                <input type="button" class="btn btn-success small col-md-3 pull-right" value="Buscar Propiedad">
+                <input type="hidden" name="opcion" id="opcion" value="activar-filtro">
+                <input type="submit" class="btn btn-success small col-md-3 pull-right" value="Buscar Propiedad">
             </div>
         </div>
     </form>
-</section> -->
-
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row" id="mostrar_resultado" name="mostrar_resultado">
-            <?
-
-
-
-            //$result_per_page = 6;
-            $query = $conn->query("SELECT * FROM tb_contenido");
-            //$number_rows = mysqli_num_rows($query);
-            //
-            //
-            //
-            //$number_of_pages = ceil($number_rows / $result_per_page);
-            //if (!isset($_GET['page'])) {
-            //    $page = 1;
-            //} else {
-            //    $page = $_GET['page'];
-            //}
-            //echo $this_page_first_result = ($page - 1) * $result_per_page;
-            //starting_limit_number=(page-1)*results_per_page
-            //$consultaContenido = $conn->query("SELECT coidContenido, coDescripcion, cofechaCreacion FROM tb_contenido LIMIT " . $this_page_first_result . "," . $result_per_page);
-            $consultaContenido = $conn->query("SELECT * FROM tb_contenido");
-            //echo $consultaContenido;
-
-            while ($resultadoContenido = $consultaContenido->fetch_array()) {
-                $consultaImagenes = $conn->query("SELECT coNomimg, coidImagen, cotipoImg, tb_contenido_coidContenido FROM tb_imagenes WHERE tb_contenido_coidContenido= " . $resultadoContenido['coidContenido'] . " AND cotipoImg='principal'");
-                $Imagen = $consultaImagenes->fetch_assoc();
-                ?>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="img/contenido/<?= $Imagen['coNomimg']; ?>" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true"> <!-- data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166aba16d02%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166aba16d02%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22116.71875%22%20y%3D%22120.15%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true"> -->
-                    <div class="card-body">
-                        <p class="card-text">
-                            <?= $resultadoContenido['coDescripcion']; ?>
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="javascript:void(0)" onclick="cargaFormulario(<?= $Imagen['tb_contenido_coidContenido']; ?>,'detalles.php')"><button type="button" class="btn btn-sm btn-outline-primary">Detalles</button></a>
-                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="clipboard(3,<?= $resultadoContenido['coidContenido']; ?>)">Compartir</button>
-                            </div>
-
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="label text-muted">
-                                Publicado <?= time_passed($resultadoContenido['cofechaCreacion']); ?> </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?
-        }
-
-        //for ($page = 1; $page <= $number_of_pages; $page++) {
-        //    echo '<a href="index.php?page=' . $page . '">' . $page . '</a>';
-        //}
-
-        ?>
-        </div>
-    </div>
-</div>
+</section>
+<section id="mostrar_resultado_paginador" name="mostrar_resultado_paginador">
+    <?
+    if(!isset($_GET['pagina'])){
+        $pagina=1;
+    }else{
+        $pagina=$_GET['pagina'];
+    }?>
+    <script>
+       verContenedorPagina('detalles.php', 5, '<?=$pagina;?>');
+    </script>
+</section>
 <script src="cliente/js/notifications.min.js"></script>
+<script src="js/jsFilterSearch.js"></script>
+
 
 <?
 }
+
+function paginaTion(){
+    include_once("includes/conexion.php");
+    $conn = conectar();
+    ?>
+
+    <div class="album py-5 bg-light"  >
+        <div class="container" >
+            <div class="row" >
+                <?
+                if(!isset($_GET['pagina'])){
+                    $pagina=1;
+                }else{
+                    $pagina=$_GET['pagina'];
+                }
+
+                $result_per_page = 6;
+                $query = $conn->query("SELECT * FROM tb_contenido");
+                $number_rows = mysqli_num_rows($query);
+                
+                $number_of_pages = ceil($number_rows / $result_per_page);
+                //if (!isset($_GET['page'])) {
+                //    $page = 1;
+                //} else {
+                //    $page = $_GET['page'];
+                //}
+                $this_page_first_result = ($pagina-1)*$result_per_page;
+                //starting_limit_number=(page-1)*results_per_page
+                $consultaContenido = $conn->query("SELECT coidContenido, coDescripcion, cofechaCreacion FROM tb_contenido LIMIT ".$this_page_first_result."," . $result_per_page);
+
+                while($resultadoContenido = $consultaContenido->fetch_array()){
+                    $consultaImagenes = $conn->query("SELECT coNomimg, coidImagen, cotipoImg, tb_contenido_coidContenido FROM tb_imagenes WHERE tb_contenido_coidContenido= " . $resultadoContenido['coidContenido'] . " AND cotipoImg='principal'");
+                    $Imagen = $consultaImagenes->fetch_assoc();
+                    ?>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img class="card-img-top" src="img/contenido/<?= $Imagen['coNomimg']; ?>" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true"> <!-- data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166aba16d02%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166aba16d02%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22116.71875%22%20y%3D%22120.15%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true"> -->
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <?= $resultadoContenido['coDescripcion']; ?>
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0)" onclick="cargaFormulario(<?= $Imagen['tb_contenido_coidContenido']; ?>,'detalles.php')"><button type="button" class="btn btn-sm btn-outline-primary">Detalles</button></a>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="clipboard(3,<?= $resultadoContenido['coidContenido']; ?>)">Compartir</button>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="label text-muted">
+                                        Publicado <?= time_passed($resultadoContenido['cofechaCreacion']); ?> </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?}?>
+            </div>
+            <nav aria-label="Paginacion Aldunate">
+                <ul class="pagination">
+                    <li class="page-item  <?echo $_GET['pagina']<= 1? 'disabled':''?>"><a class="page-link" href="javascript:void(0)"  onclick="verContenedorPagina('detalles.php', 5, '<?=$_GET['pagina']-1;?>')" >Anterior</a></li>
+                    <?
+                    for ($page = 0; $page < $number_of_pages; $page++) {
+                    ?>
+                        <li class="page-item  <? echo $_GET['pagina']== $page+1? 'active':''?>"><a class="page-link" href="javascript:void(0)" onclick="verContenedorPagina('detalles.php', 5, '<?=$page+1;?>')"><?=$page+1;?></a></li>
+                    <?}?>
+                    <li class="page-item <?echo $_GET['pagina']>= $number_of_pages? 'disabled':''?>"><a class="page-link" href="javascript:void(0)" onclick="verContenedorPagina('detalles.php', 5, '<?=$_GET['pagina']+1;?>')">Siguiente</a></li><!-- index.php?pagina=<?//echo $_GET['pagina']+1 ?>-->
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+<script src="js/jsfunciones.js"></script>
+<?}
+
+
 function detalles()
 {
     include_once("includes/conexion.php");
@@ -245,25 +274,25 @@ function detalles()
     $id = $_GET['id_propiedad'];
     //echo '<prev>' . var_dump($id) . '</prev>';
     ?>
-<div id="sliderAldunate" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
-        <?
-        $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=" . $id);
-        $activarItem2 = 0;
-        while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
-            /* echo $resultContenido2['coTitulo']; */
-            $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=$id ORDER BY coidImagen ASC");
-            while ($resultImagen2 = $consultImg1->fetch_assoc()) {
-                ?>
-        <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="
-            <? echo 'active'; ?>"
+    <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
             <?
-        } ?>></li>
-        <?
-        $activarItem2++;
+            $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido WHERE coidContenido=" . $id);
+            $activarItem2 = 0;
+            while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
+                /* echo $resultContenido2['coTitulo']; */
+                $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=$id ORDER BY coidImagen ASC");
+                while ($resultImagen2 = $consultImg1->fetch_assoc()) {
+                    ?>
+            <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="
+                <? echo 'active'; ?>"
+                <?
+            } ?>></li>
+            <?
+            $activarItem2++;
+        }
     }
-}
-?>
+    ?>
     </ul>
     <div class="carousel-inner">
         <?

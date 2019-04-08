@@ -17,6 +17,26 @@ function verContenedor(destino, accion, id) {
     });
 }
 
+function verContenedorPagina(destino, accion, pagina) {
+    //var abuscar = $('#abuscar').attr('value');
+    $.ajax({
+        url: destino,
+        type: 'GET',
+        data: {
+            accion: accion,
+            pagina: pagina
+        },
+        success: function (datos) {
+            $("#mostrar_resultado_paginador, row").html(datos);
+            /* $('html, body').animate({
+                scrollTop: 0
+            }, 'slow'); 
+            return false; */
+        }
+    });
+}
+
+
 function cargaFormulario(id_propiedad, destino) {
     /* console.log(id_propiedad);
     console.log(destino); */

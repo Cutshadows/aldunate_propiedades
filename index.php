@@ -1,4 +1,5 @@
-<? include_once("includes/conexion.php");
+<?
+include_once("includes/conexion.php");
 $conn = conectar();
 ?>
 <!DOCTYPE html>
