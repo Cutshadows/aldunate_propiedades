@@ -4,13 +4,29 @@ $conn = conectar();
 $opcion=htmlspecialchars($_POST['opcion']);
 if($opcion=="activar-filtro"){
     $txtBusqueda=$_POST['busqueda'];
-    $comuna=$_POST['slctComuna'];
-    $tipoContenido=$_POST['tipoContenido'];
+    $comuna=($_POST['slctComuna']!='0')? " or coComuna LIKE '%".$_POST['slctComuna']."%'":'';
+    $tipoContenido=($_POST['tipoContenido']!='0')? " or coestadoContenido LIKE  '%".$_POST['tipoContenido']."%'":'';
     $tipoEstructura=$_POST['tipoEstructura'];
+    $rango_inicio=$_POST['valSlid1'];
+    $rango_final=$_POST['valSlid2'];
+    if($rango_inicio!='' && $rango_final!=''){
+        $consultaRango=" or coPrecioCLP BETWEEN '$rango_inicio' AND '$rango_final'";
+        if($rango_final=='2000000'){
+            $consultaRango=" or coPrecioCLP >='$rango_final'";
+        }
+    }
+    //$WHERE="WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coComuna LIKE '%$comuna%' or coestadoContenido LIKE '%$tipoContenido%' or coDireccion LIKE '%$txtBusqueda%' or coPrecioCLP LIKE '%$txtBusqueda%' or coPreciouF LIKE '%$txtBusqueda%'";
+    echo "SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, cofechaCreacion, coestadoContenido, coPrecioCLP FROM tb_contenido WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coDireccion LIKE '%$txtBusqueda%' $comuna $tipoContenido $consultaRango ORDER BY coidContenido ASC LIMIT 6";
+
+
+    $consulta=$conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, cofechaCreacion, coestadoContenido FROM tb_contenido WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coDireccion LIKE '%$txtBusqueda%' $comuna $tipoContenido $consultaRango ORDER BY coidContenido ASC LIMIT 6");
+
+    
     $temp='<div class="album py-5 bg-light"  >'.
                 '<div class="container" >'.
                     '<div class="row" >';
-    $consulta=$conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, cofechaCreacion FROM tb_contenido WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coComuna LIKE '%$comuna%' or coDireccion LIKE '%$txtBusqueda%' or coPrecioCLP LIKE '%$txtBusqueda%' or coPreciouF LIKE '%$txtBusqueda%' ORDER BY coidContenido ASC");
+    
+        
     while($resultados=$consulta->fetch_assoc()){
         $idContenido=$resultados['coidContenido'];
         $fechaCrecion=$resultados['cofechaCreacion'];

@@ -1,5 +1,8 @@
 $(document).ready(function(){
     
+    
+
+
     $("#frmFiltro").on("submit", function (e) {
         //$("#btnNuevoContenido").on("click", function (e) {        
         e.preventDefault();

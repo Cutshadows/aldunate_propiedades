@@ -134,14 +134,14 @@ function contenedor()
             <div class="row">
 
                 <div class="col-md-2"></div>
-                <div class="col-md-2">
-                </div>
+                <!-- <div class="col-md-2">
+                </div> -->
                 <div class="col-md-6">
-                    <!-- <div class="price-range-block" style="margin:10px!important;">
-                        <div id="slider-range" class="price-filter-range" style="width:80%!important;" name="rangeInput">
+                    <div style="margin:10px!important;">
+                        <b id="valSlider1"> $200.000 </b>&nbsp;&nbsp;&nbsp;<input id="precio_rango" name="precio_rango" type="text" data-slider-value="[200000, 1000000]" data-slider-ticks="[200, 500, 1000]" data-slider-lock-to-ticks="false"/>&nbsp;&nbsp;&nbsp;<b id="valSlider2">$500.000 </b>
 
-                        </div>
-                    </div> -->
+                        <!-- Filter by price interval: <b>€ 10</b> <input id="ex24" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b> -->
+                    </div>
                 </div>
             </div>
             <div class="row mb20">
@@ -150,8 +150,8 @@ function contenedor()
                     <div class="input-group">
                         <select class="form-control" name="tipoContenido" id="tipoContenido">
                             <option value="0">¿Venta o Arriendo?</option>
-                            <option value="arriendo">Arriendo</option>
-                            <option value="venta">Venta</option>
+                            <option value="1">Arriendo</option>
+                            <option value="2">Venta</option>
                         </select>
                     </div>
                 </div>
@@ -170,6 +170,8 @@ function contenedor()
         <div class="row mb20">
             <div class="col-md-12 pull-right">
                 <input type="hidden" name="opcion" id="opcion" value="activar-filtro">
+                <input type="hidden" name="valSlid1" id="valSlid1" value="">
+                <input type="hidden" name="valSlid2" id="valSlid2" value="">
                 <input type="submit" class="btn btn-success small col-md-3 pull-right" value="Buscar Propiedad">
             </div>
         </div>
@@ -186,8 +188,32 @@ function contenedor()
        verContenedorPagina('detalles.php', 5, '<?=$pagina;?>');
     </script>
 </section>
+<script src="js/jquery.js"></script>
 <script src="cliente/js/notifications.min.js"></script>
 <script src="js/jsFilterSearch.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js" type="text/javascript"></script>
+
+<script>
+    /* $(document).ready(function(){
+        $("#ex24").slider({});
+    }); */
+
+    var slider = new Slider('#precio_rango',{
+        value: [200000, 500000, 1000000, 1500000, 2000000],
+        ticks: [200000, 500000, 1000000, 1500000, 2000000],
+        lock_to_ticks: true
+        });
+        slider.on("slide", function(sliderValue) {
+            var slideVal1=sliderValue[0];
+            var slideVal2=(sliderValue[1]==2000000)?"más":"$"+sliderValue[1];
+            
+            document.getElementById("valSlider1").textContent = "$"+slideVal1;
+            document.getElementById("valSlider2").textContent = slideVal2;
+            document.getElementById("valSlid1").value = sliderValue[0];
+            document.getElementById("valSlid2").value = sliderValue[1];
+        });
+</script>
 
 
 <?

@@ -58,7 +58,7 @@ function validarLogin(e) {
                             options
                         );
                         setTimeout(function () {
-                            window.location.href = 'administrador';
+                            window.location.href = 'admin-page.php';
                         }, 1800);
 
                         //console.log(respuesta);
