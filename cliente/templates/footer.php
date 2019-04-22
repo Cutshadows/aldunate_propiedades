@@ -4,18 +4,18 @@
     <strong>Copyright &copy; Desarrollo Personal.</strong> Todos los Derechos Reservados.
   </footer>
   <!-- jQuery 3 -->
-<script src="js/jquery.min.js"></script>
+<script src="../cliente/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../cliente/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="js/controller/router.js"></script>
+<script src="../cliente/js/controller/router.js"></script>
 <!-- Controlador -->
-<script src="js/jquery.slimscroll.min.js"></script>
+<script src="../cliente/js/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="js/fastclick.js"></script>
+<script src="../cliente/js/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
-<script src="js/bootstrap-toggle.js"></script>
+<script src="../cliente/js/adminlte.min.js"></script>
+<script src="../cliente/js/bootstrap-toggle.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="js/demo.js"></script> -->

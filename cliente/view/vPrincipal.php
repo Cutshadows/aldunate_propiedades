@@ -108,8 +108,8 @@ function inicio(){?>
     <!-- /.content -->
   </div>
 	
-	<script src="js/raphael.min.js"></script>
-	<script src="js/morris.min.js"></script>
+	<script src="../cliente/js/raphael.min.js"></script>
+	<script src="../cliente/js/morris.min.js"></script>
 	<!-- /.content -->
 	<script>
   $(function () {
@@ -530,8 +530,8 @@ function formulario_contenido(){
 
 		</section>
 		<!-- /.content -->
-		<script src="js/controller/contenido.js"></script>
-		<script src="js/notifications.min.js"></script>
+		<script src="../cliente/js/controller/contenido.js"></script>
+		<script src="../cliente/js/notifications.min.js"></script>
 		<script>
         /*  */
         $(function() {
@@ -707,10 +707,10 @@ function admin_contenido(){?>
 		<!-- <script src="js/controller/admin.js"></script> -->
 		<!-- /.content -->
 		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
-		<script type="text/javascript" src="js/controller/contenido.js"></script>
+		<script type="text/javascript" src="../cliente/js/controller/contenido.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
-		<script  src="js/jquery.dataTables.min.js"></script>
-		<script src="js/notifications.min.js"></script>
+		<script  src="../cliente/js/jquery.dataTables.min.js"></script>
+		<script src="../cliente/js/notifications.min.js"></script>
 		
 		 <script>
 			$(document).ready( function() {
@@ -843,8 +843,8 @@ function agregar_admin(){
 			</div>
 		</div>
 
-		<script src="js/controller/admin.js"></script>
-		<script src="js/notifications.min.js"></script>
+		<script src="../cliente/js/controller/admin.js"></script>
+		<script src="../cliente/js/notifications.min.js"></script>
 		
 		 <script>
 			$(document).ready( function() {
@@ -963,10 +963,10 @@ function tabla_admin(){?>
 		<!-- <script src="js/controller/admin.js"></script> -->
 		<!-- /.content -->
 		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
-		<script type="text/javascript" src="js/controller/admin.js"></script>
+		<script type="text/javascript" src="../cliente/js/controller/admin.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
-		<script  src="js/jquery.dataTables.min.js"></script>
-		<script src="js/notifications.min.js"></script>
+		<script  src="../cliente/js/jquery.dataTables.min.js"></script>
+		<script src="../cliente/js/notifications.min.js"></script>
 		
 		 <script>
 			$(document).ready( function() {
@@ -1070,9 +1070,9 @@ function tabla_actividad(){?>
 		<!-- <script src="js/controller/admin.js"></script> -->
 		<!-- /.content -->
 		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
-		<script type="text/javascript" src="js/controller/admin.js"></script>
+		<script type="text/javascript" src="../cliente/js/controller/admin.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
-		<script  src="js/jquery.dataTables.min.js"></script>
+		<script  src="../cliente/js/jquery.dataTables.min.js"></script>
 <?}
 
 function todo_contenido(){?>
@@ -1173,10 +1173,10 @@ function todo_contenido(){?>
 		<!-- <script src="js/controller/admin.js"></script> -->
 		<!-- /.content -->
 		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
-		<script type="text/javascript" src="js/controller/contenido.js"></script>
+		<script type="text/javascript" src="../cliente/js/controller/contenido.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
-		<script  src="js/jquery.dataTables.min.js"></script>
-		<script src="js/notifications.min.js"></script>
+		<script  src="../cliente/js/jquery.dataTables.min.js"></script>
+		<script src="../cliente/js/notifications.min.js"></script>
 		
 		 <script>
 			$(document).ready( function() {

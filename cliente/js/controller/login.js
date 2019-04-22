@@ -33,7 +33,7 @@ function validarLogin(e) {
         // crear el llamado a ajax
         var xhr = new XMLHttpRequest();
         //abrir conexion
-        xhr.open('POST', 'controller/cLogin.php', true);
+        xhr.open('POST', './cliente/controller/cLogin.php', true);
         xhr.setRequestHeader('X_Requested_With', 'XMLHttpRequest');
 
         //xhr.setRequestHeader('X_Requested_with', 'XMLHttpRequest');
@@ -58,7 +58,7 @@ function validarLogin(e) {
                             options
                         );
                         setTimeout(function () {
-                            window.location.href = 'admin-page.php';
+                            window.location.href = 'administrador/cliente';
                         }, 1800);
 
                         //console.log(respuesta);

@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+RewriteEngine On    
+# Turn on the rewriting engine
+DirectoryIndex index.php index.html
+
+RewriteRule ^administrador$  cliente/login.php
+RewriteRule ^administrador/cliente$  cliente/admin-page.php
+
+RewriteRule ^administrador/salir/([a-zA-Z0-9]+)$   cliente/login.php?cerrar_sesion=true

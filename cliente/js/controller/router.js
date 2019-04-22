@@ -2,7 +2,7 @@
 function verContenedor(destino, ruta) {
     //var abuscar = $('#abuscar').attr('value');
     $.ajax({
-        url: 'view/' + destino,
+        url: '../cliente/view/' + destino,
         type: 'POST',
         data: {
             ruta: ruta
@@ -19,7 +19,7 @@ function verContenedor(destino, ruta) {
 //CARGA FORMULARIO
 function cargaFormulario(id_registro, destino, ruta) {
     $.ajax({
-        url: 'view/' + destino,
+        url: '../cliente/view/' + destino,
         type: 'POST',
         data: {
             ruta: ruta,

@@ -122,6 +122,85 @@ function mes($mesi)
     return $mes[$mesi];
 }
 
+function miles($valor){
+    if ($valor){ 
+        $digitos = strlen($valor); 
+                    // primero separamos los numeros 
+            switch ($digitos){
+                    case 6: 
+                            $num1 = substr($valor, 0, 1); 
+                            $num2 = substr($valor, 1, 1); 
+                            $num3 = substr($valor, 2, 1); 
+                            $num4 = substr($valor, 3, 1); 
+                            $num5 = substr($valor, 4, 1); 
+                            $num6 = substr($valor, 5, 1); 
+                        return 	$num1.$num2.$num3.'.'.$num4.$num5.$num6;
+                    break; 
+                    case 7: 
+                            $num =''; 
+                            $num1 = substr($valor, 0, 1); 
+                            $num2 = substr($valor, 1, 1); 
+                            $num3 = substr($valor, 2, 1); 
+                            $num4 = substr($valor, 3, 1); 
+                            $num5 = substr($valor, 4, 1); 
+                            $num6 = substr($valor, 5, 1); 
+                            $num7 = substr($valor, 6, 1);
+                            $num8 = substr($valor, 7, 1);
+                        return 	$num1.".".$num2.$num3.$num4.".".$num5.$num6.$num7;
+                    break;   
+                    case 8: 
+                            $num = substr($valor, 0, 1);     
+                            $num1 = substr ($valor, 1, 1); 
+                            $num2 = substr ($valor, 2, 1); 
+                            $num3 = substr ($valor, 3, 1); 
+                            $num4 = substr ($valor, 4, 1); 
+                            $num5 = substr ($valor, 5, 1); 
+                            $num6 = substr ($valor, 6, 1); 
+                            $num7 = substr ($valor, 7, 1); 
+                        return 	$num.$num1.".".$num2.$num3.$num4.".".$num5.$num6.$num7;
+                     break;
+                     case 9: 
+                            $num = substr($valor, 0, 1);     
+                            $num1 = substr ($valor, 1, 1); 
+                            $num2 = substr ($valor, 2, 1); 
+                            $num3 = substr ($valor, 3, 1); 
+                            $num4 = substr ($valor, 4, 1); 
+                            $num5 = substr ($valor, 5, 1); 
+                            $num6 = substr ($valor, 6, 1); 
+                            $num7 = substr ($valor, 7, 1); 
+                            $num8 = substr ($valor, 8, 1);
+                        return 	$num.$num1.$num2.".".$num3.$num4.$num5.".".$num6.$num7.$num8;
+                     break;
+                     case 10: 
+                            $num = substr($valor, 0, 1);     
+                            $num1 = substr ($valor, 1, 1); 
+                            $num2 = substr ($valor, 2, 1); 
+                            $num3 = substr ($valor, 3, 1); 
+                            $num4 = substr ($valor, 4, 1); 
+                            $num5 = substr ($valor, 5, 1); 
+                            $num6 = substr ($valor, 6, 1); 
+                            $num7 = substr ($valor, 7, 1); 
+                            $num8 = substr ($valor, 8, 1);
+                            $num9 = substr ($valor, 9, 1);
+                        return 	$num.'.'.$num1.$num2.$num3.".".$num4.$num5.$num6.".".$num7.$num8.$num9;
+                     break;
+                    case 10: 
+                            $num = substr($valor, 0, 1);     
+                            $num1 = substr ($valor, 1, 1); 
+                            $num2 = substr ($valor, 2, 1); 
+                            $num3 = substr ($valor, 3, 1); 
+                            $num4 = substr ($valor, 4, 1); 
+                            $num5 = substr ($valor, 5, 1); 
+                            $num6 = substr ($valor, 6, 1); 
+                            $num7 = substr ($valor, 7, 1); 
+                            $num8 = substr ($valor, 8, 1);
+                            $num9 = substr ($valor, 9, 1);
+                            $num10 = substr ($valor, 10, 1);
+                        return 	$num.$num1.'.'.$num2.$num3.$num4.'.'.$num5.$num6.$num7.".".$num8.$num9.$num10;
+                    break;  
+            } 
+    }
+}
 
 function time_passed($get_timestamp)
 {

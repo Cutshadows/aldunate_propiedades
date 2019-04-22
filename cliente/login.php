@@ -2,12 +2,9 @@
 if (isset($_GET['cerrar_sesion'])) {
   unset($_SESSION['nombre']);
   session_destroy();
-        // $_SESSION = array();
+  header("location:../../administrador");
 }
-    // switch(isset($_GET['error'])) {
-    //     case 1: echo "<script> alert(\"hola mundo\")</script>";
-    //     break;
-    // }
+   
 
 ?>
 <!DOCTYPE html>
@@ -19,14 +16,14 @@ if (isset($_GET['cerrar_sesion'])) {
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="./cliente/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./cliente/fonts/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="css/ionicons.min.css">
+  <link rel="stylesheet" href="./cliente/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="css/AdminLTE.min.css">
-  <link rel="stylesheet" href="css/notifications.min.css">
+  <link rel="stylesheet" href="./cliente/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="./cliente/css/notifications.min.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -68,13 +65,13 @@ if (isset($_GET['cerrar_sesion'])) {
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
-<script src="js/controller/login.js"></script>    
-<script src="js/notifications.min.js"></script>
+<script src="./cliente/js/controller/login.js"></script>    
+<script src="./cliente/js/notifications.min.js"></script>
 
 <!-- jQuery 3 -->
-<script src="js/jquery.min.js"></script>
+<script src="./cliente/js/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="js/bootstrap.min.js"></script>
+<script src="./cliente/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <!-- <script src="../../plugins/iCheck/icheck.min.js"></script> -->
 <script>

@@ -146,7 +146,7 @@
                   <a href="javascript:void(0)" onclick="cargaFormulario(<?= $_SESSION['id_usuario']; ?>,'vPrincipal.php', 4)" class="btn btn-success btn-flat">Ajustes</a>
                 </div>
                 <div class="pull-right">
-                  <a href="login.php?cerrar_sesion=true" class="btn btn-success btn-flat">Salir</a>
+                  <a href="salir/true" class="btn btn-success btn-flat">Salir</a>
                 </div>
               </li>
             </ul>

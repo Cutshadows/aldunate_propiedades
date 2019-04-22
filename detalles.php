@@ -322,7 +322,7 @@ function detalles()
     </ul>
     <div class="carousel-inner">
         <?
-        $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion, coDireccion, coComuna, coDetalles FROM tb_contenido WHERE coidContenido=" . $id);
+        $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion, coDireccion, coComuna, coDetalles, coPrecioCLP, coPreciouF  FROM tb_contenido WHERE coidContenido=" . $id);
         $activarItem = 0;
         while ($resultContenido = $consulContenido->fetch_assoc()) {
             /* echo $resultContenido['coTitulo']; */
@@ -453,6 +453,9 @@ function detalles()
                 <p>
                     <?= $resultContenido['coDireccion']; ?>,
                     <?= $comuna ?>
+                </p>
+                <p>
+                    <?='$'.$val=miles($resultContenido['coPrecioCLP']); ?> CLP, UF <?= $resultContenido['coPreciouF']; ?>
                 </p>
             </div>
             <!--<div class="carousel-caption fadeInLeft ">

@@ -115,7 +115,7 @@ $(document).ready(function(){
         });
         var datos = formData; */
         $.ajax({
-            url: 'controller/cContenido.php',
+            url: '../cliente/controller/cContenido.php',
             type: 'POST',
             dataType: 'JSON',
             cache: false,
@@ -167,7 +167,7 @@ function uploadImage(idimg, idContenido){
 
    var datos = formData;
     $.ajax({
-        url: 'controller/cimgContenido.php',
+        url: '../cliente/controller/cimgContenido.php',
         /* type: 'POST', */
         method: 'POST',
         dataType: 'JSON',
@@ -231,7 +231,7 @@ function uploadImage(idimg, idContenido){
 
 function eliminararchivos(ac, id_registro, destino) {
     $.ajax({
-        url: 'controller/' + destino,
+        url: '../cliente/controller/' + destino,
         type: 'POST',
         dataType: 'JSON',
         data: {
@@ -273,7 +273,7 @@ function cambiarTipo(id_registros, id_imagen){
      */
     //console.log(tipo);
         $.ajax({
-            url: 'controller/cContenido.php',
+            url: '../cliente/controller/cContenido.php',
             type: 'POST',
             dataType: 'JSON',
             cache: false,

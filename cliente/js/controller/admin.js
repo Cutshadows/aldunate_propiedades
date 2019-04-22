@@ -52,7 +52,7 @@ $(document).ready(function () {
         var datos = formData;
         //console.log(datos);
         $.ajax({
-            url: 'controller/cAdmin.php',
+            url: '../cliente/controller/cAdmin.php',
             type: 'POST',
             dataType: 'JSON',
             cache: false,
@@ -105,7 +105,7 @@ $(document).ready(function () {
 
 function eliminararchivos(ac, id_registro, destino) {
     $.ajax({
-        url: 'controller/' + destino,
+        url: '../cliente/controller/' + destino,
         type: 'POST',
         dataType: 'JSON',
         data: {

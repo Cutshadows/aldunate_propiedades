@@ -1,11 +1,14 @@
 #limita el ingreso hacia los archivos y carpetas del directorio en general a todos
 Options All -Indexes
+
 #redireccionar el mensaje de error a un diseño personalizado
+
 ErrorDocument 500 /cliente/error/500.html
 ErrorDocument 404 /cliente/error/404.html
 ErrorDocument 403 /cliente/error/403.html
+
 #habilitar escritura en el servidor
-RewriteRule ^api/([a-zA-Z_-]*)$ api.php?name=$1 [NC,L]
+#RewriteRule ^api/([a-zA-Z_-]*)$ api.php?name=$1 [NC,L]
 #RewriteRule ^([a-zA-Z0-9/]+)$ index.php?variablequepasa=$valor
 
 #RewriteEngine On
@@ -13,5 +16,4 @@ RewriteRule ^api/([a-zA-Z_-]*)$ api.php?name=$1 [NC,L]
 #RewriteCond %{REQUEST_FILENAME} !-d
 #RewriteRule  ^ consulta.php [QSA,L]
 
-RewriteEngine On    
-# Turn on the rewriting engine
+
