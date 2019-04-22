@@ -113,7 +113,7 @@ function clipboard(accion, id){
         status: "info",
         duration:1500,
         link: {
-            url: "http://"+window.location.host+"/detalles.php?accion=" + accion + "&id_propiedad=" + id,
+            url: "http://"+window.location.host+"/propiedad/" + accion + "/id/" + id,
             function: function () {
                 mkNoti('Link Callback function', 'This is the callback function.', {
                     status: 'success'
@@ -126,6 +126,6 @@ function clipboard(accion, id){
         "Contenido Copiado a Portapapeles",
         options
     );
-    //console.log("http://" + window.location.host + "/aldunate_propiedades/detalles.php?accion=" + accion + "&id_propiedad=" + id);
-    copyTextToClipboard("https://"+window.location.host+"/detalles.php?accion=" + accion + "&id_propiedad=" + id);
+    console.log(window.location.href+"propiedad/" + accion + "/id/" + id);
+    copyTextToClipboard(window.location.href+"propiedad/" + accion + "/id/" + id);
 }

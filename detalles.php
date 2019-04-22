@@ -633,7 +633,7 @@ function shared()
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- meta tags de redes sociales -->
-    <meta property="og:url" content="http://propiedadesaldunate.cl/detalles.php?accion=3&id_propiedad=<?= $id; ?>" />
+    <meta property="og:url" content="http://propiedadesaldunate.cl/proiedad/3/id/<?= $id; ?>" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="<?= $tituloShared; ?>" />
     <meta property="og:description" content="<?= $descripcionShared; ?>" />
@@ -645,16 +645,39 @@ function shared()
     <meta property="og:image:height" content="300" />
     <!-- meta tags de redes sociales -->
     <title>Propiedades Aldunate</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/min.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../css/animate.css">
+    <link rel="stylesheet" href="../../../css/min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="shortcut icon" href="img/aldunate.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../img/aldunate.ico" type="image/x-icon">
 </head>
 
 <body>
-    <? include("includes/pages/menu.php"); ?>
+    <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#232528;"> -->
+<nav class="navbar navbar-dark navbar-expand-md navbar-fixed-top" style="background-color:#232528;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:void(0)" onclick="verContenedor('detalles.php',1)" style="diplay:block; margin: 0 0 0 0;"> <img src="../../../img/logo_aldunate.png" width="50%;"> </a><!--  -->
+        </div>
+        <!-- <navbar-dark navbar-expand-lg> -->
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault" style="margin: 0 0 0 15%;">
+            <ul class="nav navbar-nav mr-auto navbar-right">
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0)" onclick="verContenedor('detalles.php',1)">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" onclick="verContenedor('detalles.php', 4);">Conócenos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> 
 
     <div id="contenedor" name="contenedor">
         <!-- ACA VA A CARGAR LOS ENLACES DE COMPARTIR -->
@@ -802,7 +825,7 @@ function shared()
                         ?>
 
                 <div class="carousel-item <?= $item; ?>" style="height: 60%!important;">
-                    <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" style="height:750px;"><!-- alt="Colina" -->
+                    <img src="../../../img/contenido/<?=$resultImagen['coNomimg']; ?>" style="height:750px;"><!-- alt="Colina" -->
                     <div class="carousel-caption" style="text-align:start; position:absolute;">
                         <h4>
                             <?= $resultContenido['coTitulo']; ?>
@@ -902,7 +925,7 @@ function shared()
                                         </tr>
                                         <tr>
                                             <th scope="row">Sitio Web:</th>
-                                            <td><a href="http://www.propiedadealdunate.com">www.propiedadealdunate.com</a></td>
+                                            <td><a href="https://www.propiedadealdunate.com">www.propiedadealdunate.com</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -941,7 +964,7 @@ function shared()
                         </li>
                         <li class="an">
                             <a href="https://www.amarillas.cl/fichas/propiedades-aldunate_7455014315694371/" target="_blank">
-                                <i class="fab" title="Amarillas Publiguias"> <img src="img/amarillas.png" style="width:35px; heigth:35px; vertical-align:baseline;"></i>&nbsp;
+                                <i class="fab" title="Amarillas Publiguias"> <img src="../../../img/amarillas.png" style="width:35px; heigth:35px; vertical-align:baseline;"></i>&nbsp;
                                 <!-- Amarillas -->
                                 <!-- fab fa-twitter-square fa-lg -->
                             </a>
@@ -963,10 +986,10 @@ function shared()
             </div>
         </div>
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/jsfunciones.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../../../js/jquery.js"></script>
+    <script src="../../../js/carousel.js"></script>
+    <script src="../../../js/jsfunciones.js"></script>
+    <script src="../../../js/bootstrap.min.js"></script>
 </body>
 
 </html>

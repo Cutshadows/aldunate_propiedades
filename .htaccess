@@ -7,3 +7,5 @@ RewriteRule ^administrador$  cliente/login.php
 RewriteRule ^administrador/cliente$  cliente/admin-page.php
 
 RewriteRule ^administrador/salir/([a-zA-Z0-9]+)$   cliente/login.php?cerrar_sesion=true
+
+RewriteRule ^propiedad/([a-zA-Z0-9]+)/id/([a-zA-Z0-9]+)$   detalles.php?accion=$1&id_propiedad=$1
