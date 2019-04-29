@@ -1,6 +1,9 @@
 <?
 include_once("includes/conexion.php");
 $conn = conectar();
+    write_visita ();
+    get_client_ip();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

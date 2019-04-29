@@ -1,26 +1,24 @@
 function verContenedor(destino, accion, id) {
     //var abuscar = $('#abuscar').attr('value');
     $.ajax({
-        url: destino,
+        url: "../../../"+destino,
         type: 'GET',
         data: {
             accion: accion,
             id: id
         },
         success: function (datos) {
-            $("#contenedor").html(datos);
-            $('html, body').animate({
-                scrollTop: 0
-            }, 'slow');
-            return false;
+            setTimeout(function () {
+                location.assign(window.location.href="../../../");
+            }, 1000);
         }
     });
 }
 
-function verContenedorPagina(destino, accion, pagina) {
+/* function verContenedorPagina(destino, accion, pagina) {
     //var abuscar = $('#abuscar').attr('value');
     $.ajax({
-        url: destino,
+        url: "../../../"+destino,
         type: 'GET',
         data: {
             accion: accion,
@@ -28,20 +26,18 @@ function verContenedorPagina(destino, accion, pagina) {
         },
         success: function (datos) {
             $("#mostrar_resultado_paginador, row").html(datos);
-            /* $('html, body').animate({
+            $('html, body').animate({
                 scrollTop: 0
             }, 'slow'); 
-            return false; */
+            return false;
         }
     });
-}
+} */
 
 
-function cargaFormulario(id_propiedad, destino) {
-    /* console.log(id_propiedad);
-    console.log(destino); */
+/* function cargaFormulario(id_propiedad, destino) {
     $.ajax({
-        url: destino,
+        url: "../../../"+destino,
         type: 'GET',
         data: {
             accion: 2,
@@ -55,7 +51,7 @@ function cargaFormulario(id_propiedad, destino) {
             return false;
         }
     });
-}
+} */
 
 function fallbackCopyTextToClipboard(text) {
     try {

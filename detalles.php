@@ -637,7 +637,7 @@ function shared()
     <meta property="og:type" content="article" />
     <meta property="og:title" content="<?= $tituloShared; ?>" />
     <meta property="og:description" content="<?= $descripcionShared; ?>" />
-    <meta property="og:image" content="http://propiedadesaldunate.cl/img/contenido/<?= $nomImgShared; ?>" />
+    <meta property="og:image" content="http://propiedadesaldunate.cl/img/contenido/<?=$nomImgShared; ?>" />
     <meta property="og:image:secure_url" content="https://propiedadesaldunate.cl/img/contenido/<?= $nomImgShared; ?>" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -821,7 +821,6 @@ function shared()
                                 $comuna = 'Rio Hurtado';
                                 break;
                         }
-
                         ?>
 
                 <div class="carousel-item <?= $item; ?>" style="height: 60%!important;">
@@ -988,7 +987,7 @@ function shared()
     </div>
     <script src="../../../js/jquery.js"></script>
     <script src="../../../js/carousel.js"></script>
-    <script src="../../../js/jsfunciones.js"></script>
+    <script src="../../../js/jsfunciones2.js"></script>
     <script src="../../../js/bootstrap.min.js"></script>
 </body>
 
