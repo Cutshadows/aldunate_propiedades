@@ -44,7 +44,8 @@ function loadDoc() {
         this.responseText;
       }
     };
-    xhttp.open("GET", "../cliente/view/visitas.txt", true);
-    xhttp.setRequestHeader("Content-type", "text/*");
+    xhttp.open("POST", "../cliente/view/visitas.txt", true);
+    //xhttp.setRequestHeader("Content-type", "text/*");
+    xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
   }

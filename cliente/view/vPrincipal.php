@@ -25,7 +25,7 @@ function inicio(){?>
       <div class="row">
         <div class="col-md-6">
           <!-- AREA CHART -->
-          <div class="box box-primary">
+          <!-- <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Area Chart</h3>
 
@@ -37,11 +37,27 @@ function inicio(){?>
             </div>
             <div class="box-body chart-responsive">
               <div class="chart" id="revenue-chart" style="height: 300px;"></div>
-            </div>
+            </div> -->
             <!-- /.box-body -->
-          </div>
+          <!-- </div> -->
           <!-- /.box -->
+			<!-- LINE CHART -->
+			<div class="box box-info">
+				<div class="box-header with-border">
+				<h3 class="box-title">Entradas Mensuales</h3>
 
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				</div>
+				</div>
+				<div class="box-body chart-responsive">
+				<div class="chart" id="entradas-mensuales" style="height: 300px;"></div>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
           <!-- DONUT CHART -->
           <div class="box box-danger">
             <div class="box-header with-border">
@@ -66,7 +82,7 @@ function inicio(){?>
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Line Chart</h3>
+              <h3 class="box-title">Entradas Diarias</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -75,7 +91,7 @@ function inicio(){?>
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="line-chart" style="height: 300px;"></div>
+              <div class="chart" id="entradas-diarias" style="height: 300px;"></div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -98,7 +114,7 @@ function inicio(){?>
             <!-- /.box-body>-->
           </div>
 					<!-- /.box -->
-					<!-- BAR CHART -->
+					<!-- extraer del txt -->
           <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Bar Chart</h3>
@@ -110,9 +126,9 @@ function inicio(){?>
               </div>
             </div>
             <!-- <div class="box-body chart-responsive"> -->
-							<div>
-							<!-- <div class="chart" id="bar-chart" style="height: 300px;"></div> -->
-							<div  id="mostrarEntradas" name="mostrarEntradas" style="height: 300px; width:300px;" onclick="loadDoc()" ></div>
+			<div>
+				<!-- <div class="chart" id="bar-chart" style="height: 300px;"></div> -->
+				<div  id="mostrarEntradas" name="mostrarEntradas" style="height: 300px; width:300px;" onclick="loadDoc()" ></div>
 							
             </div>
             <!-- /.box-body -->
@@ -138,7 +154,7 @@ function inicio(){?>
     "use strict";
 
     // AREA CHART
-    var area = new Morris.Area({
+    /* var area = new Morris.Area({
       element: 'revenue-chart',
       resize: true,
       data: [
@@ -158,11 +174,29 @@ function inicio(){?>
       labels: ['Item 1', 'Item 2'],
       lineColors: ['#a0d0e0', '#3c8dbc'],
       hideHover: 'auto'
-    });
+    }); */
 
     // LINE CHART
     var line = new Morris.Line({
-      element: 'line-chart',
+      element: 'entradas-diarias',
+      resize: true,
+      data: [
+        {y: '2019-02-22', item1: 50},
+        {y: '2019-02-23', item1: 100},
+        {y: '2019-02-24', item1: 80},
+        {y: '2019-02-25', item1: 200},
+        {y: '2019-02-26', item1: 400},
+        {y: '2019-02-27', item1: 500}
+      ],
+      xkey: 'y',
+      ykeys: ['item1'],
+      labels: ['day'],
+      lineColors: ['#3c8dbc'],
+      hideHover: 'auto'
+	});
+	// LINE CHART
+    var line = new Morris.Line({
+      element: 'entradas-mensuales',
       resize: true,
       data: [
         {y: '2011 Q1', item1: 2666},
