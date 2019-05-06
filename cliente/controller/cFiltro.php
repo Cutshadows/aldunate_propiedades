@@ -16,7 +16,7 @@ if($opcion=="activar-filtro"){
         }
     }
     //$WHERE="WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coComuna LIKE '%$comuna%' or coestadoContenido LIKE '%$tipoContenido%' or coDireccion LIKE '%$txtBusqueda%' or coPrecioCLP LIKE '%$txtBusqueda%' or coPreciouF LIKE '%$txtBusqueda%'";
-    echo "SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, cofechaCreacion, coestadoContenido, coPrecioCLP FROM tb_contenido WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coDireccion LIKE '%$txtBusqueda%' $comuna $tipoContenido $consultaRango ORDER BY coidContenido ASC LIMIT 6";
+    //echo "SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, cofechaCreacion, coestadoContenido, coPrecioCLP FROM tb_contenido WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coDireccion LIKE '%$txtBusqueda%' $comuna $tipoContenido $consultaRango ORDER BY coidContenido ASC LIMIT 6";
 
 
     $consulta=$conn->query("SELECT coidContenido, coTitulo, coDescripcion, coComuna, coDireccion, cofechaCreacion, coestadoContenido FROM tb_contenido WHERE coTitulo LIKE '%$txtBusqueda%' or coDescripcion LIKE '%$txtBusqueda%' or coDireccion LIKE '%$txtBusqueda%' $comuna $tipoContenido $consultaRango ORDER BY coidContenido ASC LIMIT 6");
