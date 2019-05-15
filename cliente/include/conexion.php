@@ -261,7 +261,7 @@ function write_visita (){
         $peticion = explode('/', $_GET['PATH_INFO']);
         $datos=str_pad($peticion[0],10).' '.$peticion[1];   
     }
-    try {
+   /*  try {
         $conn = conectar();
         $info=ip_info($new_ip, "City")." ".json_decode($datos);
         $fechaHora=$now->format('Y-m-d H:i:s');
@@ -274,7 +274,7 @@ function write_visita (){
         echo $e->getMessage();
     }
     $stmt->close();
-    $conn->close();
+    $conn->close(); */
     /* $txt =  str_pad($counter,25). " ".
             str_pad($new_ip,25). " ".
             str_pad($now->format('Y-m-d H:i:s'),25)." ".

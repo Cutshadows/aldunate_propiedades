@@ -548,7 +548,7 @@ function detalles()
                             <tbody>
                                 <tr>
                                     <th scope="row">Ubicación:</th>
-                                    <td>La Serena</td>
+                                    <td>Balmaceda #469, Oficina 22, La Serena.</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Tel. movil:</th>
@@ -912,7 +912,7 @@ function shared()
                                     <tbody>
                                         <tr>
                                             <th scope="row">Ubicación:</th>
-                                            <td>La Serena</td>
+                                            <td>Balmaceda #469, Oficina 22, La Serena.</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tel. movil:</th>
@@ -1017,7 +1017,19 @@ function about()
                                 <!-- <h6 class="att">Conócenos</h6> -->
                             </li>
                             <li style="font-size:18px;">
-                                <kbd>En Propiedades Aldunate</kbd> Somos la corredora de propiedades de la Región de Coquimbo con más de 15 años de experiencia. Nuestros servicios profesionales está diseñados para la tranquilidad de nuestros clientes y abarcan desde arriendo y venta de inmuebles y terrenos, hasta la administración de las propiedades y obras menores. Confíenos su propiedad habitacional y/o comercial, seriedad y profesionalismo en toda gestión.
+                                <kbd>En Propiedades Aldunate</kbd> Somos corredor de Propiedades con más de 15 años de Experiencia. Nuestros servicios profesionales estan diseñados para la tranquilidad de nuestros clientes que abarcan desde: 
+                                <p></p>
+                                <ul>
+                                    <li type="disc">Venta y Arriendo de Inmuebles y Terrenos.</li>
+                                    <li type="disc">Administraci&oacute;n de Propiedades.</li>
+                                    <li type="disc">Asesor&iacute;a Jur&iacute;dica Inmobiliaria.</li>
+                                    <li type="disc">Obras Menores y Remodelaciones.</li>
+                                </ul>
+                                <p></p>
+                                <ul>
+                                    <ol><p> Telefono de Contacto:&nbsp;<a href="tel:+56977568094" style="color:black;" target="_blank">+56 9 77568094</a></p></ol>
+                                    <ol><p> Email de Contacto:&nbsp;<a href="mailto:juliaaldunateg@gmail.com" style="color:black;" target="_blank">juliaaldunateg@gmail.com</a></p></ol>
+                                </ul>
                             </li>
                         </ul>
                         <p class="card-text">
@@ -1031,11 +1043,10 @@ function about()
                     <div class="card-body">
                         <!-- <h4 class="card-title"></h4> -->
                         <!-- <h5 class="card-subtitle mt-3">Propiedades Aldunate:</h5> -->
-                        <table class="table table-borderless">
+                        <table >
                             <tbody>
-                                <tr style="background-color:#232528">
-                                    <th scope="row"></th>
-                                    <td><img src="img/logo_aldunate.png" width="100%" alt="Aldunate Propiedades" title="Aldunate Propiedades"></td>
+                                <tr>
+                                    <td><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d216.1665677375379!2d-71.2500600581384!3d-29.90274953313729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9691ca7a5f2e6be9%3A0xd4def51cdeda24a0!2sAv.+Balmaceda+469%2C+Oficina+22%2C+La+Serena%2C+Regi%C3%B3n+de+Coquimbo!5e0!3m2!1ses!2scl!4v1557910727940!5m2!1ses!2scl" width="130%" height="240%" frameborder="0" style="border:0" allowfullscreen></iframe></td>
                                 </tr>
                                 <!-- <tr>
                                     <th scope="row">Tel. movil:</th>
