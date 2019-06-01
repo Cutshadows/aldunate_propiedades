@@ -31,16 +31,16 @@ function contenedor()
     include_once("includes/conexion.php");
     $conn = conectar();
     ?>
-        <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
+
+        
+<!-- <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
             <ul class="carousel-indicators">
                 <?
                 $consulContenido2 = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
                 $activarItem2 = 0;
                 while ($resultContenido2 = $consulContenido2->fetch_assoc()) {
-                    /* echo $resultContenido2['coTitulo']; */
                     $consultImg1 = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido2['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
                     while ($resultImagen2 = $consultImg1->fetch_assoc()) {
-
                         ?>
                 <li data-target="#sliderAldunate" data-slide-to="<?= $activarItem2; ?>" <? if ($activarItem2 == 0) { ?>class="
                     <? echo 'active'; ?>"
@@ -57,7 +57,6 @@ function contenedor()
                 $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion FROM tb_contenido");
                 $activarItem = 0;
                 while ($resultContenido = $consulContenido->fetch_assoc()) {
-                    /* echo $resultContenido['coTitulo']; */
                     $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido=" . $resultContenido['coidContenido'] . " AND cotipoImg='carrusel' ORDER BY coidImagen ASC");
                     while ($resultImagen = $consultImg->fetch_assoc()) {
                         if ($activarItem == 0) {
@@ -69,14 +68,12 @@ function contenedor()
                         ?>
 
                 <div class="carousel-item <?= $item; ?>" style="height: 30%!important;">
-                    <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>"><!-- alt="Colina" style="height:750px;" -->
+                    <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>">
                     <div class="carousel-caption fadeInLeft ">
                         <div class="doblea">
                             <p>
                                 <?= substr(($resultContenido['coTitulo']), 0, 40); ?>
                             </p>
-                            <!-- </div>
-                        <div class="doblea"> -->
                             <p>
                                 <?= substr(($resultContenido['coDescripcion']), 0, 40); ?>...</p>
                             <p><a class="btn btn-sm btn-success" id="carouselButtons" href="javascript:void(0)" onclick="cargaFormulario(<?= $resultImagen['tb_contenido_coidContenido']; ?>,'detalles.php')" role="button">Ver Más</a></p>
@@ -96,7 +93,7 @@ function contenedor()
             <a class="carousel-control-next" href="#sliderAldunate" data-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </a>
-        </div>
+        </div> -->
 
 
 <!-- FILTRO DE LA BUSQUEDAS -->
@@ -300,6 +297,188 @@ function detalles()
     $id = $_GET['id_propiedad'];
     //echo '<prev>' . var_dump($id) . '</prev>';
     ?>
+
+    <!--Carousel Wrapper-->
+    <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+  <?
+        $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion, coDireccion, coComuna, coDetalles, coPrecioCLP, coPreciouF  FROM tb_contenido WHERE coidContenido=" . $id);
+        $activarItem = 0;
+        while ($resultContenido = $consulContenido->fetch_assoc()) {
+            $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido= $id ORDER BY coidImagen ASC");
+            while ($resultImagen = $consultImg->fetch_assoc()) {
+                if ($activarItem == 0) {
+                    $item = "active";
+                } else {
+                    $item = "";
+                }
+                $jsonDetalles = json_decode($resultContenido['coDetalles'], true);
+                foreach ($jsonDetalles as $detalles => $extras) :
+                    foreach ($jsonDetalles['contenido'] as $contenedor => $resultado) :
+                        foreach ($jsonDetalles['contenido'][$contenedor] as $llave => $valor) :
+                            foreach ($jsonDetalles['contenido'][0][$llave] as $key => $value) { //=> $value) {
+                                switch ($key) {
+                                    case 'validation_bano':
+                                        if ($value == 1) {
+                                            $banoval = 'Si';
+                                        } else if ($value == 0) {
+                                            $banoval = 'No';
+                                        }
+                                        break;
+                                    case 'cantidad_bano':
+                                        if ($value == null) {
+                                            $banocant = 0;
+                                        } else {
+                                            $banocant = $value;
+                                        }
+                                        break;
+                                    case 'validation_pisos':
+                                        if ($value == 1) {
+                                            $pisosval = 'Si';
+                                        } else if ($value == 0) {
+                                            $pisosval = 'No';
+                                        }
+                                        break;
+                                    case 'cantidad_pisos':
+                                        if ($value == null) {
+                                            $pisoscant = 0;
+                                        } else {
+                                            $pisoscant = $value;
+                                        }
+                                        break;
+                                    case 'validation_oficina':
+                                        if ($value == 1) {
+                                            $oficinaval = 'Si';
+                                        } else if ($value == 0) {
+                                            $oficinaval = 'No';
+                                        }
+                                        break;
+                                    case 'cantidad_oficina':
+                                        if ($value == null) {
+                                            $oficinacant = 0;
+                                        } else {
+                                            $oficinacant = $value;
+                                        }
+                                        break;
+                                    case 'validation_estacionamiento':
+                                        if ($value == 1) {
+                                            $estaval = 'Si';
+                                        } else if ($value == 0) {
+                                            $estaval = 'No';
+                                        }
+                                        break;
+                                }
+                            }
+                        endforeach;
+                    endforeach;
+                endforeach;
+
+                switch ($resultContenido['coComuna']) {
+                    case 'P1C1CO00':
+                        $comuna = 'Canela';
+                        break;
+                    case 'P1C1CO01':
+                        $comuna = 'Illapel';
+                        break;
+                    case 'P1C1CO02':
+                        $comuna = 'Los Vilos';
+                        break;
+                    case 'P1C1CO03':
+                        $comuna = 'Salamanca';
+                        break;
+                    case 'P2C2CO04':
+                        $comuna = 'Andacollo';
+                        break;
+                    case 'P2C2CO05':
+                        $comuna = 'Coquimbo';
+                        break;
+                    case 'P2C2CO06':
+                        $comuna = 'La Higuera';
+                        break;
+                    case 'P2C2CO07':
+                        $comuna = 'La Serena';
+                        break;
+                    case 'P2C2CO08':
+                        $comuna = 'Paihuano';
+                        break;
+                    case 'P2C2CO09':
+                        $comuna = 'Vicuña';
+                        break;
+                    case 'P3C3CO10':
+                        $comuna = 'Combarbala';
+                        break;
+                    case 'P3C3CO11':
+                        $comuna = 'Monte Patria';
+                        break;
+                    case 'P3C3CO12':
+                        $comuna = 'Ovalle';
+                        break;
+                    case 'P3C3CO13':
+                        $comuna = 'Punitaqui';
+                        break;
+                    case 'P3C3CO14':
+                        $comuna = 'Rio Hurtado';
+                        break;
+                }
+
+                ?>
+
+        <div class="carousel-item <?= $item; ?>" >
+            <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" class="d-block w-60" style="height:10%!important;" >
+            <div class="carousel-caption" style="text-align:start; position:absolute;">
+                <h4>
+                    <?= $resultContenido['coTitulo']; ?>
+                </h4>
+                <p>
+                    <?= $resultContenido['coDireccion']; ?>,
+                    <?= $comuna ?>
+                </p>
+                <p>
+                    <?='$'.$val=miles($resultContenido['coPrecioCLP']); ?> CLP, UF <?= $resultContenido['coPreciouF']; ?>
+                </p>
+            </div>
+        </div>
+
+        <?
+        $titulo = $resultContenido['coTitulo'];
+        $descripcion = ($resultContenido['coDescripcion']);
+        $activarItem++;
+    }
+} ?>
+
+
+    <!-- <div class="carousel-item active">
+      <img class="d-block w-60" src="https://mdbootstrap.com/img/Photos/Slides/img%20(88).jpg"
+        alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-60" src="https://mdbootstrap.com/img/Photos/Slides/img%20(121).jpg"
+        alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-60" src="https://mdbootstrap.com/img/Photos/Slides/img%20(31).jpg"
+        alt="Third slide">
+    </div>
+  </div> -->
+  <!--/.Slides-->
+  <!--Controls-->
+  <!--/.Controls-->
+  <ol class="carousel-control-prev" style="list-style-type:none;">
+    <li data-target="#carousel-thumb" data-slide-to="0" class="active" style="position:absolute;top: 0px;bottom: 0;left: 0;right: 0;width: 50%;height: 30%;margin: auto;">
+      <img src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(88).jpg" width="120">
+    </li>
+    <li data-target="#carousel-thumb" data-slide-to="1"  style="position:absolute;top: 100px;bottom: 0;left: 0;right: 0;width: 50%;height: 30%;margin: auto;">
+      <img src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(121).jpg" width="120">
+     </li>
+    <li data-target="#carousel-thumb" data-slide-to="2"  style="position:absolute;top:200px;bottom: 0;left: 0;right: 0;width: 50%;height: 30%;margin: auto;">
+      <img src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(31).jpg" width="120">
+    </li>
+  </ol>
+</div>
+<!--/.Carousel Wrapper-->
+
+
     <div id="sliderAldunate" class="carousel slide" data-ride="carousel">
         <ul class="carousel-indicators">
             <?
@@ -325,7 +504,6 @@ function detalles()
         $consulContenido = $conn->query("SELECT coTitulo, coidContenido, coDescripcion, coDireccion, coComuna, coDetalles, coPrecioCLP, coPreciouF  FROM tb_contenido WHERE coidContenido=" . $id);
         $activarItem = 0;
         while ($resultContenido = $consulContenido->fetch_assoc()) {
-            /* echo $resultContenido['coTitulo']; */
             $consultImg = $conn->query("SELECT coidImagen, coNomimg, tb_contenido_coidContenido, cotipoImg FROM tb_imagenes WHERE tb_contenido_coidContenido= $id ORDER BY coidImagen ASC");
             while ($resultImagen = $consultImg->fetch_assoc()) {
                 if ($activarItem == 0) {
@@ -445,7 +623,7 @@ function detalles()
                 ?>
 
         <div class="carousel-item <?= $item; ?>" style="height: 60%!important;">
-            <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" style="height:750px;"><!-- alt="Colina" -->
+            <img src="img/contenido/<?= $resultImagen['coNomimg']; ?>" style="height:750px;">
             <div class="carousel-caption" style="text-align:start; position:absolute;">
                 <h4>
                     <?= $resultContenido['coTitulo']; ?>
@@ -458,16 +636,6 @@ function detalles()
                     <?='$'.$val=miles($resultContenido['coPrecioCLP']); ?> CLP, UF <?= $resultContenido['coPreciouF']; ?>
                 </p>
             </div>
-            <!--<div class="carousel-caption fadeInLeft ">
-				 <div class="caption-titulo" >
-					<p><?= substr($resultContenido['coTitulo'], 0, 20); ?></p>
-				</div> -->
-            <!-- div class="caption-contenido">
-                <p>
-                    <?= substr($resultContenido['coDescripcion'], 0, 40); ?>...</p>
-                <p><a class="btn btn-sm btn-success" id="carouselButtons" href="/" role="button">Ver Más</a></p>
-        </div>
-    </div> -->
         </div>
 
         <?

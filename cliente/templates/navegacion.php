@@ -41,8 +41,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o" ></i> Grafico de Visitas</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Grafico de Visitas por Sector</a></li>
+            <li><a href="javascript:void(0);" onclick="verContenedor('vPrincipal.php',1)"><i class="fa fa-circle-o" ></i> Grafico de Visitas</a></li>
           </ul>
         </li>
         <?}?>

@@ -152,6 +152,42 @@ $(document).ready(function(){
             }
         });
     });
+    $('#tabla_usuario').DataTable({
+        responsive: true,
+        paging: true,
+        pageLength: 10,
+        lengthChange: false,
+        searching: true,
+        scrollCollapse: true,
+        order: [
+            [3, 'desc'],
+            [0, 'asc']
+        ],
+        scroller: false,
+        language: {
+            emptyTable: 'No hay Registros',
+            zeroRecords: 'No Encontrado - Lo Siento',
+            infoFiltered: "(Filtrada de _MAX_ total entradas)"
+        }
+    });
+    $('#tabla_imagenes').DataTable({
+        responsive: true,
+        paging: true,
+        pageLength: 10,
+        lengthChange: false,
+        searching: true,
+        scrollCollapse: true,
+        order: [
+            [3, 'desc'],
+            [0, 'asc']
+        ],
+        scroller: false,
+        language: {
+            emptyTable: 'No hay Registros',
+            zeroRecords: 'No Encontrado - Lo Siento',
+            infoFiltered: "(Filtrada de _MAX_ total entradas)"
+        }
+    });
 });
 
 
@@ -208,24 +244,7 @@ function uploadImage(idimg, idContenido){
             );
         }
     });
-    $('#tabla_usuario').DataTable({
-        responsive: true,
-        paging: true,
-        pageLength: 10,
-        lengthChange: false,
-        searching: true,
-        scrollCollapse: true,
-        order: [
-            [3, 'desc'],
-            [0, 'asc']
-        ],
-        scroller: false,
-        language: {
-            emptyTable: 'No hay Registros',
-            zeroRecords: 'No Encontrado - Lo Siento',
-            infoFiltered: "(Filtrada de _MAX_ total entradas)"
-        }
-    });
+    
 
 }
 

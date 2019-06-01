@@ -551,7 +551,7 @@ function admin_contenido(){?>
 				?>
 				<tr>
                   <td><?= $resultado['coidImagen']; ?></td>
-                  <td><img src="<?= _ruta_ . $resultado['coNomimg']; ?>" width='120px' height='120px'></td>
+                  <td><img src="<?= _ruta_ . $resultado['coNomimg']; ?>" width='50px' height='50px'></td>
 				  <td><?= $resContenido['coTitulo']; ?></td>
 				  <td><?= $resUsuario['coNomUsuario']; ?></td>
 				  <td>
@@ -1006,8 +1006,14 @@ function todo_contenido(){?>
             		</div>							
             <!-- /.box-header -->
             <div class="box-body">
+<?
+define("_controlador_", 'cContenido.php');
+include_once("../include/conexion.php");
+$conn = conectar();
 
-              <table id="tabla_usuario" name="tabla_usuario" class="table table-bordered table-striped display"  >
+$consulta = $conn->query("SELECT coidContenido, coTitulo, coComuna, tb_usuario_coidUsuario, cofechaCreacion FROM tb_contenido");
+?>
+              <table id="tabla_imagenes" name="tabla_imagenes" class="table table-bordered table-striped display"  >
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -1020,11 +1026,7 @@ function todo_contenido(){?>
                 </thead>
                 <tbody>
 				<?
-			define("_controlador_", 'cContenido.php');
-			include_once("../include/conexion.php");
-			$conn = conectar();
-
-			$consulta = $conn->query("SELECT coidContenido, coTitulo, coComuna, tb_usuario_coidUsuario, cofechaCreacion FROM tb_contenido");
+			
 			while ($resultado = $consulta->fetch_assoc()) {
 				$reqComuna= $conn->query("SELECT coidComuna, coNomComuna FROM tb_comuna WHERE coidComuna='".$resultado['coComuna']."'");
 				
@@ -1078,8 +1080,8 @@ function todo_contenido(){?>
 		<!-- <script src="js/jquery.dataTables.min.js"></script> -->
 		<script type="text/javascript" src="../cliente/js/controller/contenido.js"></script>
 		<!-- <script src="js/dataTables.bootstrap.min.js"></script> -->
-		<script  src="../cliente/js/jquery.dataTables.min.js"></script>
 		<script src="../cliente/js/notifications.min.js"></script>
+		<script  src="../cliente/js/jquery.dataTables.min.js"></script>
 		
 		 <script>
 			$(document).ready( function() {
