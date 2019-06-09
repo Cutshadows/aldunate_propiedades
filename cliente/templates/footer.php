@@ -13,6 +13,7 @@
 <script src="../cliente/js/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="../cliente/js/fastclick.js"></script>
+<script src="../cliente/js/controller/tinymce.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../cliente/js/adminlte.min.js"></script>
 <script src="../cliente/js/bootstrap-toggle.js"></script>

@@ -376,5 +376,21 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     return $output;
 }
 
+function specialChar($frase){
+    $string=trim($frase);
+    $string=str_replace(
+        array('Ñ','ñ','á','Á','é','É','í','Í','ó','Ó','ú','Ú'), 
+        array('&Ntilde;','&ntilde;','&aacute;','&Aacute;','&eacute;','&Eacute;','&iacute;','&Iacute;','&oacute;','&Oacute;','&uacute;','&Uacute;'),
+        $string);
+    return $string;
+}
+function specialCharReverse($frase){
+    $string=trim($frase);
+    $string=str_replace(
+        array('&Ntilde;','&ntilde;','&aacute;','&Aacute;','&eacute;','&Eacute;','&iacute;','&Iacute;','&oacute;','&Oacute;','&uacute;','&Uacute;'),
+        array('Ñ','ñ','á','Á','é','É','í','Í','ó','Ó','ú','Ú'), 
+        $string);
+    return $string;
+}
 
 

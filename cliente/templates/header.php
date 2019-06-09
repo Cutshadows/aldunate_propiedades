@@ -32,6 +32,7 @@ $_SESSION['usuario'];
   <link rel="stylesheet" href="../cliente/css/skins/_all-skins.min.css">
 
   <link rel="stylesheet" href="../cliente/css/admin.css">
+  <link rel="stylesheet" href="../cliente/css/tinimynce.min.css">
   
   
 
