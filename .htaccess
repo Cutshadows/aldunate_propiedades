@@ -6,6 +6,7 @@ DirectoryIndex index.php index.html
 
 RewriteRule ^administrador$  cliente/login.php
 RewriteRule ^administrador/cliente$  cliente/admin-page.php
+RewriteRule ^seguiridad$  cliente/view/vEmail.php
 
 RewriteRule ^administrador/salir/([a-zA-Z0-9]+)$   cliente/login.php?cerrar_sesion=true
 

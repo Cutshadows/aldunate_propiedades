@@ -1114,3 +1114,142 @@ $consulta = $conn->query("SELECT coidContenido, coTitulo, coComuna, tb_usuario_c
 			}); 
 		</script>
 <?}
+function cambiar_clave(){
+	$opcion="cambiar-clave";
+	$boton="Cambiar Clave Usuario";
+	$id=$_POST['id'];
+	if($id>0){
+		//echo "area de actualizar usuario";
+		$opcion = "clave-usuario";
+		include_once("../include/conexion.php");
+		$conn=conectar();
+		$boton="Modificar";
+		$consul=$conn->query("SELECT coidUsuario, coNomUsuario, coEmailUsuario, coPrivilegiosUsuario, coClaveUsuario, token FROM tb_usuario WHERE coidUsuario=".$id);
+		$datos=$consul->fetch_assoc();
+		
+		
+		
+	}
+	?>
+	<section class="content-header">
+		<h1>
+			Administrador
+			<small>Control de Usuarios</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+			<li><a href="#">Usuarios</a></li>
+			<li class="active">Administrador</li>
+			<li class="active">Cambio Clave</li>
+		</ol>
+		</section>
+		<div class="row">
+			<div class="col-md-8">
+			
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Cambiar Clave Usuario</h3>
+
+					<!-- <div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+							title="Collapse">
+						<i class="fa fa-minus"></i></button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+						<i class="fa fa-times"></i></button>
+					</div>
+				</div> -->
+					<div class="box-body">
+						<form id="form-usuarios">
+							<div class="box-body">
+								<div class="form-group">
+									<label for="txtNomUsuario">Nombre Usuario:</label>
+									<input type="text" autocomplete="username" class="form-control" id="txtNomUsuario" name="txtNomUsuario" placeholder="Ingrese Nombre de Usuario" <?if($id>0){?>value="<?=$datos['coNomUsuario'];?>"<?}?>>
+								</div>
+								<div class="form-group">
+									<label for="txtEmail">Email Usuario:</label>
+									<input type="text" class="form-control" autocomplete="off"  id="txtEmail" name="txtEmail" placeholder="Ingrese Email de Usuario" <?if($id>0){?>value="<?=$datos['coEmailUsuario'];?>"<?}?>>
+								</div>
+								
+								<div class="form-group">
+									<label for="tipoUsuario" class="small">Orden en el Menú</label>
+									
+									<?$datos['coPrivilegiosUsuario'];
+									switch ($datos['coPrivilegiosUsuario']) {
+										case 'super':
+											$slct1='selected="selected"';
+											break;
+										case 'admin':
+										$slct2 = 'selected="selected"';
+											break;
+										case 'digi':
+											$slct3 = 'selected="selected"';
+											break;										
+									}?>
+									<select class="form-control" name="tipoUsuario" id="tipoUsuario" >
+									<option value="admin" <?=$slct2;?> >Administrador</option>
+									<option value="digi" <?=$slct3; ?>>Digitador</option>
+									<option value="super" <?= $slct1; ?>>Super Usuario</option>
+									</select>
+								</div>
+								
+								<div class="form-group">
+									<label for="txtClave">Contraseña:</label>
+									<input type="text"  pattern=".{6,}"  autocomplete="off"  class="form-control" id="txtClave" name="txtClave" placeholder="Clave para la Session" <?if($id>0){?>value="<?=$datos['token'];?>" readonly<?}?> >
+								</div>
+								<div class="form-group">
+									<label for="text">Contraseña:</label>
+									<input type="password"  pattern=".{6,}"  autocomplete="off"  class="form-control" id="txtRepiteClave" name="txtRepiteClave" placeholder="Repetir Clave para la Session" <?if($id>0){?>value="<?=$datos['token'];?>" readonly<?}?>>
+								</div>
+								
+								
+							<div class="box-footer">
+							<input type="hidden" name="opcion" id="opcion" value="<?if($id==0){echo $opcion;}else{echo $opcion;}?>">
+							<? if($id > 0){ ?>
+							<input type="hidden" name="id_usuario" id="id_usuario" value="<?=$datos['coidUsuario'];?>">
+							<?};?>
+								<button type="submit" class="btn-block btn-block-sm btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
+							</div>
+						</form>
+					</div>
+				<!-- /.box-body -->
+				<!--  <div class="box-footer">
+					Footer
+				</div> -->
+				<!-- /.box-footer-->
+				</div>
+				<!-- /.box -->
+
+			</section>
+			</div>
+		</div>
+
+		<script src="../cliente/js/controller/admin.js"></script>
+		<script src="../cliente/js/notifications.min.js"></script>
+		
+		 <script>
+			$(document).ready( function() {
+				/* MK Web Notification init */
+				var config = {
+					// Default, Primary, Success, Danger, Warning, Info, Light, Dark, Purple
+					positionY: "left",
+					positionX: "top",
+					scrollable: false, //true
+					rtl: false, // true = ltr
+					max: 5, // number of notifications to display,
+					dismissable: true
+				};
+				mkNotifications(config);
+				
+			}); 
+		</script>
+		
+		
+		
+		
+		
+		<!-- /.content -->
+<?}

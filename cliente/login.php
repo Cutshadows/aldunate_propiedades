@@ -60,7 +60,7 @@ if (isset($_GET['cerrar_sesion'])) {
 
    
 
-    <a href="login.html" class="text-center">¿Olvido la Contraseña?</a>
+    <a href="javascript:void(0)" onclick="window.open('seguiridad', 'blank')" class="text-center">¿Olvido la Contraseña?</a>
   </div>
   <!-- /.form-box -->
 </div>
