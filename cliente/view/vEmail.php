@@ -52,7 +52,7 @@ $conn=conectar();
 				<div class="box-header with-border">
 					<h3 class="box-title">Recuperar Clave Usuario</h3>
 					<div class="box-body">
-						<form id="form-usuarios">
+						<form id="form-email">
 							<div class="box-body">
 								<div class="form-group">
 									<label for="txtEmail">Email Usuario:</label>
@@ -60,7 +60,7 @@ $conn=conectar();
 								</div>
 								
 							<div class="box-footer">
-							<input type="hidden" name="opcion" id="opcion" value="<?if($id==0){echo $opcion;}else{echo $opcion;}?>">
+							<input type="hidden" name="opcion" id="opcion" value="email-validar">
 								<button type="submit" class="btn-block btn-block-sm btn btn-primary"><?if($id==0){echo $boton;}else{ echo $boton;}?></button>
                             </div>
                             
@@ -91,7 +91,7 @@ $conn=conectar();
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
-<script src="./cliente/js/controller/login.js"></script>    
+<script src="./cliente/js/controller/email.js"></script>    
 <script src="./cliente/js/notifications.min.js"></script>
 
 <!-- jQuery 3 -->

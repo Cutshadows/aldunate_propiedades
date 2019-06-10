@@ -2,6 +2,7 @@ eventListeners();
 
 function eventListeners() {
     document.querySelector('#form-login').addEventListener('submit', validarLogin);
+    document.querySelector('#form-email').addEventListener('submit', encontrarEmail);
 }
 
 // var ruta = window.location;
